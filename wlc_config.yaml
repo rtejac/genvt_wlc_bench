@@ -1,0 +1,161 @@
+#----------------------------------------------------------------------------
+#
+# INTEL CONFIDENTIAL
+#
+# Copyright 2021 (c) Intel Corporation.
+#
+# This software and the related documents are Intel copyrighted materials, and
+# your use of them  is governed by the  express license under which  they were
+# provided to you ("License"). Unless the License provides otherwise, you  may
+# not  use,  modify,  copy, publish,  distribute,  disclose  or transmit  this
+# software or the related documents without Intel's prior written permission.
+#
+# This software and the related documents are provided as is, with no  express
+# or implied  warranties, other  than those  that are  expressly stated in the
+# License.
+#
+#----------------------------------------------------------------------------
+
+############# WLC Bench config file ##############
+
+# run workloads serially, report wl density
+breakpoint_serial:
+
+  # put all env variables you want to set for each of your workloads
+  env_vars: [
+      DESTDIR=<location of synbench>
+  ]
+
+  # proxy wl details, typically 1 - static workload
+  proxy_wl:
+    wl_list:
+      [
+        {
+          wl: synbench,
+          # specify profile_name below for correct log files to get generated
+          profile_name: medium, #<low/medium/high>,
+          # any initialization cmd for your wl
+          # can be a single cmd OR pipe of multiple cmds OR a shell script containing many cmds
+          # For ex. cat somefile | python somefile OR /home/sk/run_some_commands.sh
+          init_cmd: null,
+          # any start cmd for your wl
+          # can be a single cmd OR pipe of multiple cmds OR a shell script containing many cmds
+          start_cmd: python3 ../exec_ssh.py, #<fully qualified command to start the wl. ex: /home/synbench/synbench /home/params/low.txt>,
+          # any stop cmd for your wl
+          # can be a single cmd OR pipe of multiple cmds OR a shell script containing many cmds
+          stop_cmd: python3 ../ssh_kill_procs.py synbench, #null,
+          # max number of instances to be started
+          instances: 1,
+          # KPI monitoring window in secs,
+          # as we add each wl, this indicated how much time we want each workload to be monitored for KPIs
+          kpi_window: 10
+        }
+      ]
+
+  measured_wl:
+    # conglomerate wl - set of different workloads encapsulated together
+    # can add as many as needed
+    # retail_pos_high considered a conglomerate wl which runs 10 times
+    # the conglomerate consists of n different types of processes (which has
+    # its own instances_count
+
+    # retail point of sales rpos is a grouped workload representing rpos usecase
+    # we can have many more like these: indu_high, indu_low: ... etc. etc.
+    indu_hmi_high:
+      # calculations are done at the conglomerate wl level
+      # wlkd_density or max_fps (if max_fps: number of children should only be 1,
+      # meaning only 1 wl inside the retail_pos_high list)
+      calculate: wkld_density
+      instances: 1
+      wl_list:
+        [
+          {
+            wl: synbench,
+            # specify profile_name below for correct log files to get generated
+            profile_name: medium, #<low/medium/high>,
+            # any initialization cmd for your wl
+            # can be a single cmd OR pipe of multiple cmds OR a shell script containing many cmds
+            # For ex. cat somefile | python somefile OR /home/sk/run_some_commands.sh
+            init_cmd: null,
+            # any start cmd for your wl
+            # can be a single cmd OR pipe of multiple cmds OR a shell script containing many cmds
+            start_cmd: python3 ../exec_ssh.py , #<fully qualified command to start the wl. ex: /home/synbench/synbench /home/params/low.txt>,
+            # any stop cmd for your wl
+            # can be a single cmd OR pipe of multiple cmds OR a shell script containing many cmds
+            stop_cmd: python3 ../ssh_kill_procs.py synbench, #null,
+            # max number of instances to be started
+            instances: 1,
+            # KPI monitoring window in secs,
+            # as we add each wl, this indicated how much time we want each workload to be monitored for KPIs
+            kpi_window: 10
+          }
+        ]
+
+  # 0 info, 1 debug
+  loglevel: 0
+
+  # workload settling time in secs
+  settling_time: 5
+
+# mqtt settings
+mqtt:
+
+  # mqtt host and port
+  host: localhost
+  port: 1883
+
+
+# system metrics settings for tools like cpu, gpu etc.
+system_metrics:
+
+  # if true, capture system metrics: else set false
+  measure: False
+
+  tools:
+    [
+      {
+        name: top,
+        type: cpu,
+        # no need to change
+        start_cmd: top -b -p 0 -d 0.5,
+      },
+      {
+        name: intel_gpu_top,
+        type: gpu,
+        # no need to change
+        start_cmd: intel_gpu_top -o - -s 500,
+        is_sudo: True
+      },
+      {
+        name: pcm.x,
+        type: memory,
+        # include pcm tool install location
+        # ex: loc: /home/pcm,  start_cmd: PCM_NO_PERF=1 /home/pcm/pcm.x 0.5
+        loc: <dir where pcm is installed>,
+        start_cmd: PCM_NO_PERF=1 <dir where pcm is installed>/pcm.x 0.5,
+        is_sudo: True
+      },
+      {
+        name: socwatch,
+        type: power,
+        # include socwatch install location
+        # loc: /home/socwatch_dir,  start_cmd: /home/socwatch_dir/socwatch -t 1 -f pkg-pwr
+        loc: <dir where socwatch is installed>,
+        start_cmd: <dir where socwatch is installed>/socwatch -t 1 -f pkg-pwr,
+        is_sudo: True
+      },
+      {
+        # needs pdu to be connected, keep use_pdu:False, not tested
+        name: pdu,
+        type: power_pdu,
+        use_pdu: False,
+        start_cmd: show sensor outlet 4 current,
+
+        # change as per pdu details, untested for now
+        ip: <PDU ip>,
+        username: <username>,
+        password: <passwword>,
+        port: 4
+      }
+
+    ]
