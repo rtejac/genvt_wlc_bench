@@ -1,0 +1,8 @@
+pyyml==0.0.2
+paho-mqtt==1.5.1
+psutil==5.8.0
+pandas
+openpyxl==3.0.7
+XlsxWriter==3.0.1
+pexpect==4.8.0
+coloredlogs==15.0.1
