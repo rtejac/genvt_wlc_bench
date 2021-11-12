@@ -3,9 +3,9 @@ import yaml
 import paramiko
 
 
-def get_VM_info():
+def get_VM_info(vm_index):
     
-    with open('ipaddress.yml',mode='r',encoding='utf-8') as f:
+    with open(f'vm{vm_index}_ipaddress.yml',mode='r',encoding='utf-8') as f:
         data = yaml.full_load(f)
     f.close()
     return data['guest_ip'], data['login'], data['password']
@@ -31,17 +31,17 @@ def Create_SSH(guest_ip,vm_password,login):
 
 def ssh_guest(cmd):
 
-    guest_ip ,login, vm_password= get_VM_info()
+    guest_ip ,login, vm_password= get_VM_info(sys.argv[1])
     ssh = Create_SSH(guest_ip,vm_password,login)
 
     if ssh is None:
         print('Error in creating connection')
         sys.exit()
 
-    print(f"\r\nExecuting the WL by the command :{cmd[1:]}")
-    cmd = ' '.join(sys.argv[1:])
+    print(f"\r\nExecuting the WL by the command :{cmd[2:]}")
+    cmd = ' '.join(sys.argv[2:])
     try:
-        stdin, stdout, stderr = ssh.exec_command(cmd)
+        stdin, stdout, stderr = ssh.exec_command(cmd,get_pty=True)
     except:
         pass
     lines = stdout.readlines()

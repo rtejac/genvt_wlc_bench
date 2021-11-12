@@ -2,7 +2,7 @@ import paramiko
 import sys
 import yaml
 from scp import SCPClient
-f =open("ipaddress.yml",mode='r',encoding = 'utf-8') 
+f =open(f"vm{sys.argv[1]}_ipaddress.yml",mode='r',encoding = 'utf-8') 
 read_data = yaml.full_load(f)
 ssh = paramiko.SSHClient()
 ssh.load_host_keys('/home/wlc/.ssh/known_hosts')
@@ -18,6 +18,6 @@ scp = SCPClient(ssh.get_transport())
 
 # Uploading the 'test' directory with its content in the
 # '/home/user/dump' remote directory
-scp.put(sys.argv[1], recursive=True, remote_path=sys.argv[2])
+scp.put(sys.argv[2], recursive=True, remote_path=sys.argv[3])
 
 scp.close()

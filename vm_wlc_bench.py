@@ -33,8 +33,7 @@ from system_metrics import SystemMetrics
 from wl_launcher import WlLauncher
 from yml_parser import YAMLParser
 
-#from vm_create import create_vm
-from vm_class import VM
+from vm_support.vm_support import VM
 
 
 
@@ -84,24 +83,31 @@ def main():
     #Teja edit
 
     #Gettitng the VM related wl details in a list
-    p = {}
-    m = {}
+    vm_list = []
     for k,v in mode.items():
         if 'vm' in k:
-            cur_vm = parser.get(k, mode)
-            p[k] = cur_vm['proxy_wl']
-            p[k]['type'] = 'proxy'
-            m[k] = cur_vm['measured_wl']
+            
+            proxy_info = {}
+            measured_info = {}
+            current_vm_info = parser.get(k, mode)
+            proxy_info[k] = current_vm_info['proxy_wl']
+            proxy_info[k]['type'] = 'proxy'
+            measured_info[k] = current_vm_info['measured_wl']
             vm_index = int(k.split('_')[1]) #to get 0,1 from vm_0,vm_1 and use them for creating VM index
             
-            vm_0 = VM(cur_vm['vm_name'],cur_vm['os_name'],cur_vm['os_image'],vm_index,p[k],m[k])
-            vm_0.create_vm()
-            vm_0.proxy_init_exec()
+            vm_object = VM(current_vm_info['vm_name'],current_vm_info['os_name'],current_vm_info['os_image'],vm_index,proxy_info[k],measured_info[k])
+            #vm_object.create_vm()
+            #vm_object.proxy_init_exec()
+            #vm_object.measured_init_exec()
+            vm_list.append(vm_object)
 
     workloads = []
-    for k,v in p.items():
-        workloads.append(setup_workloads(p[k], m[k]))
     
+    for vm_object in vm_list:
+        workloads.append(setup_workloads(vm_object.proxy, vm_object.measured))
+    
+    #for wkld in workloads:
+    #    print(wkld)
     #exit()
     #Done
     
@@ -120,14 +126,14 @@ def main():
     mqtt_host, mqtt_port = get_mqtt_yml_values("mqtt", parsed_file, parser)
     
     #Teja edit
-    with open('../ipaddress.yml',mode='r',encoding='utf-8') as f:
-        data = yaml.full_load(f)
+    #with open('../ipaddress.yml',mode='r',encoding='utf-8') as f:
+    #    data = yaml.full_load(f)
     # setup broker
-    broker = Broker(data['guest_ip'], mqtt_port)
+    #broker = Broker(data['guest_ip'], mqtt_port)
 
     #Done
 
-    #broker = Broker(mqtt_host, mqtt_port)
+    broker = Broker(mqtt_host, mqtt_port)
     broker.start()
 
     runner = system_metrics = None
@@ -195,7 +201,7 @@ def main():
             # wait for processes to release file handles, else below file open for max fps fails
             time.sleep(1)
 
-            for vm_id,wkld in m.items():
+            for vm_id,wkld in measured_info.items():
                 for k, grouped_wl in wkld.items():
                     #print(grouped_wl)
                     #grouped_wl = grouped_wl[0]
@@ -213,7 +219,7 @@ def main():
                     else:
                         logging.info(f"wlc_bench execution status: SUCCESS")
 
-                    logging.info(f"WLC Density for measured WL: {grouped_wl['type']} = "
+                    logging.warning(f"WLC Density for measured WL: {grouped_wl['type']} = "
                              f"{grouped_wl['wkld_density']}")
                     logging.info(f"*********************************************************")
 

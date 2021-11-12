@@ -3,9 +3,9 @@ import yaml
 import paramiko
 
 
-def get_VM_info():
+def get_VM_info(vm_index):
     
-    with open('ipaddress.yml',mode='r',encoding='utf-8') as f:
+    with open(f'vm{vm_index}_ipaddress.yml',mode='r',encoding='utf-8') as f:
         data = yaml.full_load(f)
     f.close()
     return data['guest_ip'], data['login'], data['password']
@@ -25,7 +25,7 @@ def Create_SSH():
     return ssh
 
 
-host, un, pwd = get_VM_info()
+host, un, pwd = get_VM_info(sys.argv[1])
 ssh = Create_SSH()
 
 if ssh is None:
@@ -34,5 +34,5 @@ if ssh is None:
 
 
 
-process = sys.argv[1]
-ssh.exec_command(f'kill -9 $(pgrep {process})')
+process = sys.argv[2]
+ssh.exec_command(f'kill -15 $(pgrep {process})') #15 for SIGTERM

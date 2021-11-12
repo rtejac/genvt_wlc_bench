@@ -78,7 +78,7 @@ print(f"Sleep for 20 second")
 time.sleep(20)
 
 #console call for created VM
-console = console_vm.Console('qemu:///system',dom.name(),wl_info)
+console = console_vm.Console('qemu:///system',dom.name(),0) #,wl_info)
 console.stdin_watch = libvirt.virEventAddHandle(0, libvirt.VIR_EVENT_HANDLE_READABLE, console_vm.stdin_callback, console)
 
 while console_vm.check_console(console):

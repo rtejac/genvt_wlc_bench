@@ -38,9 +38,10 @@ breakpoint_serial:
           {
             wl: synbench,
             profile_name: medium, #<low/medium/high>,
-            init_cmd: ./init.sh synbench start_wl.sh,
-            start_cmd: python3 detailed_genvt_ssh.py './start_wl.sh',
-            stop_cmd: python3 ssh_kill_procs.py synbench,
+            wl_setup: ./wkld_setup.sh,
+            init_cmd: rm /tmp/port.txt, 
+            start_cmd: python3 detailed_genvt_ssh.py 0 './start_wl.sh',
+            stop_cmd: python3 ssh_kill_procs.py 0 synbench,
             instances: 1,
             kpi_window: 1
           }
@@ -52,12 +53,13 @@ breakpoint_serial:
         wl_list:
           [
             {
-              wl: synbench,
-              profile_name: medium, #<low/medium/high>,
+              wl: weld_porosity,
+              profile_name: low, #<low/medium/high>,
+              wl_setup: null,
               init_cmd: null,
-              start_cmd: python3 detailed_genvt_ssh.py './start_wl.sh', 
-              stop_cmd: python3 ssh_kill_procs.py synbench, #null,
-              instances: 10,
+              start_cmd: ./add_low_wl.sh start 10.99.114.63 8554 mystream FP16-INT8 GPU 10.99.114.167, 
+              stop_cmd: ./add_low_wl.sh stop, #null,
+              instances: 5,
               kpi_window: 5
             }
             ]

@@ -91,6 +91,12 @@ class WlLauncher(object):
             val = topic.split("/")
 
             try:
+                #print('Payload message: ',payload)
+                if payload == 'lwt':
+                    #disconnect = True
+                    #self.execution_status = False
+                    return
+
                 payload = json.loads(payload)
                 logging.info(f"[Received] on : {topic} message: {payload['message']}")
                 if payload["message"] != "connected":
@@ -104,8 +110,9 @@ class WlLauncher(object):
                 logging.error(f"Received message not in JSON format. Received payload from"
                               f" process {val[0]} with parent PID:{val[1]} is : {payload}. "
                               f"Exception message is {str(ex)}")
-                disconnect = True
-                self.execution_status = False
+                pass
+                #disconnect = True
+                #self.execution_status = False
 
         def _on_kpi_error(topic, payload):
             """
@@ -209,29 +216,23 @@ class WlLauncher(object):
             try:
                 # run any init commands if init_cmd key has been set in yml file
                 if init_cmd:
+                    #print(f'\r{init_cmd}\r')
                     with open(f"./logs/log_stdout_{workload_name}_wl_{wl_count}_init_cmd.log", "w") as init_file:
-                        #subprocess.Popen(init_cmd,
-                        #                 stdout=init_file,
-                        #                 shell=True, encoding="utf-8", universal_newlines=True)
-                        #os.system(init_cmd)
-                        #print('Waiting time ....')
-                        #time.sleep(15)
-                        pass
-
+                        subprocess.Popen(init_cmd,
+                                         stdout=init_file,
+                                         shell=True, encoding="utf-8", universal_newlines=True)
+                        #pass
                     logging.info("Ran workload initialization commands")
 
                 logging.info("Pause subscription on KPI errors channel to handle new WL error spikes")
                 self.broker.unsubscribe("+/+/kpi/error/+")
 
                 if cmd:
+                    #print(f'\r{cmd}\r')
                     with open(f"./logs/log_stdout_{workload_name}_wl_{wl_count}.log", "w") as out_file:
                         proc = subprocess.Popen(cmd,
                                                 stdout=out_file,
                                                 shell=True, encoding="utf-8", universal_newlines=True)
-                        #os.system(cmd)
-                        #print('Waiting time ....')
-                        #time.sleep(5)
-                        #print('executing the command',cmd)
                 else:
                     logging.warning("No start_cmd specified. Skipping this WL"
                                     f"{workload_name}_wl_{wl_count}")
@@ -352,7 +353,7 @@ class WlLauncher(object):
         for wl in self.wl_list:
             for each_wl in wl["wl_list"]:
                 if each_wl["stop_cmd"]:
-                    print("\r"+each_wl["stop_cmd"])
+                    print("\r"+each_wl["stop_cmd"]+"\r")
                     subprocess.Popen(each_wl["stop_cmd"], stdout=subprocess.PIPE, shell=True)
 
         logging.info("Terminated all spawned processes")

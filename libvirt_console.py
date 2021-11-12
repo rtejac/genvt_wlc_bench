@@ -28,7 +28,7 @@ def error_handler(unused, error) -> None:
 
 
 class Console(object):
-    def __init__(self, uri: str, name: str) -> None:
+    def __init__(self, uri: str, name: str,vm_index:int) -> None:
         self.uri = uri
         self.name = name
         self.connection = libvirt.open(uri)
@@ -39,7 +39,8 @@ class Console(object):
         self.run_console = True
         self.stdin_watch = -1
         #self.args = args
-        self.f = open("ipaddress.yml", mode = 'w',encoding = 'utf-8')
+        self.vm_index = vm_index
+        self.f = open(f"vm{self.vm_index}_ipaddress.yml", mode = 'w',encoding = 'utf-8')
         logging.info("%s initial state %d, reason %d",
                      self.name, self.state[0], self.state[1])
 
@@ -108,7 +109,7 @@ def stream_callback(stream: libvirt.virStream, events: int, console: Console) ->
                     console.f.write(f"{x} : {y}\n")
                 console.f.close()
                 time.sleep(1)
-                print('Contents were written to yaml file')
+                print('\rContents were written to yaml file')
                 
                 #os.system(f"{init_cmd}")
                 #os.system("./init.sh guest.yml")
