@@ -3,6 +3,7 @@
 
 import os
 import time
+import re
 import sys
 import logging
 import libvirt
@@ -90,12 +91,13 @@ def stream_callback(stream: libvirt.virStream, events: int, console: Console) ->
         for login_str in char_data.rsplit():
             if login_str == 'login:' and stream_callback.login_flag == 1:
                 console.stream.send(b"wlc\n")
-                console.stream.send(b"wlc123\n")
                 login_data.clear()
                 stream_callback.login_flag = 2
     if stream_callback.cmd_flag == 1:
         for login_str in char_data.rsplit():
-            if login_str == 'wlc@wlc-ubuntu:~$' and stream_callback.cmd_flag == 1:
+            ansi_escape_8bit = re.compile(br'(?:\x1B[@-Z\\-_]|[\x80-\x9A\x9C-\x9F]|(?:\x1B\[|\x9B)[0-?]*[ -/]*[@-~])')
+            result = ansi_escape_8bit.sub(b'', login_str.encode())
+            if result.decode() == 'wlc@ubuntu-vm:~$' and stream_callback.cmd_flag == 1:
                 console.stream.send(b"echo wlc123 | sudo -S mount -t 9p -o trans=virtio,version=9p2000.L mytag /mnt\n")
                 console.stream.send(b"sudo rm -r GenVT_Env \n")
                 console.stream.send(b"mkdir GenVT_Env \n")
