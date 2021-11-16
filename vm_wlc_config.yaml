@@ -40,8 +40,8 @@ breakpoint_serial:
             profile_name: medium, #<low/medium/high>,
             wl_setup: ./wkld_setup.sh,
             init_cmd: rm /tmp/port.txt, 
-            start_cmd: python3 detailed_genvt_ssh.py 0 './start_wl.sh',
-            stop_cmd: python3 ssh_kill_procs.py 0 synbench,
+            start_cmd: python3 SSH/detailed_genvt_ssh.py 0 './start_wl.sh',
+            stop_cmd: python3 SSH/ssh_kill_procs.py 0 synbench,
             instances: 1,
             kpi_window: 1
           }

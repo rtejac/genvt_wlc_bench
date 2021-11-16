@@ -53,4 +53,7 @@ def ssh_guest(cmd):
         print(f"\n\r{data}")
 
 
+import os
+print(os.getcwd())
+
 ssh_guest(sys.argv)
