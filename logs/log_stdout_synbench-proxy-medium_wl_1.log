@@ -1,0 +1,79 @@
+Connected to 192.168.122.53 as wlc
+
+Executing the WL by the command :['./start_wl.sh']
+ Reading config from: params/intel_indu_hmi_low_profile.txt
+
+ Window dimensions = (800,600)
+
+ Window running fullscreen = false
+
+ Record metrics = false
+
+ draw offscreen = true
+
+ vsync = 1
+
+ no_swapbuffer_call = 0
+
+ Scene: hmi
+
+ Texture scene using simple shader = false
+
+ Texture scene using fetch radius of = 10
+
+ pyramid scenes dimensions: 2x2x2 
+
+ pyramid shader loop iterations: 0
+
+ dials scene shader loop iterations: 10
+
+ long shader loop iterations: 100
+
+ Number of frames to render: <infinite>
+
+ Using OpenGLES
+
+ Fixed FPS not set
+
+ hmi overdraw ratio: 2.50
+
+ hmi alpha blending: 1
+
+ hmi texturing: 1
+
+ FPS limiter (sleep) not set
+
+ synbench debug mode: 0
+
+ Render 3D model on HMI: 0
+
+ kpi measurement state: 1
+
+ kpi settling time: 5
+
+ kpi number nines: 3
+
+ kpi exit on failure: 1
+
+ kpi max frametime milliseconds: 30.00
+
+ kpi window milliseconds: 3000.00
+
+ kpi target fps: 60
+
+ kpi min fps: 59
+
+ gKPIMinFramesInWindow = 177
+
+ gKPIMTBFTime = 16666.67 ms
+
+ MQTT_ADDRESS is tcp://10.99.114.167:1883/nWaiting for successful MQTT connection or timeout...
+
+ SDL could not initialize! SDL Error: No available video device
+
+ Failed to initialize!
+
+ ./synbench_build.sh: line 8:  4053 Segmentation fault      (core dumped) ./synbench params/intel_indu_hmi_low_profile.txt
+
+ 139
+

@@ -23,10 +23,10 @@ class VM():
     
     def proxy_init_exec(self):
 
-        wl_transfer = self.proxy['wl_list'][0]['wl_transfer']
-        if wl_transfer:
+        wl_setup = self.proxy['wl_list'][0]['wl_setup']
+        if wl_setup:
             print("\rProxy wkld transfer command is being executed, and it might take some time based on the steps included in it",'\r')
-            os.system(wl_transfer)
+            os.system(wl_setup)
             print(f'\rProxy wkld transfered to vm_{self.vm_index} ')
         else:
             print(f'\rNo Transfer command for vm_{self.vm_index} Proxy, Skipping this\r')
@@ -34,10 +34,10 @@ class VM():
     
     def measured_init_exec(self):
         
-        wl_transfer = self.measured['indu_hmi_high']['wl_list'][0]['wl_transfer']
-        if wl_transfer:
+        wl_setup = self.measured['indu_hmi_high']['wl_list'][0]['wl_setup']
+        if wl_setup:
             print("\rMeasured wkld transfer command is being executed, and it might take some time based on the steps included in it",'\r')
-            os.system(wl_transfer)
+            os.system(wl_setup)
             print(f'\rMeasured wkld transfered to vm_{self.vm_index}')
         else:
             print(f'\rNo Transfer command for vm_{self.vm_index} Measured, Skipping this\r')
@@ -90,5 +90,3 @@ class VM():
             libvirt.virEventRunDefaultImpl()
         #dom.destroy()
         conn.close()
-
-

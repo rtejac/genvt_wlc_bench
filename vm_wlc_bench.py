@@ -33,7 +33,7 @@ from system_metrics import SystemMetrics
 from wl_launcher import WlLauncher
 from yml_parser import YAMLParser
 
-from vm_support.vm_support import VM
+from vm_support import VM
 
 
 
@@ -96,7 +96,7 @@ def main():
             vm_index = int(k.split('_')[1]) #to get 0,1 from vm_0,vm_1 and use them for creating VM index
             
             vm_object = VM(current_vm_info['vm_name'],current_vm_info['os_name'],current_vm_info['os_image'],vm_index,proxy_info[k],measured_info[k])
-            vm_object.create_vm()
+            #vm_object.create_vm()
             vm_object.proxy_init_exec()
             vm_object.measured_init_exec()
             vm_list.append(vm_object)
@@ -219,7 +219,7 @@ def main():
                     else:
                         logging.info(f"wlc_bench execution status: SUCCESS")
 
-                    logging.warning(f"WLC Density for measured WL: {grouped_wl['type']} = "
+                    logging.info(f"WLC Density for measured WL: {grouped_wl['type']} = "
                              f"{grouped_wl['wkld_density']}")
                     logging.info(f"*********************************************************")
 
