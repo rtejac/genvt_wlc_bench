@@ -59,7 +59,7 @@ breakpoint_serial:
               init_cmd: null,
               start_cmd: ./add_low_wl.sh start 10.99.114.63 8554 mystream FP16-INT8 GPU 10.99.114.167, 
               stop_cmd: ./add_low_wl.sh stop, #null,
-              instances: 5,
+              instances: 0,
               kpi_window: 5
             }
             ]

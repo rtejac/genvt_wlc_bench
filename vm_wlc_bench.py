@@ -33,7 +33,7 @@ from system_metrics import SystemMetrics
 from wl_launcher import WlLauncher
 from yml_parser import YAMLParser
 
-from vm_support import VM
+from VM_Support.vm_support import VM
 
 
 

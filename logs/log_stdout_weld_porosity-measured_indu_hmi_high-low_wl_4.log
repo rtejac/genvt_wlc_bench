@@ -1,5 +1,0 @@
-Connected to 192.168.122.53 as wlc
-
-Executing the WL by the command :['docker run -it --name weld_wl_8556 --pid=host --env RTSP_IP=10.99.114.63 --env RTSP_PORT=8556 --env RTSP_STREAM=mystream --env MODEL_PRECISION=FP16-INT8 --env INFERENCE_DEVICE=GPU --volume ~/share:/share --volume ~/.Xauthority:/root/.Xauthority --volume /tmp/.X11-unix/:/tmp/.X11-unix/ --env DISPLAY=localhost:10.0 --env XDG_RUNTIME_DIR=/run/user/1000  --env MQTT_IP=10.99.114.167 --net=host --device /dev/dri:/dev/dri --user root --rm ger-is-registry.caas.intel.com/pmce/wlc/add/weld_porosity_wl:V1.1 /bin/bash']
- Inconsistency detected by ld.so: ../sysdeps/x86_64/dl-machine.h: 546: elf_machine_rela_relative: Assertion `ELFW(R_TYPE) (reloc->r_info) == R_X86_64_RELATIVE' failed!
-

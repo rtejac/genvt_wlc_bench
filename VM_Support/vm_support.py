@@ -6,7 +6,7 @@ import getpass
 import netifaces as ni
 import xml_parsing_main as xml
 from yml_parser import YAMLParser
-import libvirt_console as console_vm
+from VM_Support import libvirt_console as console_vm
 
 
 class VM():

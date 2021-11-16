@@ -10,7 +10,7 @@ import libvirt
 import tty
 import termios
 import atexit
-import libvirt_ipaddress as guest_ip
+from VM_Support import libvirt_ipaddress as guest_ip
 from argparse import ArgumentParser
 from typing import Optional  # noqa F401
 import subprocess
@@ -128,9 +128,6 @@ def lifecycle_callback(connection: libvirt.virConnect, domain: libvirt.virDomain
                  console.uuid, console.state[0], console.state[1])
 
 # main
-
-print("Escape character is ^]")
-
 libvirt.virEventRegisterDefaultImpl()
 libvirt.registerErrorHandler(error_handler, None)
 
