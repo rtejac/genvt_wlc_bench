@@ -60,7 +60,7 @@ class VM():
         #geting ip address of host machine
         ni.ifaddresses('virbr0')
         ip = ni.ifaddresses('virbr0')[ni.AF_INET][0]['addr']
-        print("\n\rIP Address of Host machine:{}".format(ip))
+        #print("\n\rIP Address of Host machine:{}".format(ip))
 
         try:
             xml.vm_xml_create(self.vm_index,self.vm_name,self.os_image)
@@ -71,16 +71,15 @@ class VM():
             print(e)
 
         uuid = dom.UUIDString()
-        print(f"\rsystem : {dom.name()}  booted, file=sys.stderr")
+        print(f"\rsystem : {dom.name()}  booted, file=sys.stderr and might take sometime for the GUI to show up (20 Seconds)\r")
     
-        f = open("guest.yml", mode = 'w', encoding = 'utf-8')
-        vm_0 = {'vm_name':self.vm_name,'vm_uuid':uuid,'host_ip':ip}
+        #f = open("guest.yml", mode = 'w', encoding = 'utf-8')
+        #vm_0 = {'vm_name':self.vm_name,'vm_uuid':uuid,'host_ip':ip}
         # Aregument file creation for guest
-        for x,y in vm_0.items():
-            f.write(f"{x} : {y}\n")
-        f.close()
+        #for x,y in vm_0.items():
+        #    f.write(f"{x} : {y}\n")
+        #f.close()
     
-        print(f"\rWaiting for the system to boot(20 seconds)\r")
         time.sleep(20)
     
         #console call for created VM
