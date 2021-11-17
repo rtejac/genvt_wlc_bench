@@ -42,8 +42,8 @@ breakpoint_serial:
             init_cmd: rm /tmp/port.txt, 
             start_cmd: python3 SSH/detailed_genvt_ssh.py 0 './start_wl.sh',
             stop_cmd: python3 SSH/ssh_kill_procs.py 0 synbench,
-            instances: 1,
-            kpi_window: 1
+            instances: 0,
+            kpi_window: 5,
           }
           ]
     measured_wl:
@@ -59,8 +59,8 @@ breakpoint_serial:
               init_cmd: null,
               start_cmd: ./add_low_wl.sh start 10.99.114.63 8554 mystream FP16-INT8 GPU 10.99.114.167, 
               stop_cmd: ./add_low_wl.sh stop, #null,
-              instances: 0,
-              kpi_window: 5
+              instances: 25,
+              kpi_window: 25,
             }
             ]
 

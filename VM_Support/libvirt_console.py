@@ -99,11 +99,8 @@ def stream_callback(stream: libvirt.virStream, events: int, console: Console) ->
             result = ansi_escape_8bit.sub(b'', login_str.encode())
             if result.decode() == 'wlc@ubuntu-vm:~$' and stream_callback.cmd_flag == 1:
                 console.stream.send(b"echo wlc123 | sudo -S mount -t 9p -o trans=virtio,version=9p2000.L mytag /mnt\n")
-                console.stream.send(b"sudo rm -r GenVT_Env \n")
-                console.stream.send(b"mkdir GenVT_Env \n")
+                console.stream.send(b"echo DISPLAY env value: $DISPLAY \n")
                 ipaddress = guest_ip.Guest_IPAddress(console.domain)
-                #init_cmd = console.args[0][0]['init_cmd']
-                #start_cmd = console.args[0][0]['start_cmd']
                 vm_info = {'vm_name':vm_name,'guest_ip':ipaddress,'login':'wlc','password':'wlc123'}
 
                 # Aregument file creation for guest
@@ -112,9 +109,6 @@ def stream_callback(stream: libvirt.virStream, events: int, console: Console) ->
                 console.f.close()
                 time.sleep(1)
                 print('\rContents were written to yaml file')
-                
-                #os.system(f"{init_cmd}")
-                #os.system("./init.sh guest.yml")
                 login_data.clear()
                 stream_callback.cmd_flag = 2
                 console.run_console = False

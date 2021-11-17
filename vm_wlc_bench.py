@@ -97,8 +97,9 @@ def main():
             
             vm_object = VM(current_vm_info['vm_name'],current_vm_info['os_name'],current_vm_info['os_image'],vm_index,proxy_info[k],measured_info[k])
             #vm_object.create_vm()
-            vm_object.proxy_init_exec()
-            vm_object.measured_init_exec()
+            #exit()
+            #vm_object.proxy_init_exec()
+            #vm_object.measured_init_exec()
             vm_list.append(vm_object)
 
     workloads = []

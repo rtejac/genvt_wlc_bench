@@ -24,6 +24,9 @@ def Create_SSH(guest_ip,vm_password,login):
     try:
         ssh.connect(guest_ip, username=login, password=vm_password,allow_agent=False)
         print(f'\rConnected to {guest_ip} as {login}')
+    except paramiko.ssh_exception.BadHostKeyException as e:
+        os.system(f"ssh-keygen -f '/home/wlc/.ssh/known_hosts' -R '{guest_ip}'")
+        ssh = Create_SSH(guest_ip,vm_password,login)
     except Exception as e:
         print(f"Error: {e} while connecting to {guest_ip} as {login}")
     
