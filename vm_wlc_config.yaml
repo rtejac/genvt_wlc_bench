@@ -57,10 +57,10 @@ breakpoint_serial:
               profile_name: low, #<low/medium/high>,
               wl_setup: null,
               init_cmd: null,
-              start_cmd: ./add_low_wl.sh start 10.99.114.63 8554 mystream FP16-INT8 GPU 10.99.114.167, 
+              start_cmd: ./add_low_wl.sh start 10.99.114.63 8554 mystream FP16-INT8 CPU 10.99.114.167, 
               stop_cmd: ./add_low_wl.sh stop, #null,
-              instances: 25,
-              kpi_window: 25,
+              instances: 10,
+              kpi_window: 15,
             }
             ]
 

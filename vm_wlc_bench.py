@@ -80,8 +80,6 @@ def main():
 
     # get all proxy, measured wl details
 
-    #Teja edit
-
     #Gettitng the VM related wl details in a list
     vm_list = []
     for k,v in mode.items():
@@ -97,9 +95,6 @@ def main():
             
             vm_object = VM(current_vm_info['vm_name'],current_vm_info['os_name'],current_vm_info['os_image'],vm_index,proxy_info[k],measured_info[k])
             vm_object.create_vm()
-            #exit()
-            #vm_object.proxy_init_exec()
-            #vm_object.measured_init_exec()
             vm_list.append(vm_object)
 
     workloads = []
@@ -107,32 +102,9 @@ def main():
     for vm_object in vm_list:
         workloads.append(setup_workloads(vm_object.proxy, vm_object.measured))
     
-    #for wkld in workloads:
-    #    print(wkld)
-    #exit()
-    #Done
-    
-
-    #Original code
-    
-    #proxy = parser.get("proxy_wl", mode)
-    #proxy["type"] = "proxy"
-    #measured = parser.get("measured_wl", mode)
-
-    #workloads = setup_workloads(proxy, measured)
-    
-    #Done
     
     # get mqtt values
     mqtt_host, mqtt_port = get_mqtt_yml_values("mqtt", parsed_file, parser)
-    
-    #Teja edit
-    #with open('../ipaddress.yml',mode='r',encoding='utf-8') as f:
-    #    data = yaml.full_load(f)
-    # setup broker
-    #broker = Broker(data['guest_ip'], mqtt_port)
-
-    #Done
 
     broker = Broker(mqtt_host, mqtt_port)
     broker.start()
@@ -178,13 +150,10 @@ def main():
             # first pass, no workloads, system idle measurements
             system_metrics.collect_store()
         
-        #Teja edit
         for i,wkld in enumerate(workloads):
-            #print(f'\rLaunchig WLs in VM {i}, WL details',wkld)
             # start workload launcher
             runner = WlLauncher(wkld, settling_time, system_metrics, broker)
             runner.run()
-        #Done
 
     finally:
         # all cleanup
@@ -204,8 +173,6 @@ def main():
 
             for vm_id,wkld in measured_info.items():
                 for k, grouped_wl in wkld.items():
-                    #print(grouped_wl)
-                    #grouped_wl = grouped_wl[0]
                     if grouped_wl["calculate"] == "max_fps":
                         runner.calculate_fps(grouped_wl["wl_list"][0])
                         runner.density = "N.A"
@@ -241,8 +208,6 @@ def setup_workloads(proxy, measured):
     for wl in proxy["wl_list"]:
         wl["type"] = "proxy"
     
-    #print(type(proxy))
-    #print(type(measured))
     workloads.append(proxy)
     
     for conglomerate_wl, wl_list in measured.items():

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-image=ger-is-registry.caas.intel.com/pmce/wlc/add/weld_porosity_wl:V1.1
+image=ger-is-registry.caas.intel.com/pmce/wlc/add/weld_porosity_wl_adl:V1.0
 PORT_FILE=/tmp/port.txt
 
 function start_container()
