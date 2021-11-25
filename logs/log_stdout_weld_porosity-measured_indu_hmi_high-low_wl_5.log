@@ -1,0 +1,71 @@
+Connected to 192.168.122.73 as wlc
+
+Executing the WL by the command :docker run -it --name weld_wl_8556 --pid=host --env RTSP_IP=10.99.114.63 --env RTSP_PORT=8556 --env RTSP_STREAM=mystream --env MODEL_PRECISION=FP16-INT8 --env INFERENCE_DEVICE=CPU --volume ~/share:/share --volume ~/.Xauthority:/root/.Xauthority --volume /tmp/.X11-unix/:/tmp/.X11-unix/ --env DISPLAY=localhost:13.0 --env XDG_RUNTIME_DIR=/run/user/1000  --env MQTT_IP=10.99.114.167 --net=host --device /dev/dri:/dev/dri --user root --rm ger-is-registry.caas.intel.com/pmce/wlc/add/weld_porosity_wl_adl:V1.0 /bin/bash
+ [setupvars.sh] OpenVINO environment initialized
+
+ [setup_env.sh] GVA-plugins environment initialized
+
+ 
+
+ (gst-plugin-scanner:2502): GStreamer-[1;33mWARNING[0m **: [34m06:39:20.367[0m: Failed to load plugin '/working/containers.docker.benchmarking.add-analytics/dlStreamer_gst_KPI/build/intel64/Release/lib/libvasot_gpu.so': libimf.so: cannot open shared object file: No such file or directory
+
+ 
+
+ (gst-plugin-scanner:2502): GStreamer-[1;33mWARNING[0m **: [34m06:39:20.396[0m: Failed to load plugin '/opt/intel/openvino/data_processing/dl_streamer/lib/libvasot_gpu.so': libimf.so: cannot open shared object file: No such file or directory
+
+ 
+
+ (gst-plugin-scanner:2502): GStreamer-[1;33mWARNING[0m **: [34m06:39:20.399[0m: Failed to load plugin '/opt/intel/openvino/data_processing/dl_streamer/lib/libgpurenderer.so': libsvml.so: cannot open shared object file: No such file or directory
+
+ Setting pipeline to PAUSED ...
+
+ Reading config from: kpi_params.txt
+
+ kpi measurement state: 1
+
+ kpi settling time: 1
+
+ kpi number nines: 3
+
+ kpi exit on failure: 0
+
+ kpi max frametime milliseconds: 300.00
+
+ kpi window milliseconds: 3000.00
+
+ kpi target fps: 5
+
+ kpi min fps: 4
+
+ gKPIMinFramesInWindow = 12
+
+ gKPIMTBFTime = 200000.00 ms
+
+ Exit code: 0
+
+ Waiting for successful MQTT connection or timeout...
+
+ MQTT connection successful.
+
+ Pipeline is live and does not need PREROLL ...
+
+ Progress: (open) Opening Stream
+
+ Pipeline is PREROLLED ...
+
+ Prerolled, waiting for progress to finish...
+
+ Progress: (connect) Connecting to rtsp://10.99.114.63:8556/mystream
+
+ Progress: (open) Retrieving server options
+
+ Progress: (open) Retrieving media info
+
+ Caught SIGSEGV
+
+ exec gdb failed: No such file or directory
+
+ Spinning.  Please run 'gdb gst-launch-1.0 2501' to continue debugging, Ctrl-C to quit, or Ctrl-\ to dump core.
+
+ SIGHUP: not dumping dot file snapshot, GST_DEBUG_DUMP_DOT_DIR environment variable not set.
+

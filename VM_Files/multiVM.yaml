@@ -1,0 +1,162 @@
+#----------------------------------------------------------------------------
+#
+# INTEL CONFIDENTIAL
+#
+# Copyright 2021 (c) Intel Corporation.
+#
+# This software and the related documents are Intel copyrighted materials, and
+# your use of them  is governed by the  express license under which  they were
+# provided to you ("License"). Unless the License provides otherwise, you  may
+# not  use,  modify,  copy, publish,  distribute,  disclose  or transmit  this
+# software or the related documents without Intel's prior written permission.
+#
+# This software and the related documents are provided as is, with no  express
+# or implied  warranties, other  than those  that are  expressly stated in the
+# License.
+#
+#----------------------------------------------------------------------------
+
+############# WLC Bench config file ##############
+
+# run workloads serially, report wl density
+breakpoint_serial:
+
+  # put all env variables you want to set for each of your workloads
+  env_vars: [
+      DESTDIR=<location of synbench>
+  ]
+
+  # VM0 proxy wl details, typically 1 - static workload
+
+  vm_0:
+    
+    os_image: /gos_images/ubuntu_0.qcow2
+    vm_name: ubuntu-vm-0
+    os_name: linux
+    gpu_passthrough: 1
+    ram: 4
+    cpu: 4
+    proxy_wl:
+      wl_list:
+        [
+          {
+            wl: synbench,
+            profile_name: medium, #<low/medium/high>,
+            wl_setup: rm /tmp/port0.txt,
+            init_cmd: null, #rm /tmp/port.txt, 
+            start_cmd: python3 SSH/detailed_genvt_ssh.py 0 './start_wl.sh',
+            stop_cmd: python3 SSH/ssh_kill_procs.py 0 synbench,
+            instances: 1,
+            kpi_window: 5,
+          }
+          ]
+    measured_wl:
+      indu_hmi_high:
+        calculate: wkld_density
+        instances: 1
+        wl_list:
+          [
+            {
+              wl: weld_porosity,
+              profile_name: low, #<low/medium/high>,
+              wl_setup: null,
+              init_cmd: null,
+              start_cmd: add_cmds/add_low_wl.sh start 0 10.99.114.63 8554 mystream FP16-INT8 CPU 10.99.114.167, 
+              stop_cmd: add_cmds/add_low_wl.sh stop 0, #null,
+              instances: 15,
+              kpi_window: 10,
+            }
+            ]
+  vm_1:
+    
+    os_image: /gos_images/ubuntu_1.qcow2
+    vm_name: ubuntu-vm-1
+    os_name: linux
+    gpu_passthrough: 0
+    ram: 2
+    cpu: 2
+    proxy_wl:
+      wl_list:
+        [
+          {
+            wl: add_low,
+            profile_name: low, #<low/medium/high>,
+            wl_setup: rm /tmp/port1.txt,
+            init_cmd: null, #rm /tmp/port.txt, 
+            start_cmd: add_cmds/add_low_cpu_wl.sh start 1 10.99.114.63 8554 mystream FP16-INT8 CPU 10.99.114.167, 
+            stop_cmd: add_cmds/add_low_cpu_wl.sh stop 1, #null,
+            instances: 1,
+            kpi_window: 5,
+          }
+          ]
+  
+  
+            
+  # 0 info, 1 debug
+  loglevel: 0
+
+  # workload settling time in secs
+  settling_time: 5
+
+# mqtt settings
+mqtt:
+  
+  # mqtt host and port
+  host: localhost
+  port: 1883
+
+
+# system metrics settings for tools like cpu, gpu etc.
+system_metrics:
+
+  # if true, capture system metrics: else set false
+  measure: False
+
+  tools:
+    [
+      {
+        name: top,
+        type: cpu,
+        # no need to change
+        start_cmd: top -b -p 0 -d 0.5,
+      },
+      {
+        name: intel_gpu_top,
+        type: gpu,
+        # no need to change
+        start_cmd: intel_gpu_top -o - -s 500,
+        is_sudo: True
+      },
+      {
+        name: pcm.x,
+        type: memory,
+        # include pcm tool install location
+        # ex: loc: /home/pcm,  start_cmd: PCM_NO_PERF=1 /home/pcm/pcm.x 0.5
+        loc: <dir where pcm is installed>,
+        start_cmd: PCM_NO_PERF=1 <dir where pcm is installed>/pcm.x 0.5,
+        is_sudo: True
+      },
+      {
+        name: socwatch,
+        type: power,
+        # include socwatch install location
+        # loc: /home/socwatch_dir,  start_cmd: /home/socwatch_dir/socwatch -t 1 -f pkg-pwr
+        loc: <dir where socwatch is installed>,
+        start_cmd: <dir where socwatch is installed>/socwatch -t 1 -f pkg-pwr,
+        is_sudo: True
+      },
+      {
+        # needs pdu to be connected, keep use_pdu:False, not tested
+        name: pdu,
+        type: power_pdu,
+        use_pdu: False,
+        start_cmd: show sensor outlet 4 current,
+
+        # change as per pdu details, untested for now
+        ip: <PDU ip>,
+        username: <username>,
+        password: <passwword>,
+        port: 4
+      }
+
+    ]
