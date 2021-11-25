@@ -1,6 +1,6 @@
 Stopping containers
-Connected to 192.168.122.44 as wlc
+Connected to 192.168.122.206 as wlc
 
 Executing the WL by the command :docker ps -q --filter ancestor=add_low:latest | xargs -r docker stop
- db80fea317c6
+ b69ece32f431
 

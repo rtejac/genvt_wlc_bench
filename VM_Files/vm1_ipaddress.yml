@@ -1,4 +1,4 @@
 vm_name : ubuntu-vm-1
-guest_ip : 192.168.122.44
+guest_ip : 192.168.122.190
 login : wlc
 password : wlc123

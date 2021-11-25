@@ -1,90 +1,0 @@
-[32m2021-11-25 12:06:58[0m :: vm_wlc_bench    :: line:429        :: [1;30mINFO      [0m :: Removed old logs directory
-[32m2021-11-25 12:06:58[0m :: vm_wlc_bench    :: line:80         :: [1;30mINFO      [0m :: Setting env variable: DESTDIR=<location of synbench>
-[32m2021-11-25 12:06:58[0m :: vm_wlc_bench    :: line:85         :: [1;30mINFO      [0m :: PID of this vm_wlc_bench instance is 19716
-[32m2021-11-25 12:06:58[0m :: libvirt_console :: line:28         :: [1;30mWARNING   [0m :: [33m(42, 10, "Domain not found: no domain with matching name 'ubuntu-vm-0'", 2, 'Domain not found: %s', "no domain with matching name 'ubuntu-vm-0'", None, -1, -1)[0m
-[32m2021-11-25 12:06:58[0m :: vm_support      :: line:69         :: [1;30mINFO      [0m :: No previous instance of the VM is found...
-[32m2021-11-25 12:06:58[0m :: vm_support      :: line:71         :: [1;30mINFO      [0m :: Creating a linux VM with image /gos_images/ubuntu_0.qcow2, VM name ubuntu-vm-0
-[32m2021-11-25 12:07:01[0m :: vm_support      :: line:88         :: [1;30mINFO      [0m :: ubuntu-vm-0  booted, might take sometime to show up (20 Seconds)
-[32m2021-11-25 12:07:21[0m :: libvirt_console :: line:47         :: [1;30mINFO      [0m :: ubuntu-vm-0 initial state 1, reason 1
-[32m2021-11-25 12:07:46[0m :: libvirt_console :: line:121        :: [1;30mINFO      [0m :: IP Address of the created VM is written to yaml yaml file
-[32m2021-11-25 12:07:46[0m :: vm_support      :: line:32         :: [1;30mINFO      [0m :: Proxy wkld transfer command is being executed, and it might take some time based on the steps included in it
-[32m2021-11-25 12:07:46[0m :: vm_support      :: line:34         :: [1;30mINFO      [0m :: Proxy wkld transfered to vm_0 
-[32m2021-11-25 12:07:46[0m :: vm_support      :: line:50         :: [1;30mINFO      [0m :: No Transfer command for vm_0 Measured, Skipping this
-[32m2021-11-25 12:07:46[0m :: libvirt_console :: line:28         :: [1;30mWARNING   [0m :: [33m(42, 10, "Domain not found: no domain with matching name 'ubuntu-vm-1'", 2, 'Domain not found: %s', "no domain with matching name 'ubuntu-vm-1'", None, -1, -1)[0m
-[32m2021-11-25 12:07:46[0m :: vm_support      :: line:69         :: [1;30mINFO      [0m :: No previous instance of the VM is found...
-[32m2021-11-25 12:07:46[0m :: vm_support      :: line:71         :: [1;30mINFO      [0m :: Creating a linux VM with image /gos_images/ubuntu_1.qcow2, VM name ubuntu-vm-1
-[32m2021-11-25 12:07:46[0m :: vm_support      :: line:88         :: [1;30mINFO      [0m :: ubuntu-vm-1  booted, might take sometime to show up (20 Seconds)
-[32m2021-11-25 12:08:06[0m :: libvirt_console :: line:47         :: [1;30mINFO      [0m :: ubuntu-vm-1 initial state 1, reason 1
-[32m2021-11-25 12:08:25[0m :: libvirt_console :: line:121        :: [1;30mINFO      [0m :: IP Address of the created VM is written to yaml yaml file
-[32m2021-11-25 12:08:25[0m :: vm_support      :: line:32         :: [1;30mINFO      [0m :: Proxy wkld transfer command is being executed, and it might take some time based on the steps included in it
-[32m2021-11-25 12:08:25[0m :: vm_support      :: line:34         :: [1;30mINFO      [0m :: Proxy wkld transfered to vm_1 
-[32m2021-11-25 12:08:25[0m :: broker          :: line:48         :: [1;30mINFO      [0m :: Connected to MQTT broker: localhost on port: 1883
-[32m2021-11-25 12:08:25[0m :: wl_launcher     :: line:142        :: [1;30mINFO      [0m :: Subscribe to initial topics with callbacks
-[32m2021-11-25 12:08:25[0m :: wl_launcher     :: line:236        :: [1;30mINFO      [0m :: Pause subscription on KPI errors channel to handle new WL error spikes
-[32m2021-11-25 12:08:25[0m :: broker          :: line:84         :: [1;30mINFO      [0m :: Unsubscribed from topic: +/+/kpi/error/+
-[32m2021-11-25 12:08:25[0m :: wl_launcher     :: line:249        :: [1;30mINFO      [0m :: add_low-proxy-low instance: wl_#1 CMD:add_cmds/add_low_cpu_wl.sh start 1 10.99.114.63 8554 mystream FP16-INT8 CPU 10.99.114.167 PID:20675
-[32m2021-11-25 12:08:25[0m :: wl_launcher     :: line:254        :: [1;30mINFO      [0m :: Wait for settling time of 5s
-[32m2021-11-25 12:08:28[0m :: wl_launcher     :: line:101        :: [1;30mINFO      [0m :: [Received] on : add_weld_porosity/3113/kpi/status message: connected
-[32m2021-11-25 12:08:30[0m :: wl_launcher     :: line:270        :: [1;30mINFO      [0m :: Restart subscription on KPI errors channel
-[32m2021-11-25 12:08:30[0m :: wl_launcher     :: line:274        :: [1;30mINFO      [0m :: Watch for KPI errors in KPI window duration of: 5s
-[32m2021-11-25 12:08:36[0m :: wl_launcher     :: line:142        :: [1;30mINFO      [0m :: Subscribe to initial topics with callbacks
-[32m2021-11-25 12:08:36[0m :: wl_launcher     :: line:236        :: [1;30mINFO      [0m :: Pause subscription on KPI errors channel to handle new WL error spikes
-[32m2021-11-25 12:08:36[0m :: broker          :: line:84         :: [1;30mINFO      [0m :: Unsubscribed from topic: +/+/kpi/error/+
-[32m2021-11-25 12:08:36[0m :: wl_launcher     :: line:249        :: [1;30mINFO      [0m :: synbench-proxy-medium instance: wl_#2 CMD:python3 SSH/detailed_genvt_ssh.py 0 './start_wl.sh' PID:20750
-[32m2021-11-25 12:08:36[0m :: wl_launcher     :: line:254        :: [1;30mINFO      [0m :: Wait for settling time of 5s
-[32m2021-11-25 12:08:37[0m :: wl_launcher     :: line:101        :: [1;30mINFO      [0m :: [Received] on : synbench/2035/kpi/status message: connected
-[32m2021-11-25 12:08:41[0m :: wl_launcher     :: line:270        :: [1;30mINFO      [0m :: Restart subscription on KPI errors channel
-[32m2021-11-25 12:08:41[0m :: wl_launcher     :: line:274        :: [1;30mINFO      [0m :: Watch for KPI errors in KPI window duration of: 5s
-[32m2021-11-25 12:08:47[0m :: wl_launcher     :: line:174        :: [1;30mINFO      [0m :: Running measured round (1 of 1) for measured_indu_hmi_high
-[32m2021-11-25 12:08:47[0m :: wl_launcher     :: line:236        :: [1;30mINFO      [0m :: Pause subscription on KPI errors channel to handle new WL error spikes
-[32m2021-11-25 12:08:47[0m :: broker          :: line:84         :: [1;30mINFO      [0m :: Unsubscribed from topic: +/+/kpi/error/+
-[32m2021-11-25 12:08:47[0m :: wl_launcher     :: line:249        :: [1;30mINFO      [0m :: weld_porosity-measured_indu_hmi_high-low instance: wl_#3 CMD:add_cmds/add_low_wl.sh start 0 10.99.114.63 8554 mystream FP16-INT8 CPU 10.99.114.167 PID:20835
-[32m2021-11-25 12:08:47[0m :: wl_launcher     :: line:254        :: [1;30mINFO      [0m :: Wait for settling time of 5s
-[32m2021-11-25 12:08:50[0m :: wl_launcher     :: line:101        :: [1;30mINFO      [0m :: [Received] on : add_weld_porosity/2190/kpi/status message: connected
-[32m2021-11-25 12:08:52[0m :: wl_launcher     :: line:270        :: [1;30mINFO      [0m :: Restart subscription on KPI errors channel
-[32m2021-11-25 12:08:52[0m :: wl_launcher     :: line:274        :: [1;30mINFO      [0m :: Watch for KPI errors in KPI window duration of: 10s
-[32m2021-11-25 12:09:03[0m :: wl_launcher     :: line:236        :: [1;30mINFO      [0m :: Pause subscription on KPI errors channel to handle new WL error spikes
-[32m2021-11-25 12:09:03[0m :: broker          :: line:84         :: [1;30mINFO      [0m :: Unsubscribed from topic: +/+/kpi/error/+
-[32m2021-11-25 12:09:03[0m :: wl_launcher     :: line:249        :: [1;30mINFO      [0m :: weld_porosity-measured_indu_hmi_high-low instance: wl_#4 CMD:add_cmds/add_low_wl.sh start 0 10.99.114.63 8554 mystream FP16-INT8 CPU 10.99.114.167 PID:20940
-[32m2021-11-25 12:09:03[0m :: wl_launcher     :: line:254        :: [1;30mINFO      [0m :: Wait for settling time of 5s
-[32m2021-11-25 12:09:05[0m :: wl_launcher     :: line:101        :: [1;30mINFO      [0m :: [Received] on : add_weld_porosity/2347/kpi/status message: connected
-[32m2021-11-25 12:09:08[0m :: wl_launcher     :: line:270        :: [1;30mINFO      [0m :: Restart subscription on KPI errors channel
-[32m2021-11-25 12:09:08[0m :: wl_launcher     :: line:274        :: [1;30mINFO      [0m :: Watch for KPI errors in KPI window duration of: 10s
-[32m2021-11-25 12:09:19[0m :: wl_launcher     :: line:236        :: [1;30mINFO      [0m :: Pause subscription on KPI errors channel to handle new WL error spikes
-[32m2021-11-25 12:09:19[0m :: broker          :: line:84         :: [1;30mINFO      [0m :: Unsubscribed from topic: +/+/kpi/error/+
-[32m2021-11-25 12:09:19[0m :: wl_launcher     :: line:249        :: [1;30mINFO      [0m :: weld_porosity-measured_indu_hmi_high-low instance: wl_#5 CMD:add_cmds/add_low_wl.sh start 0 10.99.114.63 8554 mystream FP16-INT8 CPU 10.99.114.167 PID:21041
-[32m2021-11-25 12:09:19[0m :: wl_launcher     :: line:254        :: [1;30mINFO      [0m :: Wait for settling time of 5s
-[32m2021-11-25 12:09:21[0m :: wl_launcher     :: line:101        :: [1;30mINFO      [0m :: [Received] on : add_weld_porosity/2498/kpi/status message: connected
-[32m2021-11-25 12:09:24[0m :: wl_launcher     :: line:270        :: [1;30mINFO      [0m :: Restart subscription on KPI errors channel
-[32m2021-11-25 12:09:24[0m :: wl_launcher     :: line:274        :: [1;30mINFO      [0m :: Watch for KPI errors in KPI window duration of: 10s
-[32m2021-11-25 12:09:35[0m :: wl_launcher     :: line:236        :: [1;30mINFO      [0m :: Pause subscription on KPI errors channel to handle new WL error spikes
-[32m2021-11-25 12:09:35[0m :: broker          :: line:84         :: [1;30mINFO      [0m :: Unsubscribed from topic: +/+/kpi/error/+
-[32m2021-11-25 12:09:35[0m :: wl_launcher     :: line:249        :: [1;30mINFO      [0m :: weld_porosity-measured_indu_hmi_high-low instance: wl_#6 CMD:add_cmds/add_low_wl.sh start 0 10.99.114.63 8554 mystream FP16-INT8 CPU 10.99.114.167 PID:21147
-[32m2021-11-25 12:09:35[0m :: wl_launcher     :: line:254        :: [1;30mINFO      [0m :: Wait for settling time of 5s
-[32m2021-11-25 12:09:37[0m :: wl_launcher     :: line:101        :: [1;30mINFO      [0m :: [Received] on : add_weld_porosity/2639/kpi/status message: connected
-[32m2021-11-25 12:09:40[0m :: wl_launcher     :: line:270        :: [1;30mINFO      [0m :: Restart subscription on KPI errors channel
-[32m2021-11-25 12:09:40[0m :: wl_launcher     :: line:274        :: [1;30mINFO      [0m :: Watch for KPI errors in KPI window duration of: 10s
-[32m2021-11-25 12:09:51[0m :: wl_launcher     :: line:236        :: [1;30mINFO      [0m :: Pause subscription on KPI errors channel to handle new WL error spikes
-[32m2021-11-25 12:09:51[0m :: broker          :: line:84         :: [1;30mINFO      [0m :: Unsubscribed from topic: +/+/kpi/error/+
-[32m2021-11-25 12:09:51[0m :: wl_launcher     :: line:249        :: [1;30mINFO      [0m :: weld_porosity-measured_indu_hmi_high-low instance: wl_#7 CMD:add_cmds/add_low_wl.sh start 0 10.99.114.63 8554 mystream FP16-INT8 CPU 10.99.114.167 PID:21252
-[32m2021-11-25 12:09:51[0m :: wl_launcher     :: line:254        :: [1;30mINFO      [0m :: Wait for settling time of 5s
-[32m2021-11-25 12:09:54[0m :: wl_launcher     :: line:101        :: [1;30mINFO      [0m :: [Received] on : add_weld_porosity/2789/kpi/status message: connected
-[32m2021-11-25 12:09:56[0m :: wl_launcher     :: line:270        :: [1;30mINFO      [0m :: Restart subscription on KPI errors channel
-[32m2021-11-25 12:09:56[0m :: wl_launcher     :: line:274        :: [1;30mINFO      [0m :: Watch for KPI errors in KPI window duration of: 10s
-[32m2021-11-25 12:09:58[0m :: wl_launcher     :: line:133        :: [1;30mERROR     [0m :: [31mKPI ERROR #1 detected on process:add_weld_porosity,2190 message: [Frame:991] ERROR-1: Workload rendered single frame (308.32 ms) slower than maximum (300.00 ms)[0m
-[32m2021-11-25 12:09:58[0m :: wl_launcher     :: line:133        :: [1;30mERROR     [0m :: [31mKPI ERROR #1 detected on process:add_weld_porosity,2347 message: [Frame:777] ERROR-1: Workload rendered single frame (332.72 ms) slower than maximum (300.00 ms)[0m
-[32m2021-11-25 12:09:58[0m :: wl_launcher     :: line:282        :: [1;30mERROR     [0m :: [31mKPI error encountered. Closing wlc_bench[0m
-[32m2021-11-25 12:09:58[0m :: wl_launcher     :: line:133        :: [1;30mERROR     [0m :: [31mKPI ERROR #1 detected on process:add_weld_porosity,2639 message: [Frame:300] ERROR-1: Workload rendered single frame (306.75 ms) slower than maximum (300.00 ms)[0m
-[32m2021-11-25 12:09:59[0m :: wl_launcher     :: line:133        :: [1;30mERROR     [0m :: [31mKPI ERROR #1 detected on process:add_weld_porosity,2789 message: [Frame:16] ERROR-1: Workload rendered single frame (501.06 ms) slower than maximum (300.00 ms)[0m
-[32m2021-11-25 12:09:59[0m :: wl_launcher     :: line:133        :: [1;30mERROR     [0m :: [31mKPI ERROR #1 detected on process:add_weld_porosity,2347 message: [Frame:791] ERROR-1: Workload rendered single frame (301.24 ms) slower than maximum (300.00 ms)[0m
-[32m2021-11-25 12:09:59[0m :: wl_launcher     :: line:184        :: [1;30mINFO      [0m :: Created: 1 of synbench-proxy-medium
-[32m2021-11-25 12:09:59[0m :: wl_launcher     :: line:184        :: [1;30mINFO      [0m :: Created: 5 of weld_porosity-measured_indu_hmi_high-low
-[32m2021-11-25 12:09:59[0m :: wl_launcher     :: line:133        :: [1;30mERROR     [0m :: [31mKPI ERROR #1 detected on process:add_weld_porosity,2789 message: [Frame:33] ERROR-1: Workload rendered single frame (514.49 ms) slower than maximum (300.00 ms)[0m
-[32m2021-11-25 12:09:59[0m :: broker          :: line:119        :: [1;30mINFO      [0m :: Disconnected from MQTT broker
-[32m2021-11-25 12:09:59[0m :: vm_wlc_bench    :: line:239        :: [1;30mINFO      [0m :: Please wait for all processes to gracefully terminate and produce log files. ctrl+c not recommended
-[32m2021-11-25 12:10:12[0m :: wl_launcher     :: line:367        :: [1;30mINFO      [0m :: Terminated all spawned processes
-[32m2021-11-25 12:10:13[0m :: vm_wlc_bench    :: line:278        :: [1;30mINFO      [0m :: *********************************************************
-[32m2021-11-25 12:10:13[0m :: vm_wlc_bench    :: line:285        :: [1;30mINFO      [0m :: wlc_bench execution status: SUCCESS
-[32m2021-11-25 12:10:13[0m :: vm_wlc_bench    :: line:287        :: [1;30mINFO      [0m :: WLC Density for measured WL: measured_indu_hmi_high = 4
-[32m2021-11-25 12:10:13[0m :: vm_wlc_bench    :: line:289        :: [1;30mINFO      [0m :: *********************************************************
-[32m2021-11-25 12:10:13[0m :: vm_wlc_bench    :: line:291        :: [1;30mINFO      [0m :: Done

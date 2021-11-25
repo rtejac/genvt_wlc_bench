@@ -1,0 +1,6 @@
+Stopping containers
+Connected to 192.168.122.190 as wlc
+
+Executing the WL by the command :docker ps -q --filter ancestor=add_low:latest | xargs -r docker stop
+ 4fa0dbd968f2
+
