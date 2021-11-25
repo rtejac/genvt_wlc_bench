@@ -1,0 +1,6 @@
+[32m2021-11-19 15:54:53[0m :: vm_wlc_bench    :: line:374        :: [1;30mINFO      [0m :: Removed old logs directory
+[32m2021-11-19 15:54:53[0m :: vm_wlc_bench    :: line:78         :: [1;30mINFO      [0m :: Setting env variable: DESTDIR=<location of synbench>
+[32m2021-11-19 15:54:53[0m :: broker          :: line:48         :: [1;30mINFO      [0m :: Connected to MQTT broker: localhost on port: 1883
+[32m2021-11-19 15:54:53[0m :: wl_launcher     :: line:142        :: [1;30mINFO      [0m :: Subscribe to initial topics with callbacks
+[32m2021-11-19 15:54:53[0m :: broker          :: line:119        :: [1;30mINFO      [0m :: Disconnected from MQTT broker
+[32m2021-11-19 15:54:53[0m :: vm_wlc_bench    :: line:205        :: [1;30mINFO      [0m :: Please wait for all processes to gracefully terminate and produce log files. ctrl+c not recommended
