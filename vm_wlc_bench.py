@@ -19,6 +19,7 @@
 import yaml
 import datetime
 import logging
+import subprocess
 import os
 import shutil
 import sys
@@ -26,6 +27,7 @@ import time
 from getpass import getpass
 from pathlib import Path
 
+from datetime import datetime
 import coloredlogs
 
 from broker import Broker
@@ -77,34 +79,99 @@ def main():
         temp = var.split("=")
         logging.info(f"Setting env variable: {var}")
         os.environ[temp[0]] = temp[1]
-
-    # get all proxy, measured wl details
+    
+    #Teja edit
+    #For Debug purpose
+    logging.info(f'PID of this vm_wlc_bench instance is {os.getpid()}')
+    #force = True if int(sys.argv[2]) else False
 
     #Gettitng the VM related wl details in a list
+    gpu_pass = 0
+    measured = 0
+
+    for k,v in mode.items():
+        if 'vm' in k:
+            current_vm_info = parser.get(k, mode)
+            if current_vm_info['gpu_passthrough'] != 0:
+                gpu_pass += 1
+            try:    
+                if current_vm_info['measured_wl']:
+                    measured += 1
+            except:
+                pass
+
+    if gpu_pass > 1:
+        logging.error('More than 1 VM has GPU pass through... INVALID yaml file')
+        exit()
+    if measured > 1:
+        logging.error('None or more than 1 VM has measured workload mentioned... INVALID yaml file')
+        exit()
+            
     vm_list = []
+    found_measured = False
+    measured_vm = {}
     for k,v in mode.items():
         if 'vm' in k:
             
             proxy_info = {}
             measured_info = {}
-            current_vm_info = parser.get(k, mode)
-            proxy_info[k] = current_vm_info['proxy_wl']
+            current_vm = parser.get(k, mode)
+            proxy_info[k] = current_vm['proxy_wl']
             proxy_info[k]['type'] = 'proxy'
-            measured_info[k] = current_vm_info['measured_wl']
+             
+            try:
+                measured_info[k] = current_vm['measured_wl']
+                found_measured = True
+                measured_vm[k] = current_vm['measured_wl']
+            except:
+                measured_info[k] = None
+
             vm_index = int(k.split('_')[1]) #to get 0,1 from vm_0,vm_1 and use them for creating VM index
             
-            vm_object = VM(current_vm_info['vm_name'],current_vm_info['os_name'],current_vm_info['os_image'],vm_index,proxy_info[k],measured_info[k])
+            #Instansating VM object
+            vm_object = VM(current_vm['vm_name'],current_vm['os_name'],current_vm['os_image'],vm_index,proxy_info[k],measured_info[k],current_vm['gpu_passthrough'],current_vm['ram'],current_vm['cpu'])
+            
+            #Creating VM
             vm_object.create_vm()
+            vm_object.proxy_init_exec()
+            vm_object.measured_init_exec()
             vm_list.append(vm_object)
 
+    #if not found_measured:
+    #    logging.error('At least one VM should have Measured wkld instance listed')
+    #    exit()
+    
+    
     workloads = []
     
     for vm_object in vm_list:
         workloads.append(setup_workloads(vm_object.proxy, vm_object.measured))
     
+    measured_wkld_vm = []
+    no_measured_wkld_vm = []
+    for workload in workloads:
+        if workload[1]['isExist']:
+            measured_wkld_vm.append(workload)
+        else:
+            no_measured_wkld_vm.append(workload)
+    
+    #Done
+    
+
+    #Original code
+    
+    # get all proxy, measured wl details
+    #proxy = parser.get("proxy_wl", mode)
+    #proxy["type"] = "proxy"
+    #measured = parser.get("measured_wl", mode)
+
+    #workloads = setup_workloads(proxy, measured)
+    
+    #Done
     
     # get mqtt values
     mqtt_host, mqtt_port = get_mqtt_yml_values("mqtt", parsed_file, parser)
+    
 
     broker = Broker(mqtt_host, mqtt_port)
     broker.start()
@@ -150,10 +217,17 @@ def main():
             # first pass, no workloads, system idle measurements
             system_metrics.collect_store()
         
-        for i,wkld in enumerate(workloads):
+        #Teja edit
+        for wkld in no_measured_wkld_vm:   #for i,wkld in enumerate(workloads):
             # start workload launcher
             runner = WlLauncher(wkld, settling_time, system_metrics, broker)
             runner.run()
+        
+        for wkld in measured_wkld_vm:   #for i,wkld in enumerate(workloads):
+            # start workload launcher
+            runner = WlLauncher(wkld, settling_time, system_metrics, broker)
+            runner.run()
+        #Done
 
     finally:
         # all cleanup
@@ -162,6 +236,24 @@ def main():
 
         logging.info("Please wait for all processes to gracefully terminate and produce log files."
                      " ctrl+c not recommended")
+        
+        #Executing the Stop commands
+        for wkld in no_measured_wkld_vm:
+            with open(f"./logs/{wkld[0]['wl_list'][0]['wl']}_{wkld[0]['wl_list'][0]['profile_name']}_{datetime.now().strftime('%Y_%m_%d_%H_%M_%S')}_stop_cmd.log",'w') as f:
+                subprocess.Popen(wkld[0]['wl_list'][0]['stop_cmd'],stdout=f,shell=True,encoding='utf-8',universal_newlines=True)
+                time.sleep(1)
+        
+        for wkld in measured_wkld_vm:   #for i,wkld in enumerate(workloads):
+            with open(f"./logs/{wkld[0]['wl_list'][0]['wl']}_{wkld[0]['wl_list'][0]['profile_name']}_{datetime.now().strftime('%Y_%m_%d_%H_%M_%S')}stop_cmd.log",'w') as f:
+                subprocess.Popen(wkld[0]['wl_list'][0]['stop_cmd'],stdout=f,shell=True,encoding='utf-8',universal_newlines=True)
+                time.sleep(1)
+                
+            
+            with open(f"./logs/{wkld[1]['wl_list'][0]['wl']}_{wkld[0]['wl_list'][0]['profile_name']}_{datetime.now().strftime('%Y_%m_%d_%H_%M_%S')}stop_cmd.log",'w') as f:
+                subprocess.Popen(wkld[1]['wl_list'][0]['stop_cmd'],stdout=f,shell=True,encoding='utf-8',universal_newlines=True)
+                time.sleep(1)
+            
+
         if system_metrics:
             system_metrics.kill()
 
@@ -171,8 +263,8 @@ def main():
             # wait for processes to release file handles, else below file open for max fps fails
             time.sleep(1)
 
-            for vm_id,wkld in measured_info.items():
-                for k, grouped_wl in wkld.items():
+            for vm_id,wkld in measured_vm.items():
+                for k,grouped_wl in wkld.items():
                     if grouped_wl["calculate"] == "max_fps":
                         runner.calculate_fps(grouped_wl["wl_list"][0])
                         runner.density = "N.A"
@@ -208,9 +300,12 @@ def setup_workloads(proxy, measured):
     for wl in proxy["wl_list"]:
         wl["type"] = "proxy"
     
+    #print(type(proxy))
+    #print(measured, type(measured))
     workloads.append(proxy)
     
-    for conglomerate_wl, wl_list in measured.items():
+    if measured: 
+        for conglomerate_wl, wl_list in measured.items():
         # if max_fps is set, ensure instances number == 1 at
         # conglomerate_wl level AND wl_list level
         # e.g: rpos_retail_high:
@@ -220,25 +315,31 @@ def setup_workloads(proxy, measured):
         #             {...
         #               instances: 1,...
         #       }
-        wl_list["type"] = f"measured_{conglomerate_wl}"
-        wl_list["wkld_density"] = 0
+            wl_list["type"] = f"measured_{conglomerate_wl}"
+            wl_list["wkld_density"] = 0
+            wl_list["isExist"] = True
 
-        # Flag indicating if measured WL runs were successful or not
-        wl_list["is_success"] = True
+            # Flag indicating if measured WL runs were successful or not
+            wl_list["is_success"] = True
 
-        if "calculate" in wl_list and \
-                wl_list["calculate"] == "max_fps" and \
-                (len(wl_list["wl_list"]) > 1 or
-                 wl_list["wl_list"][0]["instances"]) > 1:
-            logging.error("calculate:max_fps has been set. # of WLs in "
+            if "calculate" in wl_list and \
+                    wl_list["calculate"] == "max_fps" and \
+                    (len(wl_list["wl_list"]) > 1 or
+                    wl_list["wl_list"][0]["instances"]) > 1:
+                logging.error("calculate:max_fps has been set. # of WLs in "
                           "conglomerate WLs can only be 1. Please check yml file")
-            exit(1)
+                exit(1)
 
-        for each_wl in wl_list["wl_list"]:
-            each_wl["type"] = f"measured_{conglomerate_wl}"
-        workloads.append(wl_list)
+            for each_wl in wl_list["wl_list"]:
+                each_wl["type"] = f"measured_{conglomerate_wl}"
+            workloads.append(wl_list)
     
-    #print('workloads in function: ',workloads)
+    else:
+        measure_check = {}
+        measure_check["type"] = "measured"
+        measure_check["isExist"] = False
+        workloads.append(measure_check)
+
     return workloads
 
 
@@ -289,7 +390,7 @@ def setup_logging(log_level):
     Path("./logs/").mkdir(parents=True, exist_ok=True)
 
     # all logs in ./logs dir
-    file_name = f"./logs/log_stdout_wlc_bench_{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.log"
+    file_name = f"./logs/log_stdout_wlc_bench_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.log"
     out_format = "\r%(asctime)-15s :: %(module)-15s :: line:%(lineno)-10d :: %(levelname)-10s :: %(message)-s\r"
     formatter = coloredlogs.ColoredFormatter(out_format)
 

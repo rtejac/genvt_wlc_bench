@@ -167,6 +167,9 @@ class WlLauncher(object):
                 # there are nested sub lists in measured wl
                 # since we have grouped/conglomerate wls defined
                 # parse through each list and sub list
+                if not grouped_wl['isExist']:
+                    return
+
                 for x in range(grouped_wl["instances"]):
                     logging.info(f"Running measured round ({x + 1}"
                                  f" of {grouped_wl['instances']}) for {grouped_wl['type']}")
@@ -187,11 +190,17 @@ class WlLauncher(object):
         :return: None, breaks if KPI error exception encountered
         """
         global wl_count
+        
+        #print(wl['isExist'])
+        #try:
+        #    if not wl['isExist']:
+        #        return
+        #except:
+        #    pass
 
         wl_name = wl["wl"]
         wl_type = wl["type"]
         profile_name = wl["profile_name"]
-
         init_cmd = None
         if "init_cmd" in wl and wl["init_cmd"] is not None:
             init_cmd = wl["init_cmd"]
@@ -228,7 +237,6 @@ class WlLauncher(object):
                 self.broker.unsubscribe("+/+/kpi/error/+")
 
                 if cmd:
-                    #print(f'\r{cmd}\r')
                     with open(f"./logs/log_stdout_{workload_name}_wl_{wl_count}.log", "w") as out_file:
                         proc = subprocess.Popen(cmd,
                                                 stdout=out_file,
@@ -351,6 +359,8 @@ class WlLauncher(object):
 
         # terminate any docker containers if spawned, needs stop_cmd param set in yml file
         for wl in self.wl_list:
+            if wl['type'] == 'measured' and not wl['isExist']:
+                return
             for each_wl in wl["wl_list"]:
                 if each_wl["stop_cmd"]:
                     print("\r"+each_wl["stop_cmd"]+"\r")

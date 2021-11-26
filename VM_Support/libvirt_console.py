@@ -1,5 +1,23 @@
 #!/usr/bin/env python3
 # consolecallback - provide a persistent console that survives guest reboots
+#!/usr/bin/env python3
+#
+# INTEL CONFIDENTIAL
+#
+# Copyright 2021 (c) Intel Corporation.
+#
+# This software and the related documents are Intel copyrighted materials, and
+# your use of them  is governed by the  express license under which  they were
+# provided to you ("License"). Unless the License provides otherwise, you  may
+# not  use,  modify,  copy, publish,  distribute,  disclose  or transmit  this
+# software or the related documents without Intel"s prior written permission.
+#
+# This software and the related documents are provided as is, with no  express
+# or implied  warranties, other  than those  that are  expressly stated in the
+# License.
+#
+# ----------------------------------------------------------------------------
+
 
 import os
 import time
@@ -29,7 +47,7 @@ def error_handler(unused, error) -> None:
 
 
 class Console(object):
-    def __init__(self, uri: str, name: str,vm_index:int) -> None:
+    def __init__(self, uri: str, name: str,vm_index: int) -> None:
         self.uri = uri
         self.name = name
         self.connection = libvirt.open(uri)
@@ -41,7 +59,9 @@ class Console(object):
         self.stdin_watch = -1
         #self.args = args
         self.vm_index = vm_index
-        self.f = open(f"vm{self.vm_index}_ipaddress.yml", mode = 'w',encoding = 'utf-8')
+        self.login_flag = 1
+        self.cmd_flag = 1
+        self.f = open(f"VM_Files/vm{self.vm_index}_ipaddress.yml", mode = 'w',encoding = 'utf-8')
         logging.info("%s initial state %d, reason %d",
                      self.name, self.state[0], self.state[1])
 
@@ -87,32 +107,43 @@ def stream_callback(stream: libvirt.virStream, events: int, console: Console) ->
 
     char_data = ''.join(login_data)
     vm_name = console.name
-    if stream_callback.login_flag == 1:
+    #if stream_callback.login_flag == 1:
+    if console.login_flag == 1:
         for login_str in char_data.rsplit():
             if login_str == 'login:' and stream_callback.login_flag == 1:
                 console.stream.send(b"wlc\n")
+                time.sleep(1)
+                console.stream.send(b"wlc123\n")
                 login_data.clear()
-                stream_callback.login_flag = 2
-    if stream_callback.cmd_flag == 1:
+                #stream_callback.login_flag = 2
+                console.login_flag = 2
+    else:
+        pass
+        #print('\rlogin flag: ',stream_callback.login_flag,'\r')
+    
+    if console.cmd_flag == 1:
         for login_str in char_data.rsplit():
             ansi_escape_8bit = re.compile(br'(?:\x1B[@-Z\\-_]|[\x80-\x9A\x9C-\x9F]|(?:\x1B\[|\x9B)[0-?]*[ -/]*[@-~])')
             result = ansi_escape_8bit.sub(b'', login_str.encode())
             if result.decode() == 'wlc@ubuntu-vm:~$' and stream_callback.cmd_flag == 1:
-                console.stream.send(b"echo wlc123 | sudo -S mount -t 9p -o trans=virtio,version=9p2000.L mytag /mnt\n")
-                console.stream.send(b"echo DISPLAY env value: $DISPLAY \n")
+                #console.stream.send(b"echo wlc123 | sudo -S mount -t 9p -o trans=virtio,version=9p2000.L mytag /mnt\n")
+                #console.stream.send(b"echo DISPLAY env value: $DISPLAY \n")
                 ipaddress = guest_ip.Guest_IPAddress(console.domain)
                 vm_info = {'vm_name':vm_name,'guest_ip':ipaddress,'login':'wlc','password':'wlc123'}
-
+                
                 # Aregument file creation for guest
                 for x,y in vm_info.items():
                     console.f.write(f"{x} : {y}\n")
                 console.f.close()
                 time.sleep(1)
-                print('\rContents were written to yaml file')
+                logging.info('IP Address of the created VM is written to yaml yaml file')
                 login_data.clear()
-                stream_callback.cmd_flag = 2
+                console.cmd_flag = 2
                 console.run_console = False
                 return
+    else:
+        pass
+        #print('\rcommand flag: ',stream_callback.cmd_flag,'\r')
 
 
 

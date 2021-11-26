@@ -1,3 +1,22 @@
+#!/usr/bin/env python3
+#
+# INTEL CONFIDENTIAL
+#
+# Copyright 2021 (c) Intel Corporation.
+#
+# This software and the related documents are Intel copyrighted materials, and
+# your use of them  is governed by the  express license under which  they were
+# provided to you ("License"). Unless the License provides otherwise, you  may
+# not  use,  modify,  copy, publish,  distribute,  disclose  or transmit  this
+# software or the related documents without Intel"s prior written permission.
+#
+# This software and the related documents are provided as is, with no  express
+# or implied  warranties, other  than those  that are  expressly stated in the
+# License.
+#
+# ----------------------------------------------------------------------------
+
+
 import os
 import sys
 import yaml
@@ -6,7 +25,7 @@ import paramiko
 
 def get_VM_info(vm_index):
     
-    with open(f'vm{vm_index}_ipaddress.yml',mode='r',encoding='utf-8') as f:
+    with open(f'VM_Files/vm{vm_index}_ipaddress.yml',mode='r',encoding='utf-8') as f:
         data = yaml.full_load(f)
     f.close()
     return data['guest_ip'], data['login'], data['password']
@@ -42,21 +61,25 @@ def ssh_guest(cmd):
         print('Error in creating connection')
         sys.exit()
 
-    print(f"\r\nExecuting the WL by the command :{cmd[2:]}")
-    cmd = ' '.join(sys.argv[2:])
+    print(f"\r\nExecuting the WL by the command :{cmd[2]}")
+    #cmd = ' '.join(sys.argv[2:])
     try:
-        stdin, stdout, stderr = ssh.exec_command(cmd,get_pty=True)
+        stdin, stdout, stderr = ssh.exec_command(sys.argv[2],get_pty=True)
     except:
+        #Kill the process directly and print the output generated so far(???)
         pass
     lines = stdout.readlines()
     error = stderr.readlines()
-    for line in lines:
-        print('\r',line)
-    for data in error:
-        print(f"\n\r{data}")
+    
+    if len(sys.argv) == 4:
+        with open(f'logs/{sys.argv[3]}.log','w') as f:
+            for line in lines:
+                f.write(line)
+    else:
+        for line in lines:
+            print('\r',line)
+        for data in error:
+            print(f"\n\r{data}")
 
-
-import os
-print(os.getcwd())
 
 ssh_guest(sys.argv)

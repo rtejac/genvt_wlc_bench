@@ -1,0 +1,45 @@
+<domain type="kvm">
+  <name>ubuntu-vm-1</name>
+  <memory unit="KiB">1048576</memory>
+  <currentMemory unit="KiB">1048576</currentMemory>
+  <cpu mode="host-model">
+   <model fallback="allow" />
+  </cpu>
+  <vcpu>1</vcpu>
+  <os>
+    <type arch="x86_64" machine="pc">hvm</type>
+    <boot dev="hd" />
+    <boot dev="cdrom" />
+  </os>
+  <clock offset="utc" />
+  <on_poweroff>destroy</on_poweroff>
+  <on_reboot>restart</on_reboot>
+  <on_crash>destroy</on_crash>
+  <devices>
+    <emulator>/usr/bin/qemu-system-x86_64</emulator>
+  <disk type="file" device="disk">
+       <driver name="qemu" type="qcow2" />
+       <source file="/gos_images/ubuntu_1.qcow2" />
+       <target dev="vdb" bus="virtio" />
+  </disk>
+  <interface type="bridge">
+    <source bridge="virbr0" />
+    <model type="virtio" />
+  </interface>
+  <serial type="pty">
+    <target port="1" />
+  </serial>
+  <console type="pty">
+    <target type="serial" port="1" />
+  </console>
+  <filesystem type="mount" accessmode="squash">
+    <driver type="path" />
+    <source dir="/home/wlc/libvirt" />
+    <target dir="mytag" />
+    </filesystem>
+    <channel type="unix">
+    <source mode="bind" path="/var/lib/libvirt/qemu/f16x86_64.agent" />
+    <target type="virtio" name="org.qemu.guest_agent.0" state="connected" />
+  </channel>
+  </devices>
+</domain>

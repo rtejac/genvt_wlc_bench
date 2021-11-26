@@ -1,8 +1,28 @@
+#!/usr/bin/env python3
+#
+# INTEL CONFIDENTIAL
+#
+# Copyright 2021 (c) Intel Corporation.
+#
+# This software and the related documents are Intel copyrighted materials, and
+# your use of them  is governed by the  express license under which  they were
+# provided to you ("License"). Unless the License provides otherwise, you  may
+# not  use,  modify,  copy, publish,  distribute,  disclose  or transmit  this
+# software or the related documents without Intel"s prior written permission.
+#
+# This software and the related documents are provided as is, with no  express
+# or implied  warranties, other  than those  that are  expressly stated in the
+# License.
+#
+# ----------------------------------------------------------------------------
+
+
 import os
 import yaml
 import libvirt
 import time
 import getpass
+import logging
 import netifaces as ni
 import xml_parsing_main as xml
 from yml_parser import YAMLParser
@@ -11,7 +31,7 @@ from VM_Support import libvirt_console as console_vm
 
 class VM():
 
-    def __init__(self,vm_name,os_name,os_image,vm_index,proxy,measured):
+    def __init__(self,vm_name,os_name,os_image,vm_index,proxy,measured,gpu_pass,ram,cpu):
 
         self.vm_name = vm_name
         self.os_name = os_name
@@ -19,66 +39,72 @@ class VM():
         self.vm_index = vm_index
         self.proxy = proxy
         self.measured = measured
+        self.gpu_pass = gpu_pass
+        self.ram = ram*1024*1024
+        self.cpu = cpu
 
     
     def proxy_init_exec(self):
-
+        
         wl_setup = self.proxy['wl_list'][0]['wl_setup']
         if wl_setup:
-            print("\rProxy wkld transfer command is being executed, and it might take some time based on the steps included in it",'\r')
+            logging.info("Proxy wkld transfer command is being executed, and it might take some time based on the steps included in it")
             os.system(wl_setup)
-            print(f'\rProxy wkld transfered to vm_{self.vm_index} ')
+            logging.info(f'Proxy wkld transfered to vm_{self.vm_index} ')
         else:
-            print(f'\rNo Transfer command for vm_{self.vm_index} Proxy, Skipping this\r')
+            logging.info(f'No Transfer command for vm_{self.vm_index} Proxy, Skipping this')
     
     
     def measured_init_exec(self):
         
+        if not self.measured:
+            return
+
         wl_setup = self.measured['indu_hmi_high']['wl_list'][0]['wl_setup']
         if wl_setup:
-            print("\rMeasured wkld transfer command is being executed, and it might take some time based on the steps included in it",'\r')
+            logging.info("Measured wkld transfer command is being executed, and it might take some time based on the steps included in it")
             os.system(wl_setup)
-            print(f'\rMeasured wkld transfered to vm_{self.vm_index}')
+            logging.info(f'Measured wkld transfered to vm_{self.vm_index}')
         else:
-            print(f'\rNo Transfer command for vm_{self.vm_index} Measured, Skipping this\r')
-    
-    
+            logging.info(f'No Transfer command for vm_{self.vm_index} Measured, Skipping this')
     
     
     
     def create_vm(self):
 
-        print(f"\rCreating a {self.os_name} VM with image {self.os_image}, VM name {self.vm_name}\r")
         try:
             conn = libvirt.open('qemu:///system')
         except libvirt.libvirtError as e:
             print(repr(e),file=sys.stderr)
             exit(1)
 
+        try:
+            dom = conn.lookupByName(self.vm_name)
+
+            if dom.isActive():
+                logging.info(f'VM {self.vm_name} is already running, Not creating again')
+                return
+        except:
+            logging.info('No previous instance of the VM is found...')
+        
+        logging.info(f"Creating a {self.os_name} VM with image {self.os_image}, VM name {self.vm_name}")
         username = getpass.getuser()
     
         #geting ip address of host machine
         ni.ifaddresses('virbr0')
         ip = ni.ifaddresses('virbr0')[ni.AF_INET][0]['addr']
-        #print("\n\rIP Address of Host machine:{}".format(ip))
 
         try:
-            xml.vm_xml_create(self.vm_index,self.vm_name,self.os_image)
-            f_xml = open(f'vm_{self.vm_index}.xml','r')
+            #Include this line in future, diabling as the xmls are already created...
+            xml.vm_xml_create(self.vm_index,self.vm_name,self.os_image,self.gpu_pass,self.ram,self.cpu)
+            f_xml = open(f'VM_Files/vm_{self.vm_index}.xml','r')
             dom = conn.createXML(f_xml.read(),0)
         except Exception as e:
-            print("Can Not boot guest domain {file=sys.stderr}")
-            print(e)
+            logging.error("Can Not boot guest domain {file=sys.stderr}")
+            logging.error(e)
 
         uuid = dom.UUIDString()
-        print(f"\rsystem : {dom.name()}  booted, file=sys.stderr and might take sometime for the GUI to show up (20 Seconds)\r")
-    
-        #f = open("guest.yml", mode = 'w', encoding = 'utf-8')
-        #vm_0 = {'vm_name':self.vm_name,'vm_uuid':uuid,'host_ip':ip}
-        # Aregument file creation for guest
-        #for x,y in vm_0.items():
-        #    f.write(f"{x} : {y}\n")
-        #f.close()
+        logging.info(f"{dom.name()}  booted, might take sometime to show up (20 Seconds)")
     
         time.sleep(20)
     
@@ -87,5 +113,4 @@ class VM():
         console.stdin_watch = libvirt.virEventAddHandle(0, libvirt.VIR_EVENT_HANDLE_READABLE, console_vm.stdin_callback, console)
         while console_vm.check_console(console):
             libvirt.virEventRunDefaultImpl()
-        #dom.destroy()
         conn.close()
