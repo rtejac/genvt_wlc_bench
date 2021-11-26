@@ -103,7 +103,7 @@ def main():
     if gpu_pass > 1:
         logging.error('More than 1 VM has GPU pass through... INVALID yaml file')
         exit()
-    if measured != 1:
+    if measured > 1:
         logging.error('None or more than 1 VM has measured workload mentioned... INVALID yaml file')
         exit()
             
@@ -127,15 +127,19 @@ def main():
                 measured_info[k] = None
 
             vm_index = int(k.split('_')[1]) #to get 0,1 from vm_0,vm_1 and use them for creating VM index
+            
+            #Instansating VM object
             vm_object = VM(current_vm['vm_name'],current_vm['os_name'],current_vm['os_image'],vm_index,proxy_info[k],measured_info[k],current_vm['gpu_passthrough'],current_vm['ram'],current_vm['cpu'])
+            
+            #Creating VM
             vm_object.create_vm()
             vm_object.proxy_init_exec()
             vm_object.measured_init_exec()
             vm_list.append(vm_object)
 
-    if not found_measured:
-        logging.error('At least one VM should have Measured wkld instance listed')
-        exit()
+    #if not found_measured:
+    #    logging.error('At least one VM should have Measured wkld instance listed')
+    #    exit()
     
     
     workloads = []
@@ -218,17 +222,11 @@ def main():
             # start workload launcher
             runner = WlLauncher(wkld, settling_time, system_metrics, broker)
             runner.run()
-            #print(wkld[0]['wl_list'][0]['stop_cmd'])
         
         for wkld in measured_wkld_vm:   #for i,wkld in enumerate(workloads):
-            #print(f'\rLaunchig WLs in VM {i}, WL details',wkld)
             # start workload launcher
             runner = WlLauncher(wkld, settling_time, system_metrics, broker)
             runner.run()
-            #print(wkld[0]['wl_list'][0]['stop_cmd'])
-            #print(wkld[1]['wl_list'][0]['stop_cmd'])
-        #time.sleep(30*60)
-        #logging.info('30 Mins test run completed')
         #Done
 
     finally:
@@ -266,10 +264,7 @@ def main():
             time.sleep(1)
 
             for vm_id,wkld in measured_vm.items():
-                #print(measured_wkld_vm[0])
                 for k,grouped_wl in wkld.items():
-                    #print(grouped_wl)
-                    #grouped_wl = grouped_wl[0]
                     if grouped_wl["calculate"] == "max_fps":
                         runner.calculate_fps(grouped_wl["wl_list"][0])
                         runner.density = "N.A"
@@ -345,7 +340,6 @@ def setup_workloads(proxy, measured):
         measure_check["isExist"] = False
         workloads.append(measure_check)
 
-    #print('workloads in function: ',workloads)
     return workloads
 
 

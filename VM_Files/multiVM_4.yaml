@@ -34,16 +34,18 @@ breakpoint_serial:
     vm_name: ubuntu-vm-0
     os_name: linux
     gpu_passthrough: 1
+    ram: 2
+    cpu: 4
     proxy_wl:
       wl_list:
         [
           {
             wl: synbench,
             profile_name: medium, #<low/medium/high>,
-            wl_setup: ./wkld_setup.sh,
-            init_cmd: rm /tmp/port.txt, 
+            wl_setup: rm /tmp/port0.txt,
+            init_cmd: null, #rm /tmp/port.txt, 
             start_cmd: python3 SSH/detailed_genvt_ssh.py 0 './start_wl.sh',
-            stop_cmd: python3 SSH/ssh_kill_procs.py 0 synbench,
+            stop_cmd: python3 SSH/ssh_kill_procs.py 0 synbench_cmds/synbench,
             instances: 1,
             kpi_window: 5,
           }
@@ -59,9 +61,9 @@ breakpoint_serial:
               profile_name: low, #<low/medium/high>,
               wl_setup: null,
               init_cmd: null,
-              start_cmd: ./add_low_wl.sh start 0 10.99.114.63 8554 mystream FP16-INT8 CPU 10.99.114.167, 
-              stop_cmd: ./add_low_wl.sh stop 0, #null,
-              instances: 5,
+              start_cmd: add_cmds/add_low_wl.sh start 0 10.99.114.63 8554 mystream FP16-INT8 CPU 10.99.114.167, 
+              stop_cmd: add_cmds/add_low_wl.sh stop 0, #null,
+              instances: 10,
               kpi_window: 10,
             }
             ]
@@ -71,18 +73,20 @@ breakpoint_serial:
     vm_name: ubuntu-vm-1
     os_name: linux
     gpu_passthrough: 0
+    ram: 1
+    cpu: 1
     proxy_wl:
       wl_list:
         [
           {
             wl: add_low,
             profile_name: low, #<low/medium/high>,
-            wl_setup: ./wkld_setup.sh,
-            init_cmd: rm /tmp/port.txt, 
-            start_cmd: ./add_low_cpu_wl.sh start 1 10.99.114.63 8554 mystream FP16-INT8 CPU 10.99.114.167, 
-            stop_cmd: ./add_low_wl.sh stop 1, #null,
+            wl_setup: rm /tmp/port1.txt,
+            init_cmd: null, #rm /tmp/port.txt, 
+            start_cmd: add_cmds/add_low_cpu_wl.sh start 1 10.99.114.63 8554 mystream FP16-INT8 CPU 10.99.114.167, 
+            stop_cmd: add_cmds/add_low_cpu_wl.sh stop 1, #null,
             instances: 1,
-            kpi_window: 5,
+            kpi_window: 10,
           }
           ]
   
@@ -92,21 +96,45 @@ breakpoint_serial:
     vm_name: ubuntu-vm-2
     os_name: linux
     gpu_passthrough: 0
+    ram: 1
+    cpu: 1
     proxy_wl:
       wl_list:
         [
           {
             wl: add_low,
             profile_name: low, #<low/medium/high>,
-            wl_setup: null, #./wkld_setup.sh,
+            wl_setup: rm /tmp/port2.txt,
             init_cmd: null, #rm /tmp/port.txt, 
-            start_cmd: ./add_low_cpu_wl.sh start 1 10.99.114.63 8554 mystream FP16-INT8 CPU 10.99.114.167, 
-            stop_cmd: ./add_low_wl.sh stop 1, #null,
+            start_cmd: add_cmds/add_low_cpu_wl.sh start 2 10.99.114.63 8554 mystream FP16-INT8 CPU 10.99.114.167, 
+            stop_cmd: add_cmds/add_low_cpu_wl.sh stop 2, #null,
             instances: 1,
-            kpi_window: 5,
+            kpi_window: 10,
           }
           ]
   
+  vm_3:
+    
+    os_image: /gos_images/ubuntu_3.qcow2
+    vm_name: ubuntu-vm-3
+    os_name: linux
+    gpu_passthrough: 0
+    ram: 1
+    cpu: 1
+    proxy_wl:
+      wl_list:
+        [
+          {
+            wl: add_low,
+            profile_name: low, #<low/medium/high>,
+            wl_setup: rm /tmp/port3.txt,
+            init_cmd: null, #rm /tmp/port.txt, 
+            start_cmd: add_cmds/add_low_cpu_wl.sh start 3 10.99.114.63 8554 mystream FP16-INT8 CPU 10.99.114.167, 
+            stop_cmd: add_cmds/add_low_cpu_wl.sh stop 3, #null,
+            instances: 1,
+            kpi_window: 10,
+          }
+          ]
             
   # 0 info, 1 debug
   loglevel: 0

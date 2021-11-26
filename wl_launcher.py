@@ -359,6 +359,8 @@ class WlLauncher(object):
 
         # terminate any docker containers if spawned, needs stop_cmd param set in yml file
         for wl in self.wl_list:
+            if wl['type'] == 'measured' and not wl['isExist']:
+                return
             for each_wl in wl["wl_list"]:
                 if each_wl["stop_cmd"]:
                     print("\r"+each_wl["stop_cmd"]+"\r")
