@@ -89,7 +89,6 @@ def main():
     
     validate_yaml(parser,mode)
     
-    exit()
     vm_list = []
     found_measured = False
     measured_vm = {}
