@@ -35,7 +35,7 @@ from system_metrics import SystemMetrics
 from wl_launcher import WlLauncher
 from yml_parser import YAMLParser
 
-from VM_Support.vm_support import VM
+from VM_Support.vm_support import VM, validate_yaml
 
 
 
@@ -86,27 +86,9 @@ def main():
     #force = True if int(sys.argv[2]) else False
 
     #Gettitng the VM related wl details in a list
-    gpu_pass = 0
-    measured = 0
-
-    for k,v in mode.items():
-        if 'vm' in k:
-            current_vm_info = parser.get(k, mode)
-            if current_vm_info['gpu_passthrough'] != 0:
-                gpu_pass += 1
-            try:    
-                if current_vm_info['measured_wl']:
-                    measured += 1
-            except:
-                pass
-
-    if gpu_pass > 1:
-        logging.error('More than 1 VM has GPU pass through... INVALID yaml file')
-        exit()
-    if measured > 1:
-        logging.error('None or more than 1 VM has measured workload mentioned... INVALID yaml file')
-        exit()
-            
+    
+    validate_yaml(parser,mode)
+    
     vm_list = []
     found_measured = False
     measured_vm = {}
@@ -137,9 +119,6 @@ def main():
             vm_object.measured_init_exec()
             vm_list.append(vm_object)
 
-    #if not found_measured:
-    #    logging.error('At least one VM should have Measured wkld instance listed')
-    #    exit()
     
     
     workloads = []
@@ -227,6 +206,10 @@ def main():
             # start workload launcher
             runner = WlLauncher(wkld, settling_time, system_metrics, broker)
             runner.run()
+        
+        time.sleep(30*60)
+        logging.info("Waiting for 30 mins")
+        
         #Done
 
     finally:
@@ -240,16 +223,19 @@ def main():
         #Executing the Stop commands
         for wkld in no_measured_wkld_vm:
             with open(f"./logs/{wkld[0]['wl_list'][0]['wl']}_{wkld[0]['wl_list'][0]['profile_name']}_{datetime.now().strftime('%Y_%m_%d_%H_%M_%S')}_stop_cmd.log",'w') as f:
+                print('\r'+wkld[0]['wl_list'][0]['stop_cmd'])
                 subprocess.Popen(wkld[0]['wl_list'][0]['stop_cmd'],stdout=f,shell=True,encoding='utf-8',universal_newlines=True)
                 time.sleep(1)
         
         for wkld in measured_wkld_vm:   #for i,wkld in enumerate(workloads):
             with open(f"./logs/{wkld[0]['wl_list'][0]['wl']}_{wkld[0]['wl_list'][0]['profile_name']}_{datetime.now().strftime('%Y_%m_%d_%H_%M_%S')}stop_cmd.log",'w') as f:
+                print('\r'+wkld[0]['wl_list'][0]['stop_cmd'])
                 subprocess.Popen(wkld[0]['wl_list'][0]['stop_cmd'],stdout=f,shell=True,encoding='utf-8',universal_newlines=True)
                 time.sleep(1)
                 
             
             with open(f"./logs/{wkld[1]['wl_list'][0]['wl']}_{wkld[0]['wl_list'][0]['profile_name']}_{datetime.now().strftime('%Y_%m_%d_%H_%M_%S')}stop_cmd.log",'w') as f:
+                print('\r'+wkld[1]['wl_list'][0]['stop_cmd'])
                 subprocess.Popen(wkld[1]['wl_list'][0]['stop_cmd'],stdout=f,shell=True,encoding='utf-8',universal_newlines=True)
                 time.sleep(1)
             

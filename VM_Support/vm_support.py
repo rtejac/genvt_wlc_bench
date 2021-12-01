@@ -114,3 +114,44 @@ class VM():
         while console_vm.check_console(console):
             libvirt.virEventRunDefaultImpl()
         conn.close()
+
+
+
+def validate_yaml(parser,mode):
+    
+    
+    gpu_pass = 0
+    measured = 0
+    vm_names = []
+    vm_paths = []
+
+    for k,v in mode.items():
+        if 'vm' in k:
+            current_vm_info = parser.get(k, mode)
+            vm_names.append(current_vm_info['vm_name'])
+            vm_paths.append(current_vm_info['os_image'])
+
+            if current_vm_info['gpu_passthrough'] != 0:
+                gpu_pass += 1
+            try:    
+                if current_vm_info['measured_wl']:
+                    measured += 1
+            except:
+                pass
+    
+    for i in vm_names:
+        if vm_names.count(i) > 1:
+            logging.error('More than 1 VM has same name ... INVALID yaml file')
+            exit()
+
+    for i in vm_paths:
+        if vm_paths.count(i) > 1:
+            logging.error('More than 1 VM has same path ... INVALID yaml file')
+            exit()
+    
+    if gpu_pass != 1:
+        logging.error('More than 1 VM has GPU pass through... INVALID yaml file')
+        exit()
+    if measured > 1:
+        logging.error('None or more than 1 VM has measured workload mentioned... INVALID yaml file')
+        exit()
