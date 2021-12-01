@@ -1,0 +1,4 @@
+[32m2021-12-01 10:46:44[0m :: vm_wlc_bench    :: line:449        :: [1;30mINFO      [0m :: Removed old logs directory
+[32m2021-12-01 10:46:44[0m :: vm_wlc_bench    :: line:80         :: [1;30mINFO      [0m :: Setting env variable: DESTDIR=<location of synbench>
+[32m2021-12-01 10:46:44[0m :: vm_wlc_bench    :: line:85         :: [1;30mINFO      [0m :: PID of this vm_wlc_bench instance is 29040
+[32m2021-12-01 10:46:44[0m :: vm_support      :: line:153        :: [1;30mERROR     [0m :: [31mMore than 1 VM has GPU pass through... INVALID yaml file[0m

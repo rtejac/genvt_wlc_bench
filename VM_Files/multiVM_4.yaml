@@ -35,7 +35,7 @@ breakpoint_serial:
     os_name: linux
     gpu_passthrough: 1
     ram: 2
-    cpu: 4
+    cpu: 2
     proxy_wl:
       wl_list:
         [
@@ -68,7 +68,7 @@ breakpoint_serial:
             }
             ]
   vm_1:
-    
+      
     os_image: /gos_images/ubuntu_1.qcow2
     vm_name: ubuntu-vm-1
     os_name: linux

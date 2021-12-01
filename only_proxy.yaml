@@ -42,8 +42,8 @@ breakpoint_serial:
           {
             wl: synbench,
             profile_name: medium, #<low/medium/high>,
-            wl_setup: rm /tmp/port0.txt,
-            init_cmd: null, #rm /tmp/port.txt, 
+            wl_setup: synbench_cmds/move_synbench.sh,
+            init_cmd: rm /tmp/port0.txt, 
             start_cmd: python3 SSH/detailed_genvt_ssh.py 0 './start_wl.sh',
             stop_cmd: python3 SSH/ssh_kill_procs.py 0 synbench,
             instances: 1,

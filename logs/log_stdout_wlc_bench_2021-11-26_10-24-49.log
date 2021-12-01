@@ -1,40 +1,0 @@
-[32m2021-11-26 10:24:49[0m :: vm_wlc_bench    :: line:423        :: [1;30mINFO      [0m :: Removed old logs directory
-[32m2021-11-26 10:24:49[0m :: vm_wlc_bench    :: line:80         :: [1;30mINFO      [0m :: Setting env variable: DESTDIR=<location of synbench>
-[32m2021-11-26 10:24:49[0m :: vm_wlc_bench    :: line:85         :: [1;30mINFO      [0m :: PID of this vm_wlc_bench instance is 22152
-[32m2021-11-26 10:24:49[0m :: vm_support      :: line:85         :: [1;30mINFO      [0m :: VM ubuntu-vm-0 is already running, Not creating again
-[32m2021-11-26 10:24:49[0m :: vm_support      :: line:51         :: [1;30mINFO      [0m :: Proxy wkld transfer command is being executed, and it might take some time based on the steps included in it
-[32m2021-11-26 10:24:49[0m :: vm_support      :: line:53         :: [1;30mINFO      [0m :: Proxy wkld transfered to vm_0 
-[32m2021-11-26 10:24:49[0m :: vm_support      :: line:85         :: [1;30mINFO      [0m :: VM ubuntu-vm-1 is already running, Not creating again
-[32m2021-11-26 10:24:49[0m :: vm_support      :: line:51         :: [1;30mINFO      [0m :: Proxy wkld transfer command is being executed, and it might take some time based on the steps included in it
-[32m2021-11-26 10:24:49[0m :: vm_support      :: line:53         :: [1;30mINFO      [0m :: Proxy wkld transfered to vm_1 
-[32m2021-11-26 10:24:49[0m :: vm_support      :: line:85         :: [1;30mINFO      [0m :: VM ubuntu-vm-2 is already running, Not creating again
-[32m2021-11-26 10:24:49[0m :: vm_support      :: line:51         :: [1;30mINFO      [0m :: Proxy wkld transfer command is being executed, and it might take some time based on the steps included in it
-[32m2021-11-26 10:24:49[0m :: vm_support      :: line:53         :: [1;30mINFO      [0m :: Proxy wkld transfered to vm_2 
-[32m2021-11-26 10:24:49[0m :: broker          :: line:48         :: [1;30mINFO      [0m :: Connected to MQTT broker: localhost on port: 1883
-[32m2021-11-26 10:24:49[0m :: wl_launcher     :: line:142        :: [1;30mINFO      [0m :: Subscribe to initial topics with callbacks
-[32m2021-11-26 10:24:49[0m :: wl_launcher     :: line:236        :: [1;30mINFO      [0m :: Pause subscription on KPI errors channel to handle new WL error spikes
-[32m2021-11-26 10:24:49[0m :: broker          :: line:84         :: [1;30mINFO      [0m :: Unsubscribed from topic: +/+/kpi/error/+
-[32m2021-11-26 10:24:49[0m :: wl_launcher     :: line:249        :: [1;30mINFO      [0m :: synbench-proxy-medium instance: wl_#1 CMD:python3 SSH/detailed_genvt_ssh.py 0 './start_wl.sh' PID:22168
-[32m2021-11-26 10:24:49[0m :: wl_launcher     :: line:254        :: [1;30mINFO      [0m :: Wait for settling time of 5s
-[32m2021-11-26 10:24:50[0m :: wl_launcher     :: line:101        :: [1;30mINFO      [0m :: [Received] on : synbench/2163/kpi/status message: connected
-[32m2021-11-26 10:24:54[0m :: wl_launcher     :: line:270        :: [1;30mINFO      [0m :: Restart subscription on KPI errors channel
-[32m2021-11-26 10:24:54[0m :: wl_launcher     :: line:274        :: [1;30mINFO      [0m :: Watch for KPI errors in KPI window duration of: 1s
-[32m2021-11-26 10:24:56[0m :: wl_launcher     :: line:142        :: [1;30mINFO      [0m :: Subscribe to initial topics with callbacks
-[32m2021-11-26 10:24:56[0m :: wl_launcher     :: line:236        :: [1;30mINFO      [0m :: Pause subscription on KPI errors channel to handle new WL error spikes
-[32m2021-11-26 10:24:56[0m :: broker          :: line:84         :: [1;30mINFO      [0m :: Unsubscribed from topic: +/+/kpi/error/+
-[32m2021-11-26 10:24:56[0m :: wl_launcher     :: line:249        :: [1;30mINFO      [0m :: add_low-proxy-low instance: wl_#2 CMD:add_cmds/add_low_cpu_wl.sh start 1 10.99.114.63 8554 mystream FP16-INT8 CPU 10.99.114.167 PID:22177
-[32m2021-11-26 10:24:56[0m :: wl_launcher     :: line:254        :: [1;30mINFO      [0m :: Wait for settling time of 5s
-[32m2021-11-26 10:24:58[0m :: wl_launcher     :: line:101        :: [1;30mINFO      [0m :: [Received] on : add_weld_porosity/11405/kpi/status message: connected
-[32m2021-11-26 10:25:01[0m :: wl_launcher     :: line:270        :: [1;30mINFO      [0m :: Restart subscription on KPI errors channel
-[32m2021-11-26 10:25:01[0m :: wl_launcher     :: line:274        :: [1;30mINFO      [0m :: Watch for KPI errors in KPI window duration of: 1s
-[32m2021-11-26 10:25:03[0m :: wl_launcher     :: line:142        :: [1;30mINFO      [0m :: Subscribe to initial topics with callbacks
-[32m2021-11-26 10:25:03[0m :: wl_launcher     :: line:236        :: [1;30mINFO      [0m :: Pause subscription on KPI errors channel to handle new WL error spikes
-[32m2021-11-26 10:25:03[0m :: broker          :: line:84         :: [1;30mINFO      [0m :: Unsubscribed from topic: +/+/kpi/error/+
-[32m2021-11-26 10:25:03[0m :: wl_launcher     :: line:249        :: [1;30mINFO      [0m :: add_low-proxy-low instance: wl_#3 CMD:add_cmds/add_low_cpu_wl.sh start 2 10.99.114.63 8554 mystream FP16-INT8 CPU 10.99.114.167 PID:22197
-[32m2021-11-26 10:25:03[0m :: wl_launcher     :: line:254        :: [1;30mINFO      [0m :: Wait for settling time of 5s
-[32m2021-11-26 10:25:07[0m :: wl_launcher     :: line:101        :: [1;30mINFO      [0m :: [Received] on : add_weld_porosity/8941/kpi/status message: connected
-[32m2021-11-26 10:25:08[0m :: wl_launcher     :: line:270        :: [1;30mINFO      [0m :: Restart subscription on KPI errors channel
-[32m2021-11-26 10:25:08[0m :: wl_launcher     :: line:274        :: [1;30mINFO      [0m :: Watch for KPI errors in KPI window duration of: 1s
-[32m2021-11-26 10:25:10[0m :: broker          :: line:119        :: [1;30mINFO      [0m :: Disconnected from MQTT broker
-[32m2021-11-26 10:25:10[0m :: vm_wlc_bench    :: line:237        :: [1;30mINFO      [0m :: Please wait for all processes to gracefully terminate and produce log files. ctrl+c not recommended
-[32m2021-11-26 10:25:19[0m :: vm_wlc_bench    :: line:286        :: [1;30mINFO      [0m :: Done

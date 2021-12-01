@@ -1,171 +1,0 @@
-Connected to 192.168.122.49 as wlc
-
-Executing the WL by the command :./start_wl.sh
- Reading config from: params/intel_indu_hmi_low_profile.txt
-
- Window dimensions = (800,600)
-
- Window running fullscreen = false
-
- Record metrics = false
-
- draw offscreen = false
-
- vsync = 0
-
- no_swapbuffer_call = 0
-
- Scene: hmi
-
- Texture scene using simple shader = false
-
- Texture scene using fetch radius of = 10
-
- pyramid scenes dimensions: 2x2x2 
-
- pyramid shader loop iterations: 0
-
- dials scene shader loop iterations: 10
-
- long shader loop iterations: 100
-
- Number of frames to render: <infinite>
-
- Using OpenGLES
-
- Fixed FPS not set
-
- hmi overdraw ratio: 2.50
-
- hmi alpha blending: 1
-
- hmi texturing: 1
-
- FPS limiter (sleep) not set
-
- synbench debug mode: 0
-
- Render 3D model on HMI: 0
-
- kpi measurement state: 1
-
- kpi settling time: 5
-
- kpi number nines: 3
-
- kpi exit on failure: 1
-
- kpi max frametime milliseconds: 30.00
-
- kpi window milliseconds: 3000.00
-
- kpi target fps: 60
-
- kpi min fps: 59
-
- gKPIMinFramesInWindow = 177
-
- gKPIMTBFTime = 16666.67 ms
-
- MQTT_ADDRESS is tcp://10.99.114.167:1883/nWaiting for successful MQTT connection or timeout...
-
- registerTexture(): textures/gray_texture_background_2048x1024.data
-
- registerTexture(): textures/digits_256x16.bin
-
- 1183 frames in 1.0002 seconds: 1182.7386 fps. 
-
- hmi: Overdraw Ratio: 2.50
-
- hmi: Pixel Rate: 1353.54 MP/s
-
- hmi: Memory Bandwidth: 8662.64 MB/s
-
- 1220 frames in 1.0004 seconds: 1219.4756 fps. 
-
- 1210 frames in 1.0004 seconds: 1209.5380 fps. 
-
- 1206 frames in 1.0005 seconds: 1205.3696 fps. 
-
- hmi: Overdraw Ratio: 2.50
-
- hmi: Pixel Rate: 1379.44 MP/s
-
- hmi: Memory Bandwidth: 8828.39 MB/s
-
- 1213 frames in 1.0006 seconds: 1212.2181 fps. 
-
- hmi: Overdraw Ratio: 2.50
-
- hmi: Pixel Rate: 1387.27 MP/s
-
- hmi: Memory Bandwidth: 8878.55 MB/s
-
- 1215 frames in 1.0005 seconds: 1214.4025 fps. 
-
- 1197 frames in 1.0005 seconds: 1196.3600 fps. 
-
- hmi: Overdraw Ratio: 2.50
-
- hmi: Pixel Rate: 1369.13 MP/s
-
- hmi: Memory Bandwidth: 8762.40 MB/s
-
- 1220 frames in 1.0006 seconds: 1219.2513 fps. 
-
- 1216 frames in 1.0004 seconds: 1215.5101 fps. 
-
- hmi: Overdraw Ratio: 2.50
-
- hmi: Pixel Rate: 1391.04 MP/s
-
- hmi: Memory Bandwidth: 8902.66 MB/s
-
- 1219 frames in 1.0004 seconds: 1218.5588 fps. 
-
- 1215 frames in 1.0008 seconds: 1214.0215 fps. 
-
- hmi: Overdraw Ratio: 2.50
-
- hmi: Pixel Rate: 1389.34 MP/s
-
- hmi: Memory Bandwidth: 8891.76 MB/s
-
- 1220 frames in 1.0003 seconds: 1219.6658 fps. 
-
- 1217 frames in 1.0001 seconds: 1216.8442 fps. 
-
- hmi: Overdraw Ratio: 2.50
-
- hmi: Pixel Rate: 1392.57 MP/s
-
- hmi: Memory Bandwidth: 8912.43 MB/s
-
- 1222 frames in 1.0008 seconds: 1221.0146 fps. 
-
- 1216 frames in 1.0008 seconds: 1215.0449 fps. 
-
- hmi: Overdraw Ratio: 2.50
-
- hmi: Pixel Rate: 1390.51 MP/s
-
- hmi: Memory Bandwidth: 8899.25 MB/s
-
- 1223 frames in 1.0007 seconds: 1222.0884 fps. 
-
- hmi: Overdraw Ratio: 2.50
-
- hmi: Pixel Rate: 1398.57 MP/s
-
- hmi: Memory Bandwidth: 8950.84 MB/s
-
- 1224 frames in 1.0006 seconds: 1223.2759 fps. 
-
- 1220 frames in 1.0007 seconds: 1219.1855 fps. 
-
- 1219 frames in 1.0002 seconds: 1218.7246 fps. 
-
- Terminated
-
- 143
-

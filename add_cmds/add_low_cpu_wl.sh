@@ -1,7 +1,7 @@
 #!/bin/bash
 
 image=add_low:latest
-PORT_FILE=/tmp/port1.txt
+PORT_FILE=/tmp/port$2.txt
 
 function start_container()
 {

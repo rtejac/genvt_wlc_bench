@@ -67,29 +67,6 @@ breakpoint_serial:
               kpi_window: 10,
             }
             ]
-  vm_1:
-    
-    os_image: /gos_images/ubuntu_1.qcow2
-    vm_name: ubuntu-vm-1
-    os_name: linux
-    gpu_passthrough: 0
-    ram: 1
-    cpu: 1
-    proxy_wl:
-      wl_list:
-        [
-          {
-            wl: add_low,
-            profile_name: low, #<low/medium/high>,
-            wl_setup: rm /tmp/port1.txt,
-            init_cmd: null, #rm /tmp/port.txt, 
-            start_cmd: add_cmds/add_low_cpu_wl.sh start 1 10.99.114.63 8554 mystream FP16-INT8 CPU 10.99.114.167, 
-            stop_cmd: add_cmds/add_low_cpu_wl.sh stop 1, #null,
-            instances: 1,
-            kpi_window: 10,
-          }
-          ]
-  
             
   # 0 info, 1 debug
   loglevel: 0
