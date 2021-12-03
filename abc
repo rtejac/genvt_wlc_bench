@@ -1,0 +1,31 @@
+PING 10.99.114.63 (10.99.114.63) 56(84) bytes of data.
+64 bytes from 10.99.114.63: icmp_seq=1 ttl=64 time=0.899 ms
+
+--- 10.99.114.63 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.899/0.899/0.899/0.000 ms
+PING 10.99.114.63 (10.99.114.63) 56(84) bytes of data.
+64 bytes from 10.99.114.63: icmp_seq=1 ttl=64 time=0.936 ms
+64 bytes from 10.99.114.63: icmp_seq=2 ttl=64 time=0.912 ms
+64 bytes from 10.99.114.63: icmp_seq=3 ttl=64 time=0.959 ms
+64 bytes from 10.99.114.63: icmp_seq=4 ttl=64 time=0.686 ms
+64 bytes from 10.99.114.63: icmp_seq=5 ttl=64 time=0.982 ms
+
+--- 10.99.114.63 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4068ms
+rtt min/avg/max/mdev = 0.686/0.895/0.982/0.107 ms
+PING 10.99.14.63 (10.99.14.63) 56(84) bytes of data.
+
+--- 10.99.14.63 ping statistics ---
+5 packets transmitted, 0 received, 100% packet loss, time 4094ms
+
+PING 10.99.114.63 (10.99.114.63) 56(84) bytes of data.
+64 bytes from 10.99.114.63: icmp_seq=1 ttl=64 time=0.899 ms
+64 bytes from 10.99.114.63: icmp_seq=2 ttl=64 time=0.653 ms
+64 bytes from 10.99.114.63: icmp_seq=3 ttl=64 time=0.483 ms
+64 bytes from 10.99.114.63: icmp_seq=4 ttl=64 time=0.666 ms
+64 bytes from 10.99.114.63: icmp_seq=5 ttl=64 time=0.627 ms
+
+--- 10.99.114.63 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4077ms
+rtt min/avg/max/mdev = 0.483/0.665/0.899/0.136 ms

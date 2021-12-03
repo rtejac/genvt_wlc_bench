@@ -87,7 +87,7 @@ class VM():
         except:
             logging.info('No previous instance of the VM is found...')
         
-        logging.info(f"Creating a {self.os_name} VM with image {self.os_image}, VM name {self.vm_name}")
+        logging.info(f"Creating a {self.os_name} VM with image {self.os_image}, VM name {self.vm_name} with {self.cpu} CPUs and {self.ram/(1024*1024)} GB of RAM")
         username = getpass.getuser()
     
         #geting ip address of host machine
@@ -104,7 +104,7 @@ class VM():
             logging.error(e)
 
         uuid = dom.UUIDString()
-        logging.info(f"{dom.name()}  booted, might take sometime to show up (20 Seconds)")
+        logging.info(f"{dom.name()}  booted, might take sometime to show up")
     
         time.sleep(20)
     

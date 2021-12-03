@@ -130,6 +130,7 @@ class WlLauncher(object):
                 # topic is <app_name>/<pid>/kpi/<error,warning etc.>/<error #>, synbench/122/kpi/error/1
                 val = topic.split("/")
 
+
                 logging.error(f"KPI ERROR #{val[4]} detected "
                               f"on process:{val[0]},{val[1]} "
                               f"message: {payload['message']}")
@@ -363,7 +364,7 @@ class WlLauncher(object):
                 return
             for each_wl in wl["wl_list"]:
                 if each_wl["stop_cmd"]:
-                    print("\r"+each_wl["stop_cmd"]+"\r")
+                    #print("\r"+each_wl["stop_cmd"]+"\r")
                     subprocess.Popen(each_wl["stop_cmd"], stdout=subprocess.PIPE, shell=True)
 
         logging.info("Terminated all spawned processes")

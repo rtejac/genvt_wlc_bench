@@ -118,7 +118,7 @@ def stream_callback(stream: libvirt.virStream, events: int, console: Console) ->
                     console.f.write(f"{x} : {y}\n")
                 console.f.close()
                 time.sleep(1)
-                logging.info('IP Address of the created VM is written to yaml yaml file')
+                logging.info('IP Address of the created VM is written to yaml file')
                 login_data.clear()
                 console.cmd_flag = 2
                 console.run_console = False

@@ -2,6 +2,42 @@ import os
 import sys
 import yaml
 import paramiko
+import time
+from subprocess import Popen,run
+import paho.mqtt.client as mqtt
+from datetime import datetime
+
+
+client = mqtt.Client()
+client.connect("localhost",1883,60)
+client.loop_start()
+
+
+
+
+
+def send_msg(client,topic,msg):
+
+    msg_format = '{\n'+ f"\t\"timestamp\" : \"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\",\n" + f"\t\"message\" : \"{msg}\"\n"+'}'
+    client.publish(topic,msg_format)
+
+
+
+def isHostUp(ip):
+    
+    global client
+
+    with open('host_check','w') as f:
+        proc = run(f'ping -c 1 {ip}',stdout=f,shell=True, encoding="utf-8", universal_newlines=True)
+        
+    with open('host_check','r') as f:
+        f_data = f.readlines()
+        for line in f_data:
+            if '100% packet loss' in line:
+                return False
+        return True
+    os.remove('host_check')
+
 
 
 def get_VM_info(vm_index):
@@ -14,8 +50,16 @@ def get_VM_info(vm_index):
 def Create_SSH(guest_ip,vm_password,login):
     
     if None in [guest_ip,login,vm_password]:
+        send_msg(client,'ssh/isHostUp/kpi/error/1','Missing required arguments')
         print('Missing one of the required credentails')
-        return None
+        exit()
+        #return None
+    
+    if not isHostUp(guest_ip):
+        send_msg(client,'ssh/isHostUp/kpi/error/1',f'Host {guest_ip} is Down or Not reachable')
+        print(f'{guest_ip} is Not reachable')
+        exit()
+        #return None
 
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())  # Addedd to Keys if missing
@@ -39,11 +83,11 @@ def ssh_guest(cmd):
     ssh = Create_SSH(guest_ip,vm_password,login)
 
     if ssh is None:
+        send_msg(client,'ssh/isHostUp/kpi/error/1',f'Error in connecting to {guest_ip}')
         print('Error in creating connection')
         sys.exit()
 
     print(f"\r\nExecuting the WL by the command :{cmd[2]}")
-    #cmd = ' '.join(sys.argv[2:])
     try:
         stdin, stdout, stderr = ssh.exec_command(sys.argv[2],get_pty=True)
     except:
