@@ -129,11 +129,15 @@ class WlLauncher(object):
 
                 # topic is <app_name>/<pid>/kpi/<error,warning etc.>/<error #>, synbench/122/kpi/error/1
                 val = topic.split("/")
-
-
-                logging.error(f"KPI ERROR #{val[4]} detected "
-                              f"on process:{val[0]},{val[1]} "
-                              f"message: {payload['message']}")
+                
+                if val[4] == 3:
+                    logging.error(f"CONNECTION ERROR detected "
+                                f"message: {payload['message']}")
+                else:
+                    logging.error(f"KPI ERROR #{val[4]} detected "
+                                f"on process:{val[0]},{val[1]} "
+                                f"message: {payload['message']}")
+                
                 disconnect = True
 
             except json.decoder.JSONDecodeError as ex:

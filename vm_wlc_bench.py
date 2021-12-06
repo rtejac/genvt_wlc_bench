@@ -132,8 +132,6 @@ def main():
             
             #Creating VM
             vm_object.create_vm()
-            #vm_object.proxy_init_exec()
-            #vm_object.measured_init_exec()
             vm_list.append(vm_object)
 
     
@@ -141,6 +139,9 @@ def main():
     workloads = []
     
     for vm_object in vm_list:
+
+        #vm_object.proxy_init_exec()
+        #vm_object.measured_init_exec()
         workloads.append(setup_workloads(vm_object.proxy, vm_object.measured))
     
     measured_wkld_vm = []
@@ -150,18 +151,6 @@ def main():
             measured_wkld_vm.append(workload)
         else:
             no_measured_wkld_vm.append(workload)
-    
-    #Done
-    
-
-    #Original code
-    
-    # get all proxy, measured wl details
-    #proxy = parser.get("proxy_wl", mode)
-    #proxy["type"] = "proxy"
-    #measured = parser.get("measured_wl", mode)
-
-    #workloads = setup_workloads(proxy, measured)
     
     #Done
     

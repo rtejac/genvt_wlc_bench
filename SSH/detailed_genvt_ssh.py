@@ -2,7 +2,7 @@ import os
 import sys
 import yaml
 import paramiko
-import time
+import getpass
 from subprocess import Popen,run
 import paho.mqtt.client as mqtt
 from datetime import datetime
@@ -11,9 +11,6 @@ from datetime import datetime
 client = mqtt.Client()
 client.connect("localhost",1883,60)
 client.loop_start()
-
-
-
 
 
 def send_msg(client,topic,msg):
@@ -25,8 +22,6 @@ def send_msg(client,topic,msg):
 
 def isHostUp(ip):
     
-    global client
-
     with open('host_check','w') as f:
         proc = run(f'ping -c 1 {ip}',stdout=f,shell=True, encoding="utf-8", universal_newlines=True)
         
@@ -50,13 +45,13 @@ def get_VM_info(vm_index):
 def Create_SSH(guest_ip,vm_password,login):
     
     if None in [guest_ip,login,vm_password]:
-        send_msg(client,'ssh/isHostUp/kpi/error/1','Missing required arguments')
+        send_msg(client,'ssh/isHostUp/kpi/error/3','Missing required arguments')
         print('Missing one of the required credentails')
         exit()
         #return None
     
     if not isHostUp(guest_ip):
-        send_msg(client,'ssh/isHostUp/kpi/error/1',f'Host {guest_ip} is Down or Not reachable')
+        send_msg(client,'ssh/isHostUp/kpi/error/3',f'Host {guest_ip} is Down or Not reachable')
         print(f'{guest_ip} is Not reachable')
         exit()
         #return None
@@ -69,7 +64,7 @@ def Create_SSH(guest_ip,vm_password,login):
         ssh.connect(guest_ip, username=login, password=vm_password,allow_agent=False)
         print(f'\rConnected to {guest_ip} as {login}')
     except paramiko.ssh_exception.BadHostKeyException as e:
-        os.system(f"ssh-keygen -f '/home/wlc/.ssh/known_hosts' -R '{guest_ip}'")
+        os.system(f"ssh-keygen -f '/home/{getpass.getuser()}/.ssh/known_hosts' -R '{guest_ip}'")
         ssh = Create_SSH(guest_ip,vm_password,login)
     except Exception as e:
         print(f"Error: {e} while connecting to {guest_ip} as {login}")
@@ -83,7 +78,7 @@ def ssh_guest(cmd):
     ssh = Create_SSH(guest_ip,vm_password,login)
 
     if ssh is None:
-        send_msg(client,'ssh/isHostUp/kpi/error/1',f'Error in connecting to {guest_ip}')
+        send_msg(client,'ssh/isHostUp/kpi/error/3',f'Error in connecting to {guest_ip}')
         print('Error in creating connection')
         sys.exit()
 
