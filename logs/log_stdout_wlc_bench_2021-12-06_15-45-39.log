@@ -1,0 +1,113 @@
+[32m2021-12-06 15:45:39[0m :: vm_wlc_bench    :: line:425        :: [1;30mINFO      [0m :: Removed old logs directory
+[32m2021-12-06 15:45:39[0m :: vm_wlc_bench    :: line:80         :: [1;30mINFO      [0m :: Setting env variable: DESTDIR=<location of synbench>
+[32m2021-12-06 15:45:39[0m :: broker          :: line:48         :: [1;30mINFO      [0m :: Connected to MQTT broker: localhost on port: 1883
+[32m2021-12-06 15:45:39[0m :: vm_wlc_bench    :: line:92         :: [1;30mINFO      [0m :: PID of this vm_wlc_bench instance is 27832
+[32m2021-12-06 15:45:39[0m :: vm_support      :: line:85         :: [1;30mINFO      [0m :: VM ubuntu-vm-0 is already running, Not creating again
+[32m2021-12-06 15:45:39[0m :: vm_support      :: line:85         :: [1;30mINFO      [0m :: VM ubuntu-vm-1 is already running, Not creating again
+[32m2021-12-06 15:45:39[0m :: vm_wlc_bench    :: line:153        :: [1;30mINFO      [0m :: 2 VMs are having RTCP wkld running, need 2 "completed" messages at in total
+[32m2021-12-06 15:45:39[0m :: vm_wlc_bench    :: line:165        :: [1;30mINFO      [0m :: Waiting for the 'completed' message from VMs having RTCP workloads
+[32m2021-12-06 15:45:39[0m :: wl_launcher     :: line:147        :: [1;30mINFO      [0m :: Subscribe to initial topics with callbacks
+[32m2021-12-06 15:45:39[0m :: wl_launcher     :: line:241        :: [1;30mINFO      [0m :: Pause subscription on KPI errors channel to handle new WL error spikes
+[32m2021-12-06 15:45:39[0m :: broker          :: line:84         :: [1;30mINFO      [0m :: Unsubscribed from topic: +/+/kpi/error/+
+[32m2021-12-06 15:45:39[0m :: wl_launcher     :: line:254        :: [1;30mINFO      [0m :: add_low-proxy-low instance: wl_#1 CMD:add_cmds/add_low_cpu_wl.sh start 1 10.99.114.63 8554 mystream FP16-INT8 CPU 10.99.114.167 PID:27849
+[32m2021-12-06 15:45:39[0m :: wl_launcher     :: line:259        :: [1;30mINFO      [0m :: Wait for settling time of 5s
+[32m2021-12-06 15:45:42[0m :: wl_launcher     :: line:101        :: [1;30mINFO      [0m :: [Received] on : add_weld_porosity/71373/kpi/status message: connected
+[32m2021-12-06 15:45:44[0m :: wl_launcher     :: line:275        :: [1;30mINFO      [0m :: Restart subscription on KPI errors channel
+[32m2021-12-06 15:45:44[0m :: wl_launcher     :: line:279        :: [1;30mINFO      [0m :: Watch for KPI errors in KPI window duration of: 10s
+[32m2021-12-06 15:45:55[0m :: wl_launcher     :: line:147        :: [1;30mINFO      [0m :: Subscribe to initial topics with callbacks
+[32m2021-12-06 15:45:55[0m :: wl_launcher     :: line:239        :: [1;30mINFO      [0m :: Ran workload initialization commands
+[32m2021-12-06 15:45:55[0m :: wl_launcher     :: line:241        :: [1;30mINFO      [0m :: Pause subscription on KPI errors channel to handle new WL error spikes
+[32m2021-12-06 15:45:55[0m :: broker          :: line:84         :: [1;30mINFO      [0m :: Unsubscribed from topic: +/+/kpi/error/+
+[32m2021-12-06 15:45:55[0m :: wl_launcher     :: line:254        :: [1;30mINFO      [0m :: synbench-proxy-medium instance: wl_#2 CMD:python3 SSH/detailed_genvt_ssh.py 0 './start_wl.sh' PID:27959
+[32m2021-12-06 15:45:55[0m :: wl_launcher     :: line:259        :: [1;30mINFO      [0m :: Wait for settling time of 5s
+[32m2021-12-06 15:46:00[0m :: wl_launcher     :: line:263        :: [1;30mWARNING   [0m :: [33mNot received 'connected' message from synbench-proxy-medium.	Please check if workload is connected to the MQTT broker.	Check log file for any errors.	Or your WL may not be publishing messages on MQTT.	WL Density calculations will thus be incorrect[0m
+[32m2021-12-06 15:46:00[0m :: wl_launcher     :: line:275        :: [1;30mINFO      [0m :: Restart subscription on KPI errors channel
+[32m2021-12-06 15:46:00[0m :: wl_launcher     :: line:279        :: [1;30mINFO      [0m :: Watch for KPI errors in KPI window duration of: 10s
+[32m2021-12-06 15:46:11[0m :: wl_launcher     :: line:179        :: [1;30mINFO      [0m :: Running measured round (1 of 1) for measured_indu_hmi_high
+[32m2021-12-06 15:46:11[0m :: wl_launcher     :: line:241        :: [1;30mINFO      [0m :: Pause subscription on KPI errors channel to handle new WL error spikes
+[32m2021-12-06 15:46:11[0m :: broker          :: line:84         :: [1;30mINFO      [0m :: Unsubscribed from topic: +/+/kpi/error/+
+[32m2021-12-06 15:46:11[0m :: wl_launcher     :: line:254        :: [1;30mINFO      [0m :: weld_porosity-measured_indu_hmi_high-low instance: wl_#3 CMD:add_cmds/add_low_cpu_wl.sh start 0 10.99.114.63 8554 mystream FP16-INT8 CPU 10.99.114.167 PID:28088
+[32m2021-12-06 15:46:11[0m :: wl_launcher     :: line:259        :: [1;30mINFO      [0m :: Wait for settling time of 5s
+[32m2021-12-06 15:46:16[0m :: wl_launcher     :: line:263        :: [1;30mWARNING   [0m :: [33mNot received 'connected' message from weld_porosity-measured_indu_hmi_high-low.	Please check if workload is connected to the MQTT broker.	Check log file for any errors.	Or your WL may not be publishing messages on MQTT.	WL Density calculations will thus be incorrect[0m
+[32m2021-12-06 15:46:16[0m :: wl_launcher     :: line:275        :: [1;30mINFO      [0m :: Restart subscription on KPI errors channel
+[32m2021-12-06 15:46:16[0m :: wl_launcher     :: line:279        :: [1;30mINFO      [0m :: Watch for KPI errors in KPI window duration of: 30s
+[32m2021-12-06 15:46:20[0m :: wl_launcher     :: line:101        :: [1;30mINFO      [0m :: [Received] on : synbench/4803/kpi/status message: connected
+[32m2021-12-06 15:46:47[0m :: wl_launcher     :: line:241        :: [1;30mINFO      [0m :: Pause subscription on KPI errors channel to handle new WL error spikes
+[32m2021-12-06 15:46:47[0m :: broker          :: line:84         :: [1;30mINFO      [0m :: Unsubscribed from topic: +/+/kpi/error/+
+[32m2021-12-06 15:46:47[0m :: wl_launcher     :: line:254        :: [1;30mINFO      [0m :: weld_porosity-measured_indu_hmi_high-low instance: wl_#4 CMD:add_cmds/add_low_cpu_wl.sh start 0 10.99.114.63 8554 mystream FP16-INT8 CPU 10.99.114.167 PID:28322
+[32m2021-12-06 15:46:47[0m :: wl_launcher     :: line:259        :: [1;30mINFO      [0m :: Wait for settling time of 5s
+[32m2021-12-06 15:46:52[0m :: wl_launcher     :: line:263        :: [1;30mWARNING   [0m :: [33mNot received 'connected' message from weld_porosity-measured_indu_hmi_high-low.	Please check if workload is connected to the MQTT broker.	Check log file for any errors.	Or your WL may not be publishing messages on MQTT.	WL Density calculations will thus be incorrect[0m
+[32m2021-12-06 15:46:52[0m :: wl_launcher     :: line:275        :: [1;30mINFO      [0m :: Restart subscription on KPI errors channel
+[32m2021-12-06 15:46:52[0m :: wl_launcher     :: line:279        :: [1;30mINFO      [0m :: Watch for KPI errors in KPI window duration of: 30s
+[32m2021-12-06 15:47:11[0m :: wl_launcher     :: line:101        :: [1;30mINFO      [0m :: [Received] on : add_weld_porosity/4995/kpi/status message: connected
+[32m2021-12-06 15:47:23[0m :: wl_launcher     :: line:241        :: [1;30mINFO      [0m :: Pause subscription on KPI errors channel to handle new WL error spikes
+[32m2021-12-06 15:47:23[0m :: broker          :: line:84         :: [1;30mINFO      [0m :: Unsubscribed from topic: +/+/kpi/error/+
+[32m2021-12-06 15:47:23[0m :: wl_launcher     :: line:254        :: [1;30mINFO      [0m :: weld_porosity-measured_indu_hmi_high-low instance: wl_#5 CMD:add_cmds/add_low_cpu_wl.sh start 0 10.99.114.63 8554 mystream FP16-INT8 CPU 10.99.114.167 PID:28619
+[32m2021-12-06 15:47:23[0m :: wl_launcher     :: line:259        :: [1;30mINFO      [0m :: Wait for settling time of 5s
+[32m2021-12-06 15:47:28[0m :: wl_launcher     :: line:263        :: [1;30mWARNING   [0m :: [33mNot received 'connected' message from weld_porosity-measured_indu_hmi_high-low.	Please check if workload is connected to the MQTT broker.	Check log file for any errors.	Or your WL may not be publishing messages on MQTT.	WL Density calculations will thus be incorrect[0m
+[32m2021-12-06 15:47:28[0m :: wl_launcher     :: line:275        :: [1;30mINFO      [0m :: Restart subscription on KPI errors channel
+[32m2021-12-06 15:47:28[0m :: wl_launcher     :: line:279        :: [1;30mINFO      [0m :: Watch for KPI errors in KPI window duration of: 30s
+[32m2021-12-06 15:47:36[0m :: wl_launcher     :: line:101        :: [1;30mINFO      [0m :: [Received] on : add_weld_porosity/5150/kpi/status message: connected
+[32m2021-12-06 15:47:59[0m :: wl_launcher     :: line:241        :: [1;30mINFO      [0m :: Pause subscription on KPI errors channel to handle new WL error spikes
+[32m2021-12-06 15:47:59[0m :: broker          :: line:84         :: [1;30mINFO      [0m :: Unsubscribed from topic: +/+/kpi/error/+
+[32m2021-12-06 15:47:59[0m :: wl_launcher     :: line:254        :: [1;30mINFO      [0m :: weld_porosity-measured_indu_hmi_high-low instance: wl_#6 CMD:add_cmds/add_low_cpu_wl.sh start 0 10.99.114.63 8554 mystream FP16-INT8 CPU 10.99.114.167 PID:28854
+[32m2021-12-06 15:47:59[0m :: wl_launcher     :: line:259        :: [1;30mINFO      [0m :: Wait for settling time of 5s
+[32m2021-12-06 15:48:01[0m :: wl_launcher     :: line:101        :: [1;30mINFO      [0m :: [Received] on : add_weld_porosity/5301/kpi/status message: connected
+[32m2021-12-06 15:48:04[0m :: wl_launcher     :: line:275        :: [1;30mINFO      [0m :: Restart subscription on KPI errors channel
+[32m2021-12-06 15:48:04[0m :: wl_launcher     :: line:279        :: [1;30mINFO      [0m :: Watch for KPI errors in KPI window duration of: 30s
+[32m2021-12-06 15:48:27[0m :: wl_launcher     :: line:101        :: [1;30mINFO      [0m :: [Received] on : add_weld_porosity/5452/kpi/status message: connected
+[32m2021-12-06 15:48:35[0m :: wl_launcher     :: line:241        :: [1;30mINFO      [0m :: Pause subscription on KPI errors channel to handle new WL error spikes
+[32m2021-12-06 15:48:35[0m :: broker          :: line:84         :: [1;30mINFO      [0m :: Unsubscribed from topic: +/+/kpi/error/+
+[32m2021-12-06 15:48:35[0m :: wl_launcher     :: line:254        :: [1;30mINFO      [0m :: weld_porosity-measured_indu_hmi_high-low instance: wl_#7 CMD:add_cmds/add_low_cpu_wl.sh start 0 10.99.114.63 8554 mystream FP16-INT8 CPU 10.99.114.167 PID:29091
+[32m2021-12-06 15:48:35[0m :: wl_launcher     :: line:259        :: [1;30mINFO      [0m :: Wait for settling time of 5s
+[32m2021-12-06 15:48:40[0m :: wl_launcher     :: line:263        :: [1;30mWARNING   [0m :: [33mNot received 'connected' message from weld_porosity-measured_indu_hmi_high-low.	Please check if workload is connected to the MQTT broker.	Check log file for any errors.	Or your WL may not be publishing messages on MQTT.	WL Density calculations will thus be incorrect[0m
+[32m2021-12-06 15:48:40[0m :: wl_launcher     :: line:275        :: [1;30mINFO      [0m :: Restart subscription on KPI errors channel
+[32m2021-12-06 15:48:40[0m :: wl_launcher     :: line:279        :: [1;30mINFO      [0m :: Watch for KPI errors in KPI window duration of: 30s
+[32m2021-12-06 15:49:04[0m :: wl_launcher     :: line:101        :: [1;30mINFO      [0m :: [Received] on : add_weld_porosity/5604/kpi/status message: connected
+[32m2021-12-06 15:49:11[0m :: wl_launcher     :: line:241        :: [1;30mINFO      [0m :: Pause subscription on KPI errors channel to handle new WL error spikes
+[32m2021-12-06 15:49:11[0m :: broker          :: line:84         :: [1;30mINFO      [0m :: Unsubscribed from topic: +/+/kpi/error/+
+[32m2021-12-06 15:49:11[0m :: wl_launcher     :: line:254        :: [1;30mINFO      [0m :: weld_porosity-measured_indu_hmi_high-low instance: wl_#8 CMD:add_cmds/add_low_cpu_wl.sh start 0 10.99.114.63 8554 mystream FP16-INT8 CPU 10.99.114.167 PID:29328
+[32m2021-12-06 15:49:11[0m :: wl_launcher     :: line:259        :: [1;30mINFO      [0m :: Wait for settling time of 5s
+[32m2021-12-06 15:49:16[0m :: wl_launcher     :: line:263        :: [1;30mWARNING   [0m :: [33mNot received 'connected' message from weld_porosity-measured_indu_hmi_high-low.	Please check if workload is connected to the MQTT broker.	Check log file for any errors.	Or your WL may not be publishing messages on MQTT.	WL Density calculations will thus be incorrect[0m
+[32m2021-12-06 15:49:16[0m :: wl_launcher     :: line:275        :: [1;30mINFO      [0m :: Restart subscription on KPI errors channel
+[32m2021-12-06 15:49:16[0m :: wl_launcher     :: line:279        :: [1;30mINFO      [0m :: Watch for KPI errors in KPI window duration of: 30s
+[32m2021-12-06 15:49:37[0m :: wl_launcher     :: line:137        :: [1;30mERROR     [0m :: [31mKPI ERROR #1 detected on process:add_weld_porosity,5301 message: [Frame:2604] ERROR-1: Workload rendered single frame (315.76 ms) slower than maximum (300.00 ms)[0m
+[32m2021-12-06 15:49:38[0m :: wl_launcher     :: line:287        :: [1;30mERROR     [0m :: [31mKPI error encountered. Closing wlc_bench[0m
+[32m2021-12-06 15:49:39[0m :: wl_launcher     :: line:189        :: [1;30mINFO      [0m :: Created: 1 of synbench-proxy-medium
+[32m2021-12-06 15:49:39[0m :: wl_launcher     :: line:189        :: [1;30mINFO      [0m :: Created: 6 of weld_porosity-measured_indu_hmi_high-low
+[32m2021-12-06 15:49:39[0m :: vm_wlc_bench    :: line:223        :: [1;30mINFO      [0m :: 2 completed messages are expected to come from RTCP workloads
+[32m2021-12-06 15:49:39[0m :: wl_launcher     :: line:101        :: [1;30mINFO      [0m :: [Received] on : add_weld_porosity/5756/kpi/status message: connected
+[32m2021-12-06 15:49:43[0m :: wl_launcher     :: line:137        :: [1;30mERROR     [0m :: [31mKPI ERROR #1 detected on process:add_weld_porosity,5301 message: [Frame:2721] ERROR-1: Workload rendered single frame (323.99 ms) slower than maximum (300.00 ms)[0m
+[32m2021-12-06 15:49:45[0m :: wl_launcher     :: line:137        :: [1;30mERROR     [0m :: [31mKPI ERROR #1 detected on process:add_weld_porosity,5756 message: [Frame:28] ERROR-1: Workload rendered single frame (328.00 ms) slower than maximum (300.00 ms)[0m
+[32m2021-12-06 15:49:51[0m :: wl_launcher     :: line:137        :: [1;30mERROR     [0m :: [31mKPI ERROR #1 detected on process:add_weld_porosity,5150 message: [Frame:3578] ERROR-1: Workload rendered single frame (323.31 ms) slower than maximum (300.00 ms)[0m
+[32m2021-12-06 15:49:51[0m :: wl_launcher     :: line:137        :: [1;30mERROR     [0m :: [31mKPI ERROR #1 detected on process:add_weld_porosity,5604 message: [Frame:932] ERROR-1: Workload rendered single frame (331.68 ms) slower than maximum (300.00 ms)[0m
+[32m2021-12-06 15:50:16[0m :: wl_launcher     :: line:137        :: [1;30mERROR     [0m :: [31mKPI ERROR #1 detected on process:add_weld_porosity,5756 message: [Frame:496] ERROR-1: Workload rendered single frame (356.89 ms) slower than maximum (300.00 ms)[0m
+[32m2021-12-06 15:50:20[0m :: wl_launcher     :: line:137        :: [1;30mERROR     [0m :: [31mKPI ERROR #1 detected on process:add_weld_porosity,5301 message: [Frame:3285] ERROR-1: Workload rendered single frame (333.43 ms) slower than maximum (300.00 ms)[0m
+[32m2021-12-06 15:50:23[0m :: wl_launcher     :: line:137        :: [1;30mERROR     [0m :: [31mKPI ERROR #1 detected on process:add_weld_porosity,5150 message: [Frame:4063] ERROR-1: Workload rendered single frame (301.92 ms) slower than maximum (300.00 ms)[0m
+[32m2021-12-06 15:50:28[0m :: wl_launcher     :: line:137        :: [1;30mERROR     [0m :: [31mKPI ERROR #1 detected on process:add_weld_porosity,4995 message: [Frame:4912] ERROR-1: Workload rendered single frame (329.96 ms) slower than maximum (300.00 ms)[0m
+[32m2021-12-06 15:50:30[0m :: wl_launcher     :: line:137        :: [1;30mERROR     [0m :: [31mKPI ERROR #1 detected on process:add_weld_porosity,5150 message: [Frame:4180] ERROR-1: Workload rendered single frame (304.69 ms) slower than maximum (300.00 ms)[0m
+[32m2021-12-06 15:50:32[0m :: wl_launcher     :: line:137        :: [1;30mERROR     [0m :: [31mKPI ERROR #1 detected on process:add_weld_porosity,5452 message: [Frame:2632] ERROR-1: Workload rendered single frame (314.36 ms) slower than maximum (300.00 ms)[0m
+[32m2021-12-06 15:50:34[0m :: wl_launcher     :: line:137        :: [1;30mERROR     [0m :: [31mKPI ERROR #1 detected on process:add_weld_porosity,5756 message: [Frame:763] ERROR-1: Workload rendered single frame (309.85 ms) slower than maximum (300.00 ms)[0m
+[32m2021-12-06 15:50:49[0m :: wl_launcher     :: line:137        :: [1;30mERROR     [0m :: [31mKPI ERROR #1 detected on process:add_weld_porosity,5756 message: [Frame:986] ERROR-1: Workload rendered single frame (311.34 ms) slower than maximum (300.00 ms)[0m
+[32m2021-12-06 15:50:51[0m :: wl_launcher     :: line:137        :: [1;30mERROR     [0m :: [31mKPI ERROR #1 detected on process:add_weld_porosity,5604 message: [Frame:1827] ERROR-1: Workload rendered single frame (325.19 ms) slower than maximum (300.00 ms)[0m
+[32m2021-12-06 15:51:02[0m :: wl_launcher     :: line:137        :: [1;30mERROR     [0m :: [31mKPI ERROR #1 detected on process:add_weld_porosity,5604 message: [Frame:1990] ERROR-1: Workload rendered single frame (306.60 ms) slower than maximum (300.00 ms)[0m
+[32m2021-12-06 15:51:07[0m :: wl_launcher     :: line:137        :: [1;30mERROR     [0m :: [31mKPI ERROR #1 detected on process:add_weld_porosity,5452 message: [Frame:3146] ERROR-1: Workload rendered single frame (301.33 ms) slower than maximum (300.00 ms)[0m
+[32m2021-12-06 15:51:16[0m :: wl_launcher     :: line:137        :: [1;30mERROR     [0m :: [31mKPI ERROR #1 detected on process:add_weld_porosity,5150 message: [Frame:4850] ERROR-1: Workload rendered single frame (319.32 ms) slower than maximum (300.00 ms)[0m
+[32m2021-12-06 15:51:25[0m :: wl_launcher     :: line:137        :: [1;30mERROR     [0m :: [31mKPI ERROR #1 detected on process:add_weld_porosity,5604 message: [Frame:2337] ERROR-1: Workload rendered single frame (346.32 ms) slower than maximum (300.00 ms)[0m
+[32m2021-12-06 15:51:31[0m :: vm_wlc_bench    :: line:158        :: [1;30mINFO      [0m :: Completed message received from 1 VM, 1 pending
+[32m2021-12-06 15:51:33[0m :: wl_launcher     :: line:137        :: [1;30mERROR     [0m :: [31mKPI ERROR #1 detected on process:add_weld_porosity,5604 message: [Frame:2458] ERROR-1: Workload rendered single frame (308.33 ms) slower than maximum (300.00 ms)[0m
+[32m2021-12-06 15:51:37[0m :: wl_launcher     :: line:137        :: [1;30mERROR     [0m :: [31mKPI ERROR #1 detected on process:add_weld_porosity,5604 message: [Frame:2516] ERROR-1: Workload rendered single frame (317.27 ms) slower than maximum (300.00 ms)[0m
+[32m2021-12-06 15:51:38[0m :: wl_launcher     :: line:137        :: [1;30mERROR     [0m :: [31mKPI ERROR #1 detected on process:add_weld_porosity,4995 message: [Frame:5932] ERROR-1: Workload rendered single frame (355.25 ms) slower than maximum (300.00 ms)[0m
+[32m2021-12-06 15:51:38[0m :: wl_launcher     :: line:137        :: [1;30mERROR     [0m :: [31mKPI ERROR #1 detected on process:add_weld_porosity,5756 message: [Frame:1723] ERROR-1: Workload rendered single frame (308.85 ms) slower than maximum (300.00 ms)[0m
+[32m2021-12-06 15:51:40[0m :: vm_wlc_bench    :: line:158        :: [1;30mINFO      [0m :: Completed message received from 1 VM, 0 pending
+[32m2021-12-06 15:51:40[0m :: broker          :: line:119        :: [1;30mINFO      [0m :: Disconnected from MQTT broker
+[32m2021-12-06 15:51:40[0m :: vm_wlc_bench    :: line:236        :: [1;30mINFO      [0m :: Please wait for all processes to gracefully terminate and produce log files. ctrl+c not recommended
+[32m2021-12-06 15:51:40[0m :: vm_wlc_bench    :: line:242        :: [1;30mINFO      [0m :: Executing: add_cmds/add_low_cpu_wl.sh stop 1
+[32m2021-12-06 15:51:41[0m :: vm_wlc_bench    :: line:248        :: [1;30mINFO      [0m :: Executing: python3 SSH/ssh_kill_procs.py 0 synbench
+[32m2021-12-06 15:51:42[0m :: vm_wlc_bench    :: line:254        :: [1;30mINFO      [0m :: Executing: add_cmds/add_low_wl.sh stop 0
+[32m2021-12-06 15:52:13[0m :: wl_launcher     :: line:374        :: [1;30mINFO      [0m :: Terminated all spawned processes
+[32m2021-12-06 15:52:14[0m :: vm_wlc_bench    :: line:275        :: [1;30mINFO      [0m :: *********************************************************
+[32m2021-12-06 15:52:14[0m :: vm_wlc_bench    :: line:282        :: [1;30mINFO      [0m :: wlc_bench execution status: SUCCESS
+[32m2021-12-06 15:52:14[0m :: vm_wlc_bench    :: line:284        :: [1;30mINFO      [0m :: WLC Density for measured WL: measured_indu_hmi_high = 5
+[32m2021-12-06 15:52:14[0m :: vm_wlc_bench    :: line:286        :: [1;30mINFO      [0m :: *********************************************************
+[32m2021-12-06 15:52:14[0m :: vm_wlc_bench    :: line:288        :: [1;30mINFO      [0m :: Done

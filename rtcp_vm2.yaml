@@ -33,10 +33,10 @@ breakpoint_serial:
     os_image: /gos_images/ubuntu_0.qcow2
     vm_name: ubuntu-vm-0
     os_name: linux
-    RTCP: 0
+    RTCP: 1
     gpu_passthrough: 1
-    ram: 2
-    cpu: 2
+    ram: 3
+    cpu: 4
     proxy_wl:
       wl_list:
         [
@@ -48,7 +48,7 @@ breakpoint_serial:
             start_cmd: python3 SSH/detailed_genvt_ssh.py 0 './start_wl.sh',
             stop_cmd: python3 SSH/ssh_kill_procs.py 0 synbench,
             instances: 1,
-            kpi_window: 20,
+            kpi_window: 10,
           }
           ]
     measured_wl:
@@ -62,10 +62,10 @@ breakpoint_serial:
               profile_name: low, #<low/medium/high>,
               wl_setup: null,
               init_cmd: null,
-              start_cmd: add_cmds/add_low_wl.sh start 0 10.99.114.63 8554 mystream FP16-INT8 CPU 10.99.114.167, 
+              start_cmd: add_cmds/add_low_cpu_wl.sh start 0 10.99.114.63 8554 mystream FP16-INT8 CPU 10.99.114.167, 
               stop_cmd: add_cmds/add_low_wl.sh stop 0, #null,
-              instances: 2,
-              kpi_window: 20,
+              instances: 10,
+              kpi_window: 30,
             }
             ]
   
@@ -74,8 +74,7 @@ breakpoint_serial:
     os_image: /gos_images/ubuntu_1.qcow2
     vm_name: ubuntu-vm-1
     os_name: linux
-    RTCP: 0
-    wait_time: 6
+    RTCP: 1
     gpu_passthrough: 0
     ram: 1
     cpu: 1
@@ -90,7 +89,7 @@ breakpoint_serial:
             start_cmd: add_cmds/add_low_cpu_wl.sh start 1 10.99.114.63 8554 mystream FP16-INT8 CPU 10.99.114.167, 
             stop_cmd: add_cmds/add_low_cpu_wl.sh stop 1, #null,
             instances: 1,
-            kpi_window: 20,
+            kpi_window: 10,
           }
           ]
             

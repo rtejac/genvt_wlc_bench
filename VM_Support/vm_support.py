@@ -85,7 +85,7 @@ class VM():
                 logging.info(f'VM {self.vm_name} is already running, Not creating again')
                 return
         except:
-            logging.info('No previous instance of the VM is found...')
+            logging.info(f'No previous instance of {self.vm_name} VM is found...')
         
         logging.info(f"Creating a {self.os_name} VM with image {self.os_image}, VM name {self.vm_name} with {self.cpu} CPUs and {self.ram/(1024*1024)} GB of RAM")
         username = getpass.getuser()

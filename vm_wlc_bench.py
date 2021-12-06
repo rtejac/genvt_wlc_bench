@@ -112,11 +112,8 @@ def main():
             
             global rtcp_flag
             if current_vm['RTCP']:
-                rtcp = k
-                rtcp_flag = 1
-                wait_time = current_vm['wait_time']
-            else:
-                rtcp_flag = 0
+                #rtcp = k
+                rtcp_flag += 1
 
             try:
                 measured_info[k] = current_vm['measured_wl']
@@ -133,8 +130,6 @@ def main():
             #Creating VM
             vm_object.create_vm()
             vm_list.append(vm_object)
-
-    
     
     workloads = []
     
@@ -151,6 +146,24 @@ def main():
             measured_wkld_vm.append(workload)
         else:
             no_measured_wkld_vm.append(workload)
+    
+
+    if rtcp_flag:
+        
+        logging.info(f'{rtcp_flag} VMs are having RTCP wkld running, need {rtcp_flag} "completed" messages at in total')
+            
+        def on_message(client, userdata, msg):
+            global rtcp_flag
+            if 'completed' in msg.payload.decode('utf-8'):
+                logging.info(f'Completed message received from 1 VM, {rtcp_flag - 1} pending')
+                rtcp_flag -= 1
+        
+        client = mqtt.Client()
+        client.connect("localhost",1883,60)
+        client.subscribe('rtcp/+/kpi/completed')
+        client.on_message = on_message
+        logging.info(f"Waiting for the 'completed' message from VMs having RTCP workloads")
+        client.loop_start()
     
     #Done
     
@@ -207,27 +220,11 @@ def main():
             runner = WlLauncher(wkld, settling_time, system_metrics, broker)
             runner.run()
         
-        if rtcp_flag:
-            logging.info(f'One of the VM ({rtcp}) is having RTCP wkld running... waiting for "Completed" message')
-            time.sleep(wait_time)
-            def on_message(client, userdata, msg):
-                
-                global rtcp_flag
-                if 'completed' in msg.payload.decode('utf-8'):
-                    logging.info('Completed message received from workload')
-                    rtcp_flag = 0
-
-            client = mqtt.Client()
-            client.connect("localhost",1883,60)
-
-            client.subscribe('+/+/kpi/completed')
-            client.on_message = on_message
-            logging.info(f"Waiting for the 'completed' message from {rtcp}")
-            while rtcp_flag:
-                client.loop_start()
-                if rtcp_flag == 0:
-                    logging.info('Stopping all the workloadds in all the VMs')
-                    client.loop_stop()
+        logging.info(f'{rtcp_flag} completed messages are expected to come from RTCP workloads') 
+        while rtcp_flag:
+            if rtcp_flag == 0:
+                logging.info('Stopping all the workloadds in all the VMs')
+                client.loop_stop()
 
         #Done
 
