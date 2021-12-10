@@ -91,9 +91,18 @@ def main():
     
     logging.info(f'PID of this vm_wlc_bench instance is {os.getpid()}')
 
+    with open('sample_dict.txt','w') as f:
+        f.write('=============LOGGING MESSAGES==============\n')
     #Gettitng the VM related wl details in a list
     
-    validate_yaml(parser,mode)
+    vmExist = False
+    for k,v in mode.items():
+        if 'vm' in k:
+            vmExist = True
+            break
+    
+    if vmExist:
+        validate_yaml(parser,mode)
     
     vm_list = []
     found_measured = False
@@ -135,12 +144,26 @@ def main():
     
     for vm_object in vm_list:
 
-        #vm_object.proxy_init_exec()
-        #vm_object.measured_init_exec()
+        vm_object.proxy_init_exec()
+        vm_object.measured_init_exec()
         workloads.append(setup_workloads(vm_object.proxy, vm_object.measured))
     
     measured_wkld_vm = []
     no_measured_wkld_vm = []
+    for k,v in mode.items():
+        if 'Service_OS' in k:
+            wklds = parser.get(k,mode)
+            proxy = wklds["proxy_wl"]
+            proxy["type"] = "proxy"
+            try:
+                measured = wklds["measured_wl"]
+            except:
+                measured = None
+
+            workloads.append(setup_workloads(proxy, measured))
+    #print(workloads)
+    #exit()
+
     for workload in workloads:
         if workload[1]['isExist']:
             measured_wkld_vm.append(workload)
@@ -157,10 +180,12 @@ def main():
             if 'completed' in msg.payload.decode('utf-8'):
                 logging.info(f'Completed message received from 1 VM, {rtcp_flag - 1} pending')
                 rtcp_flag -= 1
+            elif 'RTCP' in msg.payload.decode('utf-8'):
+                logging.info(msg.payload.decode('utf-8'))
         
         client = mqtt.Client()
         client.connect("localhost",1883,60)
-        client.subscribe('rtcp/+/kpi/completed')
+        client.subscribe('rtcp/+/kpi/+')
         client.on_message = on_message
         logging.info(f"Waiting for the 'completed' message from VMs having RTCP workloads")
         client.loop_start()
@@ -220,18 +245,16 @@ def main():
             runner = WlLauncher(wkld, settling_time, system_metrics, broker)
             runner.run()
         
-        logging.info(f'{rtcp_flag} completed messages are expected to come from RTCP workloads') 
-        while rtcp_flag:
-            if rtcp_flag == 0:
-                logging.info('Stopping all the workloadds in all the VMs')
-                client.loop_stop()
+        #logging.info(f'{rtcp_flag} completed messages are expected to come from RTCP workloads') 
+        #while rtcp_flag > 0:
+        #    if rtcp_flag == 0:
+        #        logging.info('Stopping all the workloadds in all the VMs')
+        #        client.loop_stop()
 
         #Done
 
     finally:
         # all cleanup
-        if broker:
-            broker.stop()
 
         logging.info("Please wait for all processes to gracefully terminate and produce log files."
                      " ctrl+c not recommended")
@@ -239,22 +262,28 @@ def main():
         #Executing the Stop commands
         for wkld in no_measured_wkld_vm:
             with open(f"./logs/{wkld[0]['wl_list'][0]['wl']}_{wkld[0]['wl_list'][0]['profile_name']}_{datetime.now().strftime('%Y_%m_%d_%H_%M_%S')}_stop_cmd.log",'w') as f:
-                logging.info('Executing: '+wkld[0]['wl_list'][0]['stop_cmd'])
-                subprocess.Popen(wkld[0]['wl_list'][0]['stop_cmd'],stdout=f,shell=True,encoding='utf-8',universal_newlines=True)
-                time.sleep(1)
+                if wkld[0]['wl_list'][0]['stop_cmd']:
+                    logging.info('Executing: '+wkld[0]['wl_list'][0]['stop_cmd'])
+                    subprocess.run(wkld[0]['wl_list'][0]['stop_cmd'],stdout=f,shell=True,encoding='utf-8',universal_newlines=True)
         
         for wkld in measured_wkld_vm:   #for i,wkld in enumerate(workloads):
             with open(f"./logs/{wkld[0]['wl_list'][0]['wl']}_{wkld[0]['wl_list'][0]['profile_name']}_{datetime.now().strftime('%Y_%m_%d_%H_%M_%S')}stop_cmd.log",'w') as f:
-                logging.info('Executing: '+wkld[0]['wl_list'][0]['stop_cmd'])
-                subprocess.Popen(wkld[0]['wl_list'][0]['stop_cmd'],stdout=f,shell=True,encoding='utf-8',universal_newlines=True)
+                #subprocess.Popen(wkld[0]['wl_list'][0]['stop_cmd'],stdout=f,shell=True,encoding='utf-8',universal_newlines=True)
+                if wkld[0]['wl_list'][0]['stop_cmd']:
+                    logging.info('Executing: '+wkld[0]['wl_list'][0]['stop_cmd'])
+                    subprocess.run(wkld[0]['wl_list'][0]['stop_cmd'],stdout=f,shell=True,encoding='utf-8',universal_newlines=True)
                 time.sleep(1)
                 
             
             with open(f"./logs/{wkld[1]['wl_list'][0]['wl']}_{wkld[0]['wl_list'][0]['profile_name']}_{datetime.now().strftime('%Y_%m_%d_%H_%M_%S')}stop_cmd.log",'w') as f:
-                logging.info('Executing: '+wkld[1]['wl_list'][0]['stop_cmd'])
-                subprocess.Popen(wkld[1]['wl_list'][0]['stop_cmd'],stdout=f,shell=True,encoding='utf-8',universal_newlines=True)
+                if wkld[1]['wl_list'][0]['stop_cmd']:
+                    logging.info('Executing: '+wkld[1]['wl_list'][0]['stop_cmd'])
+                    subprocess.run(wkld[1]['wl_list'][0]['stop_cmd'],stdout=f,shell=True,encoding='utf-8',universal_newlines=True)
+                #subprocess.Popen(wkld[1]['wl_list'][0]['stop_cmd'],stdout=f,shell=True,encoding='utf-8',universal_newlines=True)
                 time.sleep(1)
             
+        if broker:
+            broker.stop()
 
         if system_metrics:
             system_metrics.kill()

@@ -83,23 +83,28 @@ def ssh_guest(cmd):
         sys.exit()
 
     print(f"\r\nExecuting the WL by the command from :{cmd[2]}")
-    try:
-        stdin, stdout, stderr = ssh.exec_command(sys.argv[2],get_pty=True)
-    except:
-    #Kill the process directly and print the output generated so far(???)
-        pass
-    lines = stdout.readlines()
-    error = stderr.readlines()
+    if sys.argv[2].endswith('.txt'):
+        with open(sys.argv[2],'r') as file:
+            commands = file.readlines()
         
-    if len(sys.argv) == 4:
-        with open(f'logs/{sys.argv[3]}.log','w') as f:
-            for line in lines:
-                f.write(line)
-    else:
-        for line in lines:
-            print('\r',line)
-        for data in error:
-            print(f"\n\r{data}")
+        for cmd in commands:
+            print(cmd)
+            try:
+                stdin, stdout, stderr = ssh.exec_command(cmd,get_pty=True)
+            except:
+                pass
+            lines = stdout.readlines()
+            error = stderr.readlines()
+        
+            if len(sys.argv) == 4:
+                with open(f'logs/{sys.argv[3]}.log','w') as f:
+                    for line in lines:
+                        f.write(line)
+            else:
+                for line in lines:
+                    print('\r',line)
+                for data in error:
+                    print(f"\n\r{data}")
 
 
 

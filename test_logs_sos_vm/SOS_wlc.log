@@ -1,0 +1,16 @@
+[32m2021-12-09 14:17:38[0m :: vm_wlc_bench    :: line:455        :: [1;30mINFO      [0m :: Removed old logs directory
+[32m2021-12-09 14:17:38[0m :: vm_wlc_bench    :: line:80         :: [1;30mINFO      [0m :: Setting env variable: DESTDIR=<location of synbench>
+[32m2021-12-09 14:17:38[0m :: broker          :: line:48         :: [1;30mINFO      [0m :: Connected to MQTT broker: localhost on port: 1883
+[32m2021-12-09 14:17:38[0m :: vm_wlc_bench    :: line:92         :: [1;30mINFO      [0m :: PID of this vm_wlc_bench instance is 11465
+[32m2021-12-09 14:17:38[0m :: wl_launcher     :: line:159        :: [1;30mINFO      [0m :: Subscribe to initial topics with callbacks
+[32m2021-12-09 14:17:38[0m :: wl_launcher     :: line:253        :: [1;30mINFO      [0m :: Pause subscription on KPI errors channel to handle new WL error spikes
+[32m2021-12-09 14:17:38[0m :: broker          :: line:84         :: [1;30mINFO      [0m :: Unsubscribed from topic: +/+/kpi/error/+
+[32m2021-12-09 14:17:38[0m :: wl_launcher     :: line:266        :: [1;30mINFO      [0m :: localhost_wkld-proxy-low instance: wl_#1 CMD:python3 ~/Teja/msg_bus.py localhost_wkld/PID/kpi/status connected PID:11481
+[32m2021-12-09 14:17:38[0m :: wl_launcher     :: line:271        :: [1;30mINFO      [0m :: Wait for settling time of 5s
+[32m2021-12-09 14:17:38[0m :: wl_launcher     :: line:102        :: [1;30mINFO      [0m :: [Received] on : localhost_wkld/PID/kpi/status message: connected
+[32m2021-12-09 14:17:43[0m :: wl_launcher     :: line:287        :: [1;30mINFO      [0m :: Restart subscription on KPI errors channel
+[32m2021-12-09 14:17:43[0m :: wl_launcher     :: line:291        :: [1;30mINFO      [0m :: Watch for KPI errors in KPI window duration of: 5s
+[32m2021-12-09 14:17:49[0m :: vm_wlc_bench    :: line:248        :: [1;30mINFO      [0m :: 0 completed messages are expected to come from RTCP workloads
+[32m2021-12-09 14:17:49[0m :: vm_wlc_bench    :: line:259        :: [1;30mINFO      [0m :: Please wait for all processes to gracefully terminate and produce log files. ctrl+c not recommended
+[32m2021-12-09 14:17:49[0m :: broker          :: line:119        :: [1;30mINFO      [0m :: Disconnected from MQTT broker
+[32m2021-12-09 14:17:50[0m :: vm_wlc_bench    :: line:318        :: [1;30mINFO      [0m :: Done

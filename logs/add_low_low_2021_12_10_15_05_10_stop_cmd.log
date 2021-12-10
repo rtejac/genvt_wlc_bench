@@ -1,0 +1,13 @@
+Connected to 10.158.78.163 as root
+
+Executing the WL by the command from :RTCP/stop_rtcp.txt
+pkill -INT txrx-tsn; pkill -INT sleep; sync
+
+cd /usr/share/pnp-rtcp-xdp/; cp /dev/shm/* . ; ./bin2txt afxdp-fwdtstamps.log > afxdp-fwdtstamps.txt.orig
+
+cd /usr/share/pnp-rtcp-xdp/; head -n `wc -l trace-txtstamps.txt | awk '{print $1}'` afxdp-fwdtstamps.txt.orig > afxdp-fwdtstamps.txt
+
+Connected to 10.158.78.163 as root
+
+Executing the WL by the command from :cd /usr/share/pnp-rtcp-xdp/; escripts/xdp4b-calc.sh
+RTCP_MAX :: 174592

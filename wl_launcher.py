@@ -91,14 +91,21 @@ class WlLauncher(object):
             val = topic.split("/")
 
             try:
-                #print('Payload message: ',payload)
+                #print('\rPayload message: ',payload)
                 if payload == 'lwt':
                     #disconnect = True
                     #self.execution_status = False
                     return
 
                 payload = json.loads(payload)
-                logging.info(f"[Received] on : {topic} message: {payload['message']}")
+                msg = f"[Received] on : {topic} message: {payload['message']}"
+                logging.info(msg)
+                
+                date = subprocess.run('date',shell=True,stdout=subprocess.PIPE)
+                date = date.stdout.decode('utf-8').split('\n')[0]
+                with open('sample_dict.txt','a') as f:
+                    f.write(date+'::'+msg+'\n')
+                
                 if payload["message"] != "connected":
                     logging.error(f"Process {val[0]} with parent PID:{val[1]} disconnected from MQTT!")
                     disconnect = True
@@ -131,12 +138,17 @@ class WlLauncher(object):
                 val = topic.split("/")
                 
                 if val[4] == 3:
-                    logging.error(f"CONNECTION ERROR detected "
-                                f"message: {payload['message']}")
+                    msg = f"CONNECTION ERROR detected " + f"message: {payload['message']}"
+                    logging.error(msg)
                 else:
-                    logging.error(f"KPI ERROR #{val[4]} detected "
-                                f"on process:{val[0]},{val[1]} "
-                                f"message: {payload['message']}")
+                    msg = f"KPI ERROR #{val[4]} detected " + f"on process:{val[0]},{val[1]} " + f"message: {payload['message']}"
+                    logging.error(msg)
+                
+
+                date = subprocess.run('date',shell=True,stdout=subprocess.PIPE)
+                date = date.stdout.decode('utf-8').split('\n')[0]
+                with open('sample_dict.txt','a') as f:
+                    f.write(date+'::'+msg+'\n')
                 
                 disconnect = True
 
@@ -282,6 +294,11 @@ class WlLauncher(object):
                 # increment wlc density value if measured wl only - proxy wl not counted for density
                 if "measured" in wl_type:
                     self.density = self.density + 1
+                    
+                    date = subprocess.run('date',shell=True,stdout=subprocess.PIPE)
+                    date = date.stdout.decode('utf-8').split('\n')[0]
+                    with open('sample_dict.txt','a') as f:
+                        f.write(date+'::'+f'Density is {self.density}'+'\n')
 
             except WlLauncherException as e:
                 logging.error(e)

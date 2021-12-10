@@ -37,7 +37,7 @@ def isHostUp(ip):
 
 def get_VM_info(vm_index):
     
-    with open(f'VM_Files/vm{vm_index}_ipaddress.yml',mode='r',encoding='utf-8') as f:
+    with open(sys.argv[1],mode='r',encoding='utf-8') as f:
         data = yaml.full_load(f)
     f.close()
     return data['guest_ip'], data['login'], data['password']
@@ -62,7 +62,6 @@ def Create_SSH(guest_ip,vm_password,login):
     
     try:
         ssh.connect(guest_ip, username=login, password=vm_password,allow_agent=False)
-        print(f'\rConnected to {guest_ip} as {login}')
     except paramiko.ssh_exception.BadHostKeyException as e:
         os.system(f"ssh-keygen -f '/home/{getpass.getuser()}/.ssh/known_hosts' -R '{guest_ip}'")
         ssh = Create_SSH(guest_ip,vm_password,login)
@@ -81,26 +80,9 @@ def ssh_guest(cmd):
         send_msg(client,'ssh/isHostUp/kpi/error/3',f'Error in connecting to {guest_ip}')
         print('Error in creating connection')
         sys.exit()
-
-    print(f"\r\nExecuting the WL by the command from :{cmd[2]}")
-    try:
-        stdin, stdout, stderr = ssh.exec_command(sys.argv[2],get_pty=True)
-    except:
-    #Kill the process directly and print the output generated so far(???)
-        pass
-    lines = stdout.readlines()
-    error = stderr.readlines()
-        
-    if len(sys.argv) == 4:
-        with open(f'logs/{sys.argv[3]}.log','w') as f:
-            for line in lines:
-                f.write(line)
-    else:
-        for line in lines:
-            print('\r',line)
-        for data in error:
-            print(f"\n\r{data}")
-
+    
+    sftp = ssh.open_sftp()
+    sftp.get(sys.argv[2],sys.argv[3])
 
 
 ssh_guest(sys.argv)

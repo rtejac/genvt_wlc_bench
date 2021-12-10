@@ -47,7 +47,7 @@ breakpoint_serial:
             init_cmd: rm /tmp/port0.txt, 
             start_cmd: python3 SSH/detailed_genvt_ssh.py 0 './start_wl.sh',
             stop_cmd: python3 SSH/ssh_kill_procs.py 0 synbench,
-            instances: 0,
+            instances: 1,
             kpi_window: 10,
           }
           ]
@@ -64,7 +64,7 @@ breakpoint_serial:
               init_cmd: null,
               start_cmd: add_cmds/add_low_cpu_wl.sh start 0 10.99.114.63 8554 mystream FP16-INT8 CPU 10.99.114.167, 
               stop_cmd: add_cmds/add_low_wl.sh stop 0, #null,
-              instances: 0,
+              instances: 10,
               kpi_window: 15,
             }
             ]
@@ -86,29 +86,13 @@ breakpoint_serial:
             profile_name: low, #<low/medium/high>,
             wl_setup: rm /tmp/port1.txt,
             init_cmd: null, #rm /tmp/port.txt, 
-            start_cmd: null, #add_cmds/add_low_cpu_wl.sh start 1 10.99.114.63 8554 mystream FP16-INT8 CPU 10.99.114.167, 
-            stop_cmd: ./stop_rtcp.sh, #add_cmds/add_low_cpu_wl.sh stop 1, #null,
+            start_cmd: RTCP/start_rtcp.sh, #add_cmds/add_low_cpu_wl.sh start 1 10.99.114.63 8554 mystream FP16-INT8 CPU 10.99.114.167, 
+            stop_cmd: RTCP/stop_rtcp.sh, #add_cmds/add_low_cpu_wl.sh stop 1, #null,
             instances: 1,
             kpi_window: 10,
           }
           ]
             
-  Service_OS:
-    
-    proxy_wl:
-      wl_list:
-        [
-            {
-            wl: localhost_wkld,
-            profile_name: low, #<low/medium/high>,
-            wl_setup: null,
-            init_cmd: null, #rm /tmp/port.txt, 
-            start_cmd: python3 ~/Teja/msg_bus.py localhost_wkld/PID/kpi/status connected, 
-            stop_cmd: null,
-            instances: 1,
-            kpi_window: 5
-          }
-          ]
             
   # 0 info, 1 debug
   loglevel: 0

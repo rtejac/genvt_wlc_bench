@@ -1,6 +1,6 @@
-Connected to 192.168.122.6 as wlc
+Connected to 192.168.122.26 as wlc
 
-Executing the WL by the command :./start_wl.sh
+Executing the WL by the command from :./start_wl.sh
  Reading config from: params/intel_indu_hmi_low_profile.txt
 
  Window dimensions = (800,600)
@@ -69,13 +69,7 @@ Executing the WL by the command :./start_wl.sh
 
  MQTT_ADDRESS is tcp://10.99.114.167:1883/nWaiting for successful MQTT connection or timeout...
 
- error: XDG_RUNTIME_DIR not set in the environment.
-
- SDL could not initialize! SDL Error: No available video device
-
- Failed to initialize!
-
- ./run_wkld.sh: line 8:  4803 Segmentation fault      (core dumped) ./synbench params/intel_indu_hmi_low_profile.txt
+ ./run_wkld.sh: line 8:  7794 Segmentation fault      (core dumped) ./synbench params/intel_indu_hmi_low_profile.txt
 
  139
 

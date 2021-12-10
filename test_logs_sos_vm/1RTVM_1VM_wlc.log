@@ -1,0 +1,34 @@
+[32m2021-12-09 14:18:50[0m :: vm_wlc_bench    :: line:455        :: [1;30mINFO      [0m :: Removed old logs directory
+[32m2021-12-09 14:18:50[0m :: vm_wlc_bench    :: line:80         :: [1;30mINFO      [0m :: Setting env variable: DESTDIR=<location of synbench>
+[32m2021-12-09 14:18:50[0m :: broker          :: line:48         :: [1;30mINFO      [0m :: Connected to MQTT broker: localhost on port: 1883
+[32m2021-12-09 14:18:50[0m :: vm_wlc_bench    :: line:92         :: [1;30mINFO      [0m :: PID of this vm_wlc_bench instance is 11954
+[32m2021-12-09 14:18:50[0m :: vm_support      :: line:85         :: [1;30mINFO      [0m :: VM ubuntu-vm-0 is already running, Not creating again
+[32m2021-12-09 14:18:50[0m :: vm_support      :: line:85         :: [1;30mINFO      [0m :: VM ubuntu-vm-1 is already running, Not creating again
+[32m2021-12-09 14:18:50[0m :: vm_support      :: line:55         :: [1;30mINFO      [0m :: No Transfer command for vm_0 Proxy, Skipping this
+[32m2021-12-09 14:18:50[0m :: vm_support      :: line:69         :: [1;30mINFO      [0m :: No Transfer command for vm_0 Measured, Skipping this
+[32m2021-12-09 14:18:50[0m :: vm_support      :: line:51         :: [1;30mINFO      [0m :: Proxy wkld transfer command is being executed, and it might take some time based on the steps included in it
+[32m2021-12-09 14:18:50[0m :: vm_support      :: line:53         :: [1;30mINFO      [0m :: Proxy wkld transfered to vm_1 
+[32m2021-12-09 14:18:50[0m :: vm_wlc_bench    :: line:176        :: [1;30mINFO      [0m :: 1 VMs are having RTCP wkld running, need 1 "completed" messages at in total
+[32m2021-12-09 14:18:50[0m :: vm_wlc_bench    :: line:190        :: [1;30mINFO      [0m :: Waiting for the 'completed' message from VMs having RTCP workloads
+[32m2021-12-09 14:18:50[0m :: wl_launcher     :: line:159        :: [1;30mINFO      [0m :: Subscribe to initial topics with callbacks
+[32m2021-12-09 14:18:50[0m :: wl_launcher     :: line:253        :: [1;30mINFO      [0m :: Pause subscription on KPI errors channel to handle new WL error spikes
+[32m2021-12-09 14:18:50[0m :: broker          :: line:84         :: [1;30mINFO      [0m :: Unsubscribed from topic: +/+/kpi/error/+
+[32m2021-12-09 14:18:50[0m :: wl_launcher     :: line:262        :: [1;30mWARNING   [0m :: [33mNo start_cmd specified. Skipping this WLadd_low-proxy-low_wl_1[0m
+[32m2021-12-09 14:18:51[0m :: wl_launcher     :: line:159        :: [1;30mINFO      [0m :: Subscribe to initial topics with callbacks
+[32m2021-12-09 14:18:51[0m :: wl_launcher     :: line:191        :: [1;30mINFO      [0m :: Running measured round (1 of 1) for measured_indu_hmi_high
+[32m2021-12-09 14:18:51[0m :: wl_launcher     :: line:201        :: [1;30mINFO      [0m :: Created: 0 of synbench-proxy-medium
+[32m2021-12-09 14:18:51[0m :: wl_launcher     :: line:201        :: [1;30mINFO      [0m :: Created: 0 of weld_porosity-measured_indu_hmi_high-low
+[32m2021-12-09 14:18:51[0m :: vm_wlc_bench    :: line:248        :: [1;30mINFO      [0m :: 1 completed messages are expected to come from RTCP workloads
+[32m2021-12-09 14:18:56[0m :: vm_wlc_bench    :: line:181        :: [1;30mINFO      [0m :: Completed message received from 1 VM, 0 pending
+[32m2021-12-09 14:18:56[0m :: vm_wlc_bench    :: line:259        :: [1;30mINFO      [0m :: Please wait for all processes to gracefully terminate and produce log files. ctrl+c not recommended
+[32m2021-12-09 14:18:56[0m :: vm_wlc_bench    :: line:266        :: [1;30mINFO      [0m :: Executing: ./stop_rtcp.sh
+[32m2021-12-09 14:19:01[0m :: vm_wlc_bench    :: line:184        :: [1;30mINFO      [0m :: RTCP_MAX :: 161536
+[32m2021-12-09 14:19:02[0m :: vm_wlc_bench    :: line:274        :: [1;30mINFO      [0m :: Executing: python3 SSH/ssh_kill_procs.py 0 synbench
+[32m2021-12-09 14:19:03[0m :: vm_wlc_bench    :: line:281        :: [1;30mINFO      [0m :: Executing: add_cmds/add_low_wl.sh stop 0
+[32m2021-12-09 14:19:06[0m :: broker          :: line:119        :: [1;30mINFO      [0m :: Disconnected from MQTT broker
+[32m2021-12-09 14:19:06[0m :: wl_launcher     :: line:391        :: [1;30mINFO      [0m :: Terminated all spawned processes
+[32m2021-12-09 14:19:07[0m :: vm_wlc_bench    :: line:305        :: [1;30mINFO      [0m :: *********************************************************
+[32m2021-12-09 14:19:07[0m :: vm_wlc_bench    :: line:312        :: [1;30mINFO      [0m :: wlc_bench execution status: SUCCESS
+[32m2021-12-09 14:19:07[0m :: vm_wlc_bench    :: line:314        :: [1;30mINFO      [0m :: WLC Density for measured WL: measured_indu_hmi_high = 0
+[32m2021-12-09 14:19:07[0m :: vm_wlc_bench    :: line:316        :: [1;30mINFO      [0m :: *********************************************************
+[32m2021-12-09 14:19:07[0m :: vm_wlc_bench    :: line:318        :: [1;30mINFO      [0m :: Done

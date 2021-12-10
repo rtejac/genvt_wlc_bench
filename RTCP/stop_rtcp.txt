@@ -1,0 +1,3 @@
+pkill -INT txrx-tsn; pkill -INT sleep; sync
+cd /usr/share/pnp-rtcp-xdp/; cp /dev/shm/* . ; ./bin2txt afxdp-fwdtstamps.log > afxdp-fwdtstamps.txt.orig
+cd /usr/share/pnp-rtcp-xdp/; head -n `wc -l trace-txtstamps.txt | awk '{print $1}'` afxdp-fwdtstamps.txt.orig > afxdp-fwdtstamps.txt
