@@ -1,15 +1,0 @@
-rtcp/PID/kpi/status
-Connected
-Connected to 10.158.78.163 as root
-
-Executing the WL by the command from :cd /usr/share/pnp-rtcp-xdp; ssh root@10.158.77.20 "bash -c \"(cd /usr/share/pnp-rtcp-xdp/ && sleep 3 && ./escripts/xdp5a.sh enp0s4f0 2400000 64 125000 100000 0 > /var/log/rtcp.log 2>&1) &\" > /dev/null" & ./escripts/xdp4b.sh enp0s4f0 2400000 64 125000 0x6E000 0x1B8000
- buff_size: 450560
-
- span_size: 1802240
-
- Info: SIGINT triggered.
-
- /sys/firmware/efi/systab: SMBIOS entry point missing
-
- ./escripts/get_config.sh: line 14: git: command not found
-

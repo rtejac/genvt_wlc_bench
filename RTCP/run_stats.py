@@ -1,3 +1,4 @@
+import os
 import sys
 import paho.mqtt.client as mqtt
 from datetime import datetime
@@ -18,6 +19,10 @@ def send_msg(client,topic,msg):
 
 
 
+
+if not os.path.isfile(sys.argv[1]):
+    print('\rlog file not found')
+    exit()
 
 with open(sys.argv[1],'r') as f:
     data = f.readlines()

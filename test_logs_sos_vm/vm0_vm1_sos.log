@@ -1,0 +1,48 @@
+[32m2021-12-13 13:34:03[0m :: vm_wlc_bench    :: line:450        :: [1;30mINFO      [0m :: Removed old logs directory
+[32m2021-12-13 13:34:03[0m :: vm_wlc_bench    :: line:80         :: [1;30mINFO      [0m :: Setting env variable: DESTDIR=<location of synbench>
+[32m2021-12-13 13:34:03[0m :: broker          :: line:48         :: [1;30mINFO      [0m :: Connected to MQTT broker: localhost on port: 1883
+[32m2021-12-13 13:34:03[0m :: vm_wlc_bench    :: line:92         :: [1;30mINFO      [0m :: PID of this vm_wlc_bench instance is 12635
+[32m2021-12-13 13:34:03[0m :: vm_support      :: line:85         :: [1;30mINFO      [0m :: VM ubuntu-vm-0 is already running, Not creating again
+[32m2021-12-13 13:34:03[0m :: vm_support      :: line:85         :: [1;30mINFO      [0m :: VM ubuntu-vm-1 is already running, Not creating again
+[32m2021-12-13 13:34:03[0m :: vm_support      :: line:55         :: [1;30mINFO      [0m :: No Transfer command for vm_0 Proxy, Skipping this
+[32m2021-12-13 13:34:03[0m :: vm_support      :: line:51         :: [1;30mINFO      [0m :: Proxy wkld transfer command is being executed, and it might take some time based on the steps included in it
+[32m2021-12-13 13:34:03[0m :: vm_support      :: line:53         :: [1;30mINFO      [0m :: Proxy wkld transfered to vm_1 
+[32m2021-12-13 13:34:03[0m :: vm_wlc_bench    :: line:172        :: [1;30mINFO      [0m :: 1 VMs are having RTCP wkld running, need 1 "completed" messages at in total
+[32m2021-12-13 13:34:03[0m :: vm_wlc_bench    :: line:186        :: [1;30mINFO      [0m :: Waiting for the 'completed' message from VMs having RTCP workloads
+[32m2021-12-13 13:34:03[0m :: wl_launcher     :: line:159        :: [1;30mINFO      [0m :: Subscribe to initial topics with callbacks
+[32m2021-12-13 13:34:03[0m :: wl_launcher     :: line:159        :: [1;30mINFO      [0m :: Subscribe to initial topics with callbacks
+[32m2021-12-13 13:34:03[0m :: wl_launcher     :: line:159        :: [1;30mINFO      [0m :: Subscribe to initial topics with callbacks
+[32m2021-12-13 13:34:03[0m :: wl_launcher     :: line:253        :: [1;30mINFO      [0m :: Pause subscription on KPI errors channel to handle new WL error spikes
+[32m2021-12-13 13:34:03[0m :: broker          :: line:84         :: [1;30mINFO      [0m :: Unsubscribed from topic: +/+/kpi/error/+
+[32m2021-12-13 13:34:03[0m :: wl_launcher     :: line:266        :: [1;30mINFO      [0m :: SOS_wkld-proxy-low instance: wl_#1 CMD:python3 ~/Teja/msg_bus.py localhost_wkld/PID/kpi/status connected PID:12649
+[32m2021-12-13 13:34:03[0m :: wl_launcher     :: line:271        :: [1;30mINFO      [0m :: Wait for settling time of 5s
+[32m2021-12-13 13:34:03[0m :: wl_launcher     :: line:102        :: [1;30mINFO      [0m :: [Received] on : localhost_wkld/PID/kpi/status message: connected
+[32m2021-12-13 13:34:08[0m :: wl_launcher     :: line:287        :: [1;30mINFO      [0m :: Restart subscription on KPI errors channel
+[32m2021-12-13 13:34:08[0m :: wl_launcher     :: line:291        :: [1;30mINFO      [0m :: Watch for KPI errors in KPI window duration of: 5s
+[32m2021-12-13 13:34:14[0m :: wl_launcher     :: line:191        :: [1;30mINFO      [0m :: Running measured round (1 of 1) for measured_indu_hmi_high
+[32m2021-12-13 13:34:14[0m :: wl_launcher     :: line:253        :: [1;30mINFO      [0m :: Pause subscription on KPI errors channel to handle new WL error spikes
+[32m2021-12-13 13:34:14[0m :: broker          :: line:84         :: [1;30mINFO      [0m :: Unsubscribed from topic: +/+/kpi/error/+
+[32m2021-12-13 13:34:14[0m :: wl_launcher     :: line:266        :: [1;30mINFO      [0m :: SOS_wkld-measured_indu_hmi_high-low instance: wl_#2 CMD:python3 ~/Teja/msg_bus.py localhost_wkld/PID/kpi/status connected PID:12720
+[32m2021-12-13 13:34:14[0m :: wl_launcher     :: line:271        :: [1;30mINFO      [0m :: Wait for settling time of 5s
+[32m2021-12-13 13:34:14[0m :: wl_launcher     :: line:102        :: [1;30mINFO      [0m :: [Received] on : localhost_wkld/PID/kpi/status message: connected
+[32m2021-12-13 13:34:19[0m :: wl_launcher     :: line:287        :: [1;30mINFO      [0m :: Restart subscription on KPI errors channel
+[32m2021-12-13 13:34:19[0m :: wl_launcher     :: line:291        :: [1;30mINFO      [0m :: Watch for KPI errors in KPI window duration of: 5s
+[32m2021-12-13 13:34:25[0m :: wl_launcher     :: line:253        :: [1;30mINFO      [0m :: Pause subscription on KPI errors channel to handle new WL error spikes
+[32m2021-12-13 13:34:25[0m :: broker          :: line:84         :: [1;30mINFO      [0m :: Unsubscribed from topic: +/+/kpi/error/+
+[32m2021-12-13 13:34:25[0m :: wl_launcher     :: line:266        :: [1;30mINFO      [0m :: SOS_wkld-measured_indu_hmi_high-low instance: wl_#3 CMD:python3 ~/Teja/msg_bus.py localhost_wkld/PID/kpi/status connected PID:12797
+[32m2021-12-13 13:34:25[0m :: wl_launcher     :: line:271        :: [1;30mINFO      [0m :: Wait for settling time of 5s
+[32m2021-12-13 13:34:25[0m :: wl_launcher     :: line:102        :: [1;30mINFO      [0m :: [Received] on : localhost_wkld/PID/kpi/status message: connected
+[32m2021-12-13 13:34:30[0m :: wl_launcher     :: line:287        :: [1;30mINFO      [0m :: Restart subscription on KPI errors channel
+[32m2021-12-13 13:34:30[0m :: wl_launcher     :: line:291        :: [1;30mINFO      [0m :: Watch for KPI errors in KPI window duration of: 5s
+[32m2021-12-13 13:34:36[0m :: wl_launcher     :: line:201        :: [1;30mINFO      [0m :: Created: 1 of SOS_wkld-proxy-low
+[32m2021-12-13 13:34:36[0m :: wl_launcher     :: line:201        :: [1;30mINFO      [0m :: Created: 2 of SOS_wkld-measured_indu_hmi_high-low
+[32m2021-12-13 13:34:36[0m :: vm_wlc_bench    :: line:255        :: [1;30mINFO      [0m :: Please wait for all processes to gracefully terminate and produce log files. ctrl+c not recommended
+[32m2021-12-13 13:34:36[0m :: vm_wlc_bench    :: line:262        :: [1;30mINFO      [0m :: Executing: python3 SSH/ssh_kill_procs.py 0 synbench
+[32m2021-12-13 13:34:37[0m :: vm_wlc_bench    :: line:262        :: [1;30mINFO      [0m :: Executing: add_cmds/add_low_cpu_wl.sh stop 1
+[32m2021-12-13 13:34:40[0m :: broker          :: line:119        :: [1;30mINFO      [0m :: Disconnected from MQTT broker
+[32m2021-12-13 13:34:40[0m :: wl_launcher     :: line:391        :: [1;30mINFO      [0m :: Terminated all spawned processes
+[32m2021-12-13 13:34:41[0m :: vm_wlc_bench    :: line:300        :: [1;30mINFO      [0m :: *********************************************************
+[32m2021-12-13 13:34:41[0m :: vm_wlc_bench    :: line:307        :: [1;30mINFO      [0m :: wlc_bench execution status: SUCCESS
+[32m2021-12-13 13:34:41[0m :: vm_wlc_bench    :: line:309        :: [1;30mINFO      [0m :: WLC Density for measured WL: measured_indu_hmi_high = 2
+[32m2021-12-13 13:34:41[0m :: vm_wlc_bench    :: line:311        :: [1;30mINFO      [0m :: *********************************************************
+[32m2021-12-13 13:34:41[0m :: vm_wlc_bench    :: line:313        :: [1;30mINFO      [0m :: Done

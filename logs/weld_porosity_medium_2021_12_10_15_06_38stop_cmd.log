@@ -1,4 +1,0 @@
-Stopping containers
-Connected to 192.168.122.26 as wlc
-
-Executing the WL by the command from :docker ps -q --filter ancestor=ger-is-registry.caas.intel.com/pmce/wlc/add/weld_porosity_wl_adl:V1.0 | xargs -r docker stop

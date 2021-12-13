@@ -28,6 +28,47 @@ breakpoint_serial:
 
   # VM0 proxy wl details, typically 1 - static workload
 
+  vm_0:
+    
+    os_image: /gos_images/ubuntu_0.qcow2
+    vm_name: ubuntu-vm-0
+    os_name: linux
+    RTCP: 0
+    gpu_passthrough: 1
+    ram: 3
+    cpu: 4
+    proxy_wl:
+      wl_list:
+        [
+            {
+            wl: SOS_wkld,
+            profile_name: low, #<low/medium/high>,
+            wl_setup: null,
+            init_cmd: null, #rm /tmp/port.txt, 
+            start_cmd: python3 ~/Teja/msg_bus.py localhost_wkld/PID/kpi/status connected, 
+            stop_cmd: null,
+            instances: 1,
+            kpi_window: 5
+          }
+          ]
+    measured_wl:
+      indu_hmi_high:
+        calculate: wkld_density
+        instances: 1
+        wl_list:
+          [
+            {
+              wl: weld_porosity,
+              profile_name: low, #<low/medium/high>,
+              wl_setup: null,
+              init_cmd: null,
+              start_cmd: python3 ~/Teja/msg_bus.py localhost_wkld/PID/kpi/status connected, 
+              stop_cmd: null,
+              instances: 5,
+              kpi_window: 15,
+            }
+            ]
+            
   Service_OS:
     
     proxy_wl:

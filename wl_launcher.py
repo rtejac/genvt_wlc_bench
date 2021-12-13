@@ -91,10 +91,11 @@ class WlLauncher(object):
             val = topic.split("/")
 
             try:
-                #print('\rPayload message: ',payload)
                 if payload == 'lwt':
-                    #disconnect = True
-                    #self.execution_status = False
+                    return
+                if val[-1] in ['rtcp_data']:
+                    payload = json.loads(payload)
+                    logging.info(f"Message received from {topic} : {payload['message']}")
                     return
 
                 payload = json.loads(payload)
@@ -117,9 +118,6 @@ class WlLauncher(object):
                 logging.error(f"Received message not in JSON format. Received payload from"
                               f" process {val[0]} with parent PID:{val[1]} is : {payload}. "
                               f"Exception message is {str(ex)}")
-                pass
-                #disconnect = True
-                #self.execution_status = False
 
         def _on_kpi_error(topic, payload):
             """
@@ -144,11 +142,6 @@ class WlLauncher(object):
                     msg = f"KPI ERROR #{val[4]} detected " + f"on process:{val[0]},{val[1]} " + f"message: {payload['message']}"
                     logging.error(msg)
                 
-
-                date = subprocess.run('date',shell=True,stdout=subprocess.PIPE)
-                date = date.stdout.decode('utf-8').split('\n')[0]
-                with open('sample_dict.txt','a') as f:
-                    f.write(date+'::'+msg+'\n')
                 
                 disconnect = True
 
@@ -158,7 +151,8 @@ class WlLauncher(object):
         try:
             logging.info(f"Subscribe to initial topics with callbacks")
             self.broker.subscribe("+/+/kpi/error/+", _on_kpi_error)
-            self.broker.subscribe("+/+/kpi/status", _on_status_change)
+            #self.broker.subscribe("+/+/kpi/status", _on_status_change)
+            self.broker.subscribe("+/+/kpi/+", _on_status_change)
 
         except Exception as e:
             raise BrokerException(e)

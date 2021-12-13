@@ -47,8 +47,7 @@ def Create_SSH(guest_ip,vm_password,login):
     if None in [guest_ip,login,vm_password]:
         send_msg(client,'ssh/isHostUp/kpi/error/3','Missing required arguments')
         print('Missing one of the required credentails')
-        exit()
-        #return None
+        return None
     
     if not isHostUp(guest_ip):
         send_msg(client,'ssh/isHostUp/kpi/error/3',f'Host {guest_ip} is Down or Not reachable')

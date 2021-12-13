@@ -31,7 +31,7 @@ from VM_Support import libvirt_console as console_vm
 
 class VM():
 
-    def __init__(self,vm_name,os_name,os_image,vm_index,proxy,measured,gpu_pass,ram,cpu):
+    def __init__(self,vm_name,os_name,os_image,vm_index,proxy,measured,gpu_pass,ram,cpu,isRTCP):
 
         self.vm_name = vm_name
         self.os_name = os_name
@@ -42,6 +42,7 @@ class VM():
         self.gpu_pass = gpu_pass
         self.ram = ram*1024*1024
         self.cpu = cpu
+        self.isRTCP = isRTCP
 
     
     def proxy_init_exec(self):
@@ -139,6 +140,15 @@ def validate_yaml(parser,mode):
             except:
                 pass
     
+    for k,v in mode.items():
+        if 'Service_OS' in k:
+            current_info = parser.get(k, mode)
+            try:    
+                if current_info['measured_wl']:
+                    measured += 1
+            except:
+                pass
+
     for i in vm_names:
         if vm_names.count(i) > 1:
             logging.error('More than 1 VM has same name ... INVALID yaml file')

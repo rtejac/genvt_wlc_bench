@@ -140,17 +140,23 @@ def main():
             vm_object.create_vm()
             vm_list.append(vm_object)
     
-    workloads = []
+    workloads = {}
     
     for vm_object in vm_list:
 
         vm_object.proxy_init_exec()
         vm_object.measured_init_exec()
         
-        workloads.append(setup_workloads(vm_object.proxy, vm_object.measured))
+        if vm_object.isRTCP:
+            prefix = 'RTVM '
+        else:
+            prefix = 'Non RTVM '
+        workloads[prefix+vm_object.vm_name] = setup_workloads(vm_object.proxy, vm_object.measured)
     
     measured_wkld_vm = []
     no_measured_wkld_vm = []
+    rtvm_measured_wkld_vm = []
+    rtvm_no_measured_wkld_vm = []
     for k,v in mode.items():
         if 'Service_OS' in k:
             wklds = parser.get(k,mode)
@@ -162,14 +168,25 @@ def main():
             except:
                 measured = None
 
-            workloads.append(setup_workloads(proxy, measured))
+            workloads['Service_OS'] = setup_workloads(proxy, measured)
     
-    for workload in workloads:
-        
-        if workload[1]['isExist']:
+    print(workloads)
+    exit()
+    for cat,workload in workloads.items():
+        if cat == 'RTVM' and workload[1]['isExist']:
+            rtvm_measured_wkld_vm.append(workload)
+        if cat == 'Non RTVM' and  workload[1]['isExist']:
             measured_wkld_vm.append(workload)
-        else:
+        
+        if cat == 'RTVM' and not workload[1]['isExist']:
+            rtvm_no_measured_wkld_vm.append(workload)
+        if cat == 'RTVM' and not workload[1]['isExist']:
             no_measured_wkld_vm.append(workload)
+        
+        #if workload[1]['isExist']:
+        #    measured_wkld_vm.append(workload)
+        #else:
+        #    no_measured_wkld_vm.append(workload)
     ''' 
     if rtcp_flag:
         
@@ -258,17 +275,19 @@ def main():
 
         logging.info("Please wait for all processes to gracefully terminate and produce log files. Ctrl+C not recommended")
         
-        #if brocker:
-        #    broker.stop()
+        if rtcp_flag == 0:
+            broker.stop()
 
         #Executing the Stop commands
         for wkld in no_measured_wkld_vm:
+            print(wkld)
             with open(f"./logs/{wkld[0]['wl_list'][0]['wl']}_{wkld[0]['wl_list'][0]['profile_name']}_{datetime.now().strftime('%Y_%m_%d_%H_%M_%S')}_stop_cmd.log",'w') as f:
                 if wkld[0]['wl_list'][0]['stop_cmd']:
                     logging.info('Executing: '+wkld[0]['wl_list'][0]['stop_cmd'])
                     subprocess.run(wkld[0]['wl_list'][0]['stop_cmd'],stdout=f,shell=True,encoding='utf-8',universal_newlines=True)
         
         for wkld in measured_wkld_vm:   #for i,wkld in enumerate(workloads):
+            print(wkld)
             with open(f"./logs/{wkld[0]['wl_list'][0]['wl']}_{wkld[0]['wl_list'][0]['profile_name']}_{datetime.now().strftime('%Y_%m_%d_%H_%M_%S')}stop_cmd.log",'w') as f:
                 #subprocess.Popen(wkld[0]['wl_list'][0]['stop_cmd'],stdout=f,shell=True,encoding='utf-8',universal_newlines=True)
                 if wkld[0]['wl_list'][0]['stop_cmd']:
@@ -304,7 +323,7 @@ def main():
                         break
 
                     logging.info(f"*********************************************************")
-                    if rtcp_flag == 0 and not runner.execution_status:
+                    if not runner.execution_status:
                         logging.warning(f"wlc_bench execution status: FAIL")
                         logging.warning(f"Execution terminated due to a"
                                     f" failure (LWT/Terminated message from one of the WLs). "

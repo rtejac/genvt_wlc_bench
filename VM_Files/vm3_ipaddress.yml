@@ -1,4 +1,4 @@
 vm_name : ubuntu-vm-3
-guest_ip : 192.168.122.127
-login : wlc
-password : wlc123
+guest_ip : 10.99.114.63
+login : gowtham
+password : intel123

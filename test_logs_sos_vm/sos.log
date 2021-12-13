@@ -1,0 +1,58 @@
+[32m2021-12-13 16:22:39[0m :: vm_wlc_bench    :: line:456        :: [1;30mINFO      [0m :: Removed old logs directory
+[32m2021-12-13 16:22:39[0m :: vm_wlc_bench    :: line:80         :: [1;30mINFO      [0m :: Setting env variable: DESTDIR=<location of synbench>
+[32m2021-12-13 16:22:39[0m :: broker          :: line:48         :: [1;30mINFO      [0m :: Connected to MQTT broker: localhost on port: 1883
+[32m2021-12-13 16:22:39[0m :: vm_wlc_bench    :: line:92         :: [1;30mINFO      [0m :: PID of this vm_wlc_bench instance is 11643
+[32m2021-12-13 16:22:39[0m :: wl_launcher     :: line:152        :: [1;30mINFO      [0m :: Subscribe to initial topics with callbacks
+[32m2021-12-13 16:22:39[0m :: wl_launcher     :: line:247        :: [1;30mINFO      [0m :: Pause subscription on KPI errors channel to handle new WL error spikes
+[32m2021-12-13 16:22:39[0m :: broker          :: line:84         :: [1;30mINFO      [0m :: Unsubscribed from topic: +/+/kpi/error/+
+[32m2021-12-13 16:22:39[0m :: wl_launcher     :: line:260        :: [1;30mINFO      [0m :: SOS_wkld-proxy-low instance: wl_#1 CMD:python3 ~/Teja/msg_bus.py localhost_wkld/PID/kpi/status connected PID:11659
+[32m2021-12-13 16:22:39[0m :: wl_launcher     :: line:265        :: [1;30mINFO      [0m :: Wait for settling time of 5s
+[32m2021-12-13 16:22:39[0m :: wl_launcher     :: line:103        :: [1;30mINFO      [0m :: [Received] on : localhost_wkld/PID/kpi/status message: connected
+[32m2021-12-13 16:22:44[0m :: wl_launcher     :: line:281        :: [1;30mINFO      [0m :: Restart subscription on KPI errors channel
+[32m2021-12-13 16:22:44[0m :: wl_launcher     :: line:285        :: [1;30mINFO      [0m :: Watch for KPI errors in KPI window duration of: 5s
+[32m2021-12-13 16:22:50[0m :: wl_launcher     :: line:185        :: [1;30mINFO      [0m :: Running measured round (1 of 1) for measured_indu_hmi_high
+[32m2021-12-13 16:22:50[0m :: wl_launcher     :: line:247        :: [1;30mINFO      [0m :: Pause subscription on KPI errors channel to handle new WL error spikes
+[32m2021-12-13 16:22:50[0m :: broker          :: line:84         :: [1;30mINFO      [0m :: Unsubscribed from topic: +/+/kpi/error/+
+[32m2021-12-13 16:22:50[0m :: wl_launcher     :: line:260        :: [1;30mINFO      [0m :: weld_porosity-measured_indu_hmi_high-low instance: wl_#2 CMD:python3 ~/Teja/msg_bus.py localhost_wkld/PID/kpi/status connected PID:11744
+[32m2021-12-13 16:22:50[0m :: wl_launcher     :: line:265        :: [1;30mINFO      [0m :: Wait for settling time of 5s
+[32m2021-12-13 16:22:50[0m :: wl_launcher     :: line:103        :: [1;30mINFO      [0m :: [Received] on : localhost_wkld/PID/kpi/status message: connected
+[32m2021-12-13 16:22:55[0m :: wl_launcher     :: line:281        :: [1;30mINFO      [0m :: Restart subscription on KPI errors channel
+[32m2021-12-13 16:22:55[0m :: wl_launcher     :: line:285        :: [1;30mINFO      [0m :: Watch for KPI errors in KPI window duration of: 15s
+[32m2021-12-13 16:23:11[0m :: wl_launcher     :: line:247        :: [1;30mINFO      [0m :: Pause subscription on KPI errors channel to handle new WL error spikes
+[32m2021-12-13 16:23:11[0m :: broker          :: line:84         :: [1;30mINFO      [0m :: Unsubscribed from topic: +/+/kpi/error/+
+[32m2021-12-13 16:23:11[0m :: wl_launcher     :: line:260        :: [1;30mINFO      [0m :: weld_porosity-measured_indu_hmi_high-low instance: wl_#3 CMD:python3 ~/Teja/msg_bus.py localhost_wkld/PID/kpi/status connected PID:11879
+[32m2021-12-13 16:23:11[0m :: wl_launcher     :: line:265        :: [1;30mINFO      [0m :: Wait for settling time of 5s
+[32m2021-12-13 16:23:11[0m :: wl_launcher     :: line:103        :: [1;30mINFO      [0m :: [Received] on : localhost_wkld/PID/kpi/status message: connected
+[32m2021-12-13 16:23:16[0m :: wl_launcher     :: line:281        :: [1;30mINFO      [0m :: Restart subscription on KPI errors channel
+[32m2021-12-13 16:23:16[0m :: wl_launcher     :: line:285        :: [1;30mINFO      [0m :: Watch for KPI errors in KPI window duration of: 15s
+[32m2021-12-13 16:23:32[0m :: wl_launcher     :: line:247        :: [1;30mINFO      [0m :: Pause subscription on KPI errors channel to handle new WL error spikes
+[32m2021-12-13 16:23:32[0m :: broker          :: line:84         :: [1;30mINFO      [0m :: Unsubscribed from topic: +/+/kpi/error/+
+[32m2021-12-13 16:23:32[0m :: wl_launcher     :: line:260        :: [1;30mINFO      [0m :: weld_porosity-measured_indu_hmi_high-low instance: wl_#4 CMD:python3 ~/Teja/msg_bus.py localhost_wkld/PID/kpi/status connected PID:12014
+[32m2021-12-13 16:23:32[0m :: wl_launcher     :: line:265        :: [1;30mINFO      [0m :: Wait for settling time of 5s
+[32m2021-12-13 16:23:32[0m :: wl_launcher     :: line:103        :: [1;30mINFO      [0m :: [Received] on : localhost_wkld/PID/kpi/status message: connected
+[32m2021-12-13 16:23:37[0m :: wl_launcher     :: line:281        :: [1;30mINFO      [0m :: Restart subscription on KPI errors channel
+[32m2021-12-13 16:23:37[0m :: wl_launcher     :: line:285        :: [1;30mINFO      [0m :: Watch for KPI errors in KPI window duration of: 15s
+[32m2021-12-13 16:23:53[0m :: wl_launcher     :: line:247        :: [1;30mINFO      [0m :: Pause subscription on KPI errors channel to handle new WL error spikes
+[32m2021-12-13 16:23:53[0m :: broker          :: line:84         :: [1;30mINFO      [0m :: Unsubscribed from topic: +/+/kpi/error/+
+[32m2021-12-13 16:23:53[0m :: wl_launcher     :: line:260        :: [1;30mINFO      [0m :: weld_porosity-measured_indu_hmi_high-low instance: wl_#5 CMD:python3 ~/Teja/msg_bus.py localhost_wkld/PID/kpi/status connected PID:12141
+[32m2021-12-13 16:23:53[0m :: wl_launcher     :: line:265        :: [1;30mINFO      [0m :: Wait for settling time of 5s
+[32m2021-12-13 16:23:53[0m :: wl_launcher     :: line:103        :: [1;30mINFO      [0m :: [Received] on : localhost_wkld/PID/kpi/status message: connected
+[32m2021-12-13 16:23:58[0m :: wl_launcher     :: line:281        :: [1;30mINFO      [0m :: Restart subscription on KPI errors channel
+[32m2021-12-13 16:23:58[0m :: wl_launcher     :: line:285        :: [1;30mINFO      [0m :: Watch for KPI errors in KPI window duration of: 15s
+[32m2021-12-13 16:24:14[0m :: wl_launcher     :: line:247        :: [1;30mINFO      [0m :: Pause subscription on KPI errors channel to handle new WL error spikes
+[32m2021-12-13 16:24:14[0m :: broker          :: line:84         :: [1;30mINFO      [0m :: Unsubscribed from topic: +/+/kpi/error/+
+[32m2021-12-13 16:24:14[0m :: wl_launcher     :: line:260        :: [1;30mINFO      [0m :: weld_porosity-measured_indu_hmi_high-low instance: wl_#6 CMD:python3 ~/Teja/msg_bus.py localhost_wkld/PID/kpi/status connected PID:12274
+[32m2021-12-13 16:24:14[0m :: wl_launcher     :: line:265        :: [1;30mINFO      [0m :: Wait for settling time of 5s
+[32m2021-12-13 16:24:14[0m :: wl_launcher     :: line:103        :: [1;30mINFO      [0m :: [Received] on : localhost_wkld/PID/kpi/status message: connected
+[32m2021-12-13 16:24:19[0m :: wl_launcher     :: line:281        :: [1;30mINFO      [0m :: Restart subscription on KPI errors channel
+[32m2021-12-13 16:24:19[0m :: wl_launcher     :: line:285        :: [1;30mINFO      [0m :: Watch for KPI errors in KPI window duration of: 15s
+[32m2021-12-13 16:24:35[0m :: wl_launcher     :: line:195        :: [1;30mINFO      [0m :: Created: 1 of SOS_wkld-proxy-low
+[32m2021-12-13 16:24:35[0m :: wl_launcher     :: line:195        :: [1;30mINFO      [0m :: Created: 5 of weld_porosity-measured_indu_hmi_high-low
+[32m2021-12-13 16:24:35[0m :: vm_wlc_bench    :: line:259        :: [1;30mINFO      [0m :: Please wait for all processes to gracefully terminate and produce log files. Ctrl+C not recommended
+[32m2021-12-13 16:24:38[0m :: broker          :: line:119        :: [1;30mINFO      [0m :: Disconnected from MQTT broker
+[32m2021-12-13 16:24:38[0m :: wl_launcher     :: line:385        :: [1;30mINFO      [0m :: Terminated all spawned processes
+[32m2021-12-13 16:24:39[0m :: vm_wlc_bench    :: line:306        :: [1;30mINFO      [0m :: *********************************************************
+[32m2021-12-13 16:24:39[0m :: vm_wlc_bench    :: line:313        :: [1;30mINFO      [0m :: wlc_bench execution status: SUCCESS
+[32m2021-12-13 16:24:39[0m :: vm_wlc_bench    :: line:315        :: [1;30mINFO      [0m :: WLC Density for measured WL: measured_indu_hmi_high = 5
+[32m2021-12-13 16:24:39[0m :: vm_wlc_bench    :: line:317        :: [1;30mINFO      [0m :: *********************************************************
+[32m2021-12-13 16:24:39[0m :: vm_wlc_bench    :: line:319        :: [1;30mINFO      [0m :: Done

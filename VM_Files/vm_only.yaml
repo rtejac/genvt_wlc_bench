@@ -64,7 +64,7 @@ breakpoint_serial:
               init_cmd: null,
               start_cmd: add_cmds/add_low_cpu_wl.sh start 0 10.99.114.63 8554 mystream FP16-INT8 CPU 10.99.114.167, 
               stop_cmd: add_cmds/add_low_wl.sh stop 0, #null,
-              instances: 10,
+              instances: 5,
               kpi_window: 15,
             }
             ]
@@ -74,7 +74,7 @@ breakpoint_serial:
     os_image: /gos_images/ubuntu_1.qcow2
     vm_name: ubuntu-vm-1
     os_name: linux
-    RTCP: 1
+    RTCP: 0
     gpu_passthrough: 0
     ram: 1
     cpu: 1
@@ -86,8 +86,8 @@ breakpoint_serial:
             profile_name: low, #<low/medium/high>,
             wl_setup: rm /tmp/port1.txt,
             init_cmd: null, #rm /tmp/port.txt, 
-            start_cmd: RTCP/start_rtcp.sh, #add_cmds/add_low_cpu_wl.sh start 1 10.99.114.63 8554 mystream FP16-INT8 CPU 10.99.114.167, 
-            stop_cmd: RTCP/stop_rtcp.sh, #add_cmds/add_low_cpu_wl.sh stop 1, #null,
+            start_cmd: add_cmds/add_low_cpu_wl.sh start 1 10.99.114.63 8554 mystream FP16-INT8 CPU 10.99.114.167, 
+            stop_cmd: add_cmds/add_low_cpu_wl.sh stop 1, #null,
             instances: 1,
             kpi_window: 10,
           }
