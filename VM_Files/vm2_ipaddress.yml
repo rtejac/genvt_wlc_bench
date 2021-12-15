@@ -1,4 +1,4 @@
 vm_name : ubuntu-vm-0
-guest_ip : 10.158.78.163
+guest_ip : 10.158.78.158
 login : root
-password : intel123 
+password : edge 

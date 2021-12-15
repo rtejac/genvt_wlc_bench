@@ -95,74 +95,88 @@ def main():
         f.write('=============LOGGING MESSAGES==============\n')
     #Gettitng the VM related wl details in a list
     
-    vmExist = False
-    for k,v in mode.items():
-        if 'vm' in k:
-            vmExist = True
-            break
+    workloads = []
+    only_measured = {}
     
-    if vmExist:
+    
+    default_mode = True
+
+    for k,v in mode.items():
+        if 'vm' in k or 'Service_OS' in k:
+            default_mode = False
+            break
+         
+
+    if default_mode:
+    # get all proxy, measured wl details
+        proxy = parser.get("proxy_wl", mode)
+        proxy["type"] = "proxy"
+        only_measured['default'] = parser.get("measured_wl", mode)
+        workloads.append(setup_workloads(proxy, only_measured['default']))
+    
+
+    else:
         validate_yaml(parser,mode)
     
-    vm_list = []
-    #found_measured = False
-    only_measured = {}
+        vm_list = []
 
-    rtcp = None
+        rtcp = None
         
-    for k,v in mode.items():
-        if 'vm' in k:
+        for k,v in mode.items():
+            if 'vm' in k:
             
-            proxy_info = {}
-            measured_info = {}
-            current_vm = parser.get(k, mode)
-            proxy_info[k] = current_vm['proxy_wl']
-            proxy_info[k]['type'] = 'proxy'
+                proxy_info = {}
+                measured_info = {}
+                current_vm = parser.get(k, mode)
+                proxy_info[k] = current_vm['proxy_wl']
+                proxy_info[k]['type'] = 'proxy'
             
-            global rtcp_flag
-            isRTCP = False
-            if current_vm['RTCP']:
-                rtcp_flag += 1
-                isRTCP = True
+                global rtcp_flag
+                isRTCP = False
+                if current_vm['RTCP']:
+                    rtcp_flag += 1
+                    isRTCP = True
 
-            try:
-                measured_info[k] = current_vm['measured_wl']
-                only_measured[k] = current_vm['measured_wl']
-            except:
-                measured_info[k] = None
+                try:
+                    measured_info[k] = current_vm['measured_wl']
+                    only_measured[k] = current_vm['measured_wl']
+                except:
+                    measured_info[k] = None
 
-            vm_index = int(k.split('_')[1]) #to get 0,1 from vm_0,vm_1 and use them for creating VM index
+                vm_index = int(k.split('_')[1]) #to get 0,1 from vm_0,vm_1 and use them for creating VM index
             
-            #Instansating VM object
-            vm_object = VM(current_vm['vm_name'],current_vm['os_name'],current_vm['os_image'],vm_index,proxy_info[k],measured_info[k],current_vm['gpu_passthrough'],current_vm['ram'],current_vm['cpu'],isRTCP)
+                #Instansating VM object
+                vm_object = VM(current_vm['vm_name'],current_vm['os_name'],current_vm['os_image'],vm_index,proxy_info[k],measured_info[k],current_vm['gpu_passthrough'],current_vm['ram'],current_vm['cpu'],isRTCP)
             
-            #Creating VM
-            vm_object.create_vm()
-            vm_list.append(vm_object)
+                #Creating VM
+                vm_object.create_vm()
+                vm_list.append(vm_object)
     
-    workloads = []
+        #workloads = []
     
-    for vm_object in vm_list:
+        for vm_object in vm_list:
 
-        vm_object.proxy_init_exec()
-        vm_object.measured_init_exec()
+            vm_object.proxy_init_exec()
+            vm_object.measured_init_exec()
         
-        workloads.append(setup_workloads(vm_object.proxy, vm_object.measured))
+            workloads.append(setup_workloads(vm_object.proxy, vm_object.measured))
     
+        for k,v in mode.items():
+            if 'Service_OS' in k:
+                wklds = parser.get(k,mode)
+                proxy = wklds["proxy_wl"]
+                proxy["type"] = "proxy"
+                try:
+                    measured = wklds["measured_wl"]
+                    only_measured[k] = wklds['measured_wl']
+                except:
+                    measured = None
+
+                workloads.append(setup_workloads(proxy, measured))
+    
+
     measured_wkld_vm = []
     no_measured_wkld_vm = []
-    for k,v in mode.items():
-        if 'Service_OS' in k:
-            wklds = parser.get(k,mode)
-            proxy = wklds["proxy_wl"]
-            proxy["type"] = "proxy"
-            try:
-                measured = wklds["measured_wl"]
-                only_measured[k] = wklds['measured_wl']
-            except:
-                measured = None
-
-            workloads.append(setup_workloads(proxy, measured))
     
     for workload in workloads:
         
@@ -170,6 +184,8 @@ def main():
             measured_wkld_vm.append(workload)
         else:
             no_measured_wkld_vm.append(workload)
+    
+    
     ''' 
     if rtcp_flag:
         
@@ -234,13 +250,12 @@ def main():
             # first pass, no workloads, system idle measurements
             system_metrics.collect_store()
         
-        #Teja edit
-        for wkld in no_measured_wkld_vm:   #for i,wkld in enumerate(workloads):
+        for wkld in no_measured_wkld_vm:
             # start workload launcher
             runner = WlLauncher(wkld, settling_time, system_metrics, broker)
             runner.run()
         
-        for wkld in measured_wkld_vm:   #for i,wkld in enumerate(workloads):
+        for wkld in measured_wkld_vm: 
             # start workload launcher
             runner = WlLauncher(wkld, settling_time, system_metrics, broker)
             runner.run()
@@ -251,16 +266,12 @@ def main():
         #        logging.info('Stopping all the workloadds in all the VMs')
         #        client.loop_stop()
 
-        #Done
 
     finally:
         # all cleanup
 
         logging.info("Please wait for all processes to gracefully terminate and produce log files. Ctrl+C not recommended")
         
-        #if brocker:
-        #    broker.stop()
-
         #Executing the Stop commands
         for wkld in no_measured_wkld_vm:
             with open(f"./logs/{wkld[0]['wl_list'][0]['wl']}_{wkld[0]['wl_list'][0]['profile_name']}_{datetime.now().strftime('%Y_%m_%d_%H_%M_%S')}_stop_cmd.log",'w') as f:
@@ -270,7 +281,6 @@ def main():
         
         for wkld in measured_wkld_vm:   #for i,wkld in enumerate(workloads):
             with open(f"./logs/{wkld[0]['wl_list'][0]['wl']}_{wkld[0]['wl_list'][0]['profile_name']}_{datetime.now().strftime('%Y_%m_%d_%H_%M_%S')}stop_cmd.log",'w') as f:
-                #subprocess.Popen(wkld[0]['wl_list'][0]['stop_cmd'],stdout=f,shell=True,encoding='utf-8',universal_newlines=True)
                 if wkld[0]['wl_list'][0]['stop_cmd']:
                     logging.info('Executing: '+wkld[0]['wl_list'][0]['stop_cmd'])
                     subprocess.run(wkld[0]['wl_list'][0]['stop_cmd'],stdout=f,shell=True,encoding='utf-8',universal_newlines=True)
@@ -281,7 +291,6 @@ def main():
                 if wkld[1]['wl_list'][0]['stop_cmd']:
                     logging.info('Executing: '+wkld[1]['wl_list'][0]['stop_cmd'])
                     subprocess.run(wkld[1]['wl_list'][0]['stop_cmd'],stdout=f,shell=True,encoding='utf-8',universal_newlines=True)
-                #subprocess.Popen(wkld[1]['wl_list'][0]['stop_cmd'],stdout=f,shell=True,encoding='utf-8',universal_newlines=True)
                 time.sleep(1)
             
         if broker:

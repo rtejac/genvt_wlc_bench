@@ -1,1 +1,6 @@
 =============LOGGING MESSAGES==============
+Wed Dec 15 21:31:27 IST 2021::[Received] on : localhost_wkld/PID/kpi/status message: connected
+Wed Dec 15 21:31:38 IST 2021::[Received] on : localhost_wkld/PID/kpi/status message: connected
+Wed Dec 15 21:31:48 IST 2021::Density is 1
+Wed Dec 15 21:31:49 IST 2021::[Received] on : localhost_wkld/PID/kpi/status message: connected
+Wed Dec 15 21:31:59 IST 2021::Density is 2

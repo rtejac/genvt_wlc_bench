@@ -143,6 +143,8 @@ def validate_yaml(parser,mode):
     for k,v in mode.items():
         if 'Service_OS' in k:
             current_info = parser.get(k, mode)
+            if current_info['gpu_passthrough'] != 0:
+                gpu_pass += 1
             try:    
                 if current_info['measured_wl']:
                     measured += 1
@@ -160,7 +162,7 @@ def validate_yaml(parser,mode):
             exit()
     
     if gpu_pass != 1:
-        logging.error('More than 1 VM has GPU pass through... INVALID yaml file')
+        logging.error('0 or more than 1 VM has GPU pass through... INVALID yaml file')
         exit()
     if measured > 1:
         logging.error('None or more than 1 VM has measured workload mentioned... INVALID yaml file')

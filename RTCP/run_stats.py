@@ -29,6 +29,9 @@ with open(sys.argv[1],'r') as f:
 
 
 for line in data:
+   
+    if 'Too little data' in line:
+        print(line)
     
     if 'Results' in line:
         

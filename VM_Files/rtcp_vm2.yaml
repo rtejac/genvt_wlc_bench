@@ -95,6 +95,7 @@ breakpoint_serial:
             
   Service_OS:
     
+    gpu_passthrough: 0
     proxy_wl:
       wl_list:
         [

@@ -1,0 +1,56 @@
+[32m2021-12-15 21:30:00[0m :: vm_wlc_bench    :: line:465        :: [1;30mINFO      [0m :: Removed old logs directory
+[32m2021-12-15 21:30:00[0m :: vm_wlc_bench    :: line:80         :: [1;30mINFO      [0m :: Setting env variable: DESTDIR=<location of synbench>
+[32m2021-12-15 21:30:00[0m :: broker          :: line:48         :: [1;30mINFO      [0m :: Connected to MQTT broker: localhost on port: 1883
+[32m2021-12-15 21:30:00[0m :: vm_wlc_bench    :: line:92         :: [1;30mINFO      [0m :: PID of this vm_wlc_bench instance is 25006
+[32m2021-12-15 21:30:00[0m :: libvirt_console :: line:28         :: [1;30mWARNING   [0m :: [33m(42, 10, "Domain not found: no domain with matching name 'ubuntu-vm-0'", 2, 'Domain not found: %s', "no domain with matching name 'ubuntu-vm-0'", None, -1, -1)[0m
+[32m2021-12-15 21:30:00[0m :: vm_support      :: line:89         :: [1;30mINFO      [0m :: No previous instance of ubuntu-vm-0 VM is found...
+[32m2021-12-15 21:30:00[0m :: vm_support      :: line:91         :: [1;30mINFO      [0m :: Creating a linux VM with image /gos_images/ubuntu_0.qcow2, VM name ubuntu-vm-0 with 4 CPUs and 3.0 GB of RAM
+[32m2021-12-15 21:30:02[0m :: vm_support      :: line:108        :: [1;30mINFO      [0m :: ubuntu-vm-0  booted, might take sometime to show up
+[32m2021-12-15 21:30:22[0m :: libvirt_console :: line:47         :: [1;30mINFO      [0m :: ubuntu-vm-0 initial state 1, reason 1
+[32m2021-12-15 21:30:45[0m :: libvirt_console :: line:121        :: [1;30mINFO      [0m :: IP Address of the created VM is written to yaml file
+[32m2021-12-15 21:30:45[0m :: libvirt_console :: line:28         :: [1;30mWARNING   [0m :: [33m(42, 10, "Domain not found: no domain with matching name 'ubuntu-vm-1'", 2, 'Domain not found: %s', "no domain with matching name 'ubuntu-vm-1'", None, -1, -1)[0m
+[32m2021-12-15 21:30:45[0m :: vm_support      :: line:89         :: [1;30mINFO      [0m :: No previous instance of ubuntu-vm-1 VM is found...
+[32m2021-12-15 21:30:45[0m :: vm_support      :: line:91         :: [1;30mINFO      [0m :: Creating a linux VM with image /gos_images/ubuntu_1.qcow2, VM name ubuntu-vm-1 with 1 CPUs and 1.0 GB of RAM
+[32m2021-12-15 21:30:46[0m :: vm_support      :: line:108        :: [1;30mINFO      [0m :: ubuntu-vm-1  booted, might take sometime to show up
+[32m2021-12-15 21:31:06[0m :: libvirt_console :: line:47         :: [1;30mINFO      [0m :: ubuntu-vm-1 initial state 1, reason 1
+[32m2021-12-15 21:31:27[0m :: libvirt_console :: line:121        :: [1;30mINFO      [0m :: IP Address of the created VM is written to yaml file
+[32m2021-12-15 21:31:27[0m :: vm_support      :: line:56         :: [1;30mINFO      [0m :: No Transfer command for vm_0 Proxy, Skipping this
+[32m2021-12-15 21:31:27[0m :: vm_support      :: line:52         :: [1;30mINFO      [0m :: Proxy wkld transfer command is being executed, and it might take some time based on the steps included in it
+[32m2021-12-15 21:31:27[0m :: vm_support      :: line:54         :: [1;30mINFO      [0m :: Proxy wkld transfered to vm_1 
+[32m2021-12-15 21:31:27[0m :: wl_launcher     :: line:152        :: [1;30mINFO      [0m :: Subscribe to initial topics with callbacks
+[32m2021-12-15 21:31:27[0m :: wl_launcher     :: line:152        :: [1;30mINFO      [0m :: Subscribe to initial topics with callbacks
+[32m2021-12-15 21:31:27[0m :: wl_launcher     :: line:152        :: [1;30mINFO      [0m :: Subscribe to initial topics with callbacks
+[32m2021-12-15 21:31:27[0m :: wl_launcher     :: line:247        :: [1;30mINFO      [0m :: Pause subscription on KPI errors channel to handle new WL error spikes
+[32m2021-12-15 21:31:27[0m :: broker          :: line:84         :: [1;30mINFO      [0m :: Unsubscribed from topic: +/+/kpi/error/+
+[32m2021-12-15 21:31:27[0m :: wl_launcher     :: line:260        :: [1;30mINFO      [0m :: SOS_wkld-proxy-low instance: wl_#1 CMD:python3 ~/Teja/msg_bus.py localhost_wkld/PID/kpi/status connected PID:26044
+[32m2021-12-15 21:31:27[0m :: wl_launcher     :: line:265        :: [1;30mINFO      [0m :: Wait for settling time of 5s
+[32m2021-12-15 21:31:27[0m :: wl_launcher     :: line:103        :: [1;30mINFO      [0m :: [Received] on : localhost_wkld/PID/kpi/status message: connected
+[32m2021-12-15 21:31:32[0m :: wl_launcher     :: line:281        :: [1;30mINFO      [0m :: Restart subscription on KPI errors channel
+[32m2021-12-15 21:31:32[0m :: wl_launcher     :: line:285        :: [1;30mINFO      [0m :: Watch for KPI errors in KPI window duration of: 5s
+[32m2021-12-15 21:31:38[0m :: wl_launcher     :: line:185        :: [1;30mINFO      [0m :: Running measured round (1 of 1) for measured_indu_hmi_high
+[32m2021-12-15 21:31:38[0m :: wl_launcher     :: line:247        :: [1;30mINFO      [0m :: Pause subscription on KPI errors channel to handle new WL error spikes
+[32m2021-12-15 21:31:38[0m :: broker          :: line:84         :: [1;30mINFO      [0m :: Unsubscribed from topic: +/+/kpi/error/+
+[32m2021-12-15 21:31:38[0m :: wl_launcher     :: line:260        :: [1;30mINFO      [0m :: SOS_wkld-measured_indu_hmi_high-low instance: wl_#2 CMD:python3 ~/Teja/msg_bus.py localhost_wkld/PID/kpi/status connected PID:26115
+[32m2021-12-15 21:31:38[0m :: wl_launcher     :: line:265        :: [1;30mINFO      [0m :: Wait for settling time of 5s
+[32m2021-12-15 21:31:38[0m :: wl_launcher     :: line:103        :: [1;30mINFO      [0m :: [Received] on : localhost_wkld/PID/kpi/status message: connected
+[32m2021-12-15 21:31:43[0m :: wl_launcher     :: line:281        :: [1;30mINFO      [0m :: Restart subscription on KPI errors channel
+[32m2021-12-15 21:31:43[0m :: wl_launcher     :: line:285        :: [1;30mINFO      [0m :: Watch for KPI errors in KPI window duration of: 5s
+[32m2021-12-15 21:31:49[0m :: wl_launcher     :: line:247        :: [1;30mINFO      [0m :: Pause subscription on KPI errors channel to handle new WL error spikes
+[32m2021-12-15 21:31:49[0m :: broker          :: line:84         :: [1;30mINFO      [0m :: Unsubscribed from topic: +/+/kpi/error/+
+[32m2021-12-15 21:31:49[0m :: wl_launcher     :: line:260        :: [1;30mINFO      [0m :: SOS_wkld-measured_indu_hmi_high-low instance: wl_#3 CMD:python3 ~/Teja/msg_bus.py localhost_wkld/PID/kpi/status connected PID:26188
+[32m2021-12-15 21:31:49[0m :: wl_launcher     :: line:265        :: [1;30mINFO      [0m :: Wait for settling time of 5s
+[32m2021-12-15 21:31:49[0m :: wl_launcher     :: line:103        :: [1;30mINFO      [0m :: [Received] on : localhost_wkld/PID/kpi/status message: connected
+[32m2021-12-15 21:31:54[0m :: wl_launcher     :: line:281        :: [1;30mINFO      [0m :: Restart subscription on KPI errors channel
+[32m2021-12-15 21:31:54[0m :: wl_launcher     :: line:285        :: [1;30mINFO      [0m :: Watch for KPI errors in KPI window duration of: 5s
+[32m2021-12-15 21:32:00[0m :: wl_launcher     :: line:195        :: [1;30mINFO      [0m :: Created: 1 of SOS_wkld-proxy-low
+[32m2021-12-15 21:32:00[0m :: wl_launcher     :: line:195        :: [1;30mINFO      [0m :: Created: 2 of SOS_wkld-measured_indu_hmi_high-low
+[32m2021-12-15 21:32:00[0m :: vm_wlc_bench    :: line:273        :: [1;30mINFO      [0m :: Please wait for all processes to gracefully terminate and produce log files. Ctrl+C not recommended
+[32m2021-12-15 21:32:00[0m :: vm_wlc_bench    :: line:279        :: [1;30mINFO      [0m :: Executing: python3 SSH/ssh_kill_procs.py 0 synbench
+[32m2021-12-15 21:32:00[0m :: vm_wlc_bench    :: line:279        :: [1;30mINFO      [0m :: Executing: add_cmds/add_low_cpu_wl.sh stop 1
+[32m2021-12-15 21:32:04[0m :: broker          :: line:119        :: [1;30mINFO      [0m :: Disconnected from MQTT broker
+[32m2021-12-15 21:32:04[0m :: wl_launcher     :: line:385        :: [1;30mINFO      [0m :: Terminated all spawned processes
+[32m2021-12-15 21:32:05[0m :: vm_wlc_bench    :: line:315        :: [1;30mINFO      [0m :: *********************************************************
+[32m2021-12-15 21:32:05[0m :: vm_wlc_bench    :: line:322        :: [1;30mINFO      [0m :: wlc_bench execution status: SUCCESS
+[32m2021-12-15 21:32:05[0m :: vm_wlc_bench    :: line:324        :: [1;30mINFO      [0m :: WLC Density for measured WL: measured_indu_hmi_high = 2
+[32m2021-12-15 21:32:05[0m :: vm_wlc_bench    :: line:326        :: [1;30mINFO      [0m :: *********************************************************
+[32m2021-12-15 21:32:05[0m :: vm_wlc_bench    :: line:328        :: [1;30mINFO      [0m :: Done
