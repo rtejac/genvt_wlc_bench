@@ -1,8 +1,10 @@
 # Description
 
-Please include a summary of the change and which issue is fixed. Please also include relevant motivation and context. List any dependencies that are required for this change.
+-Please include a summary of the change and which issue is fixed. 
+-Please also include relevant motivation and context. 
+-List any dependencies that are required for this change.
 
-Fixes # (issue)
+Fixes # (RTC Task Number)
 
 ## Type of change
 
@@ -17,10 +19,6 @@ Please select the options which are relevant.
 
 Please describe the tests that you ran to verify your changes. 
 
-- [ ] Test A
-
-
-- [ ] Test B
 
 
 
